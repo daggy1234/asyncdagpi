@@ -2,6 +2,7 @@ import aiohttp
 from io import BytesIO
 
 
+
 class http:
     __slots__ = ("session", "codedict")
 
