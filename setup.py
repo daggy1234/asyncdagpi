@@ -4,7 +4,6 @@ with open("README.md", "r") as f:
 setup(
     name="asyncdagpi",
     packages=["asyncdagpi"],
-    version="1.0.0",
     pacakges=find_packages(),
     license="MIT",
     description="Asynchronous API wrapper for the Dagbot API (http://dagpi.tk)",
