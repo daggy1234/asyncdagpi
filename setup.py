@@ -1,18 +1,16 @@
 from setuptools import find_packages, setup
-with open("README.md", "r") as f:
-    long_description = f.read()
+
 setup(
     name="asyncdagpi",
-    packages=["asyncdagpi"],
-    pacakges=find_packages(),
+    version='1.1.0',
     license="MIT",
     description="Asynchronous API wrapper for the Dagbot API (http://dagpi.tk)",
-    url="https://github.com/Daggy1234/asyncdagpi",
-    download_url="https://github.com/Daggy1234/asyncdagpi/archive/1.1.0.tar.gz",
-    author="Daggy1234",
-    install_requires=["aiohttp"],
-    long_description=long_description,
+    long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
+    url="https://github.com/Daggy1234/asyncdagpi",
+    author="Daggy1234",
+    pacakges=find_packages(),
+    install_requires=["aiohttp"],
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
