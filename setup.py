@@ -1,9 +1,5 @@
 from setuptools import find_packages, setup
 
-
-with open("README.md", "r") as f:
-    long_description = f.read()
-
 setup(
     name="asyncdagpi",
     packages=["asyncdagpi"],
@@ -13,8 +9,6 @@ setup(
     description="Asynchronous API wrapper for the Dagbot API (http://dagpi.tk)",
     url="https://github.com/Daggy1234/asyncdagpi",
     author="Daggy1234",
-    long_description=long_description,
-    long_description_content_type="text/markdown",
     install_requires=["aiohttp"],
     classifiers=[
         "Development Status :: 5 - Production/Stable",
