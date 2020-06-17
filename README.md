@@ -1,11 +1,7 @@
 # asyncdagpi
 An async wrapper for http://dagpi.tk
 
-[![Build Status](https://travis-ci.com/Daggy1234/asyncdagpi.svg?branch=master)](https://travis-ci.com/Daggy1234/asyncdagpi)
-
-[![License](https://img.shields.io/github/license/daggy1234/asyncdagpi)](https://mit-license.org/)
-
-[![codestyle](https://img.shields.io/badge/code%20style-black-000000.svg)](https://pypi.org/project/black/)
+[![Build Status](https://travis-ci.com/Daggy1234/asyncdagpi.svg?branch=master)](https://travis-ci.com/Daggy1234/asyncdagpi)[![License](https://img.shields.io/github/license/daggy1234/asyncdagpi)](https://mit-license.org/)[![codestyle](https://img.shields.io/badge/code%20style-black-000000.svg)](https://pypi.org/project/black/)
 
 ## Documentation for asyncdagpi
 
@@ -66,7 +62,7 @@ The examples below depict a few use cases
 
 ```python
 async def wanted(image_url:str):
-    response = await API_CLIENT.staticimage('wanted'image_url)
+    response = await API_CLIENT.staticimage('wanted',image_url)
     with open('wanted.png''wb') as out:
         out.write(response.read())
 ```
@@ -76,7 +72,7 @@ async def wanted(image_url:str):
 ```python
 from PIL import Image
 async def wanted(image_url:str):
-    response = await API_CLIENT.staticimage('wanted'image_url)
+    response = await API_CLIENT.staticimage('wanted',image_url)
     image = Image.open(response)
 ```
 
@@ -93,8 +89,8 @@ from discord.ext import commands
 bot = commands.Bot(command_prefix = '.')
 @bot.command()
 async def wanted(ctximage_url:str):
-    response = await API_CLIENT.staticimage('wanted'image_url)
-    file = discord.File(responsefilename='wanted.png')
+    response = await API_CLIENT.staticimage('wanted',image_url)
+    file = discord.File(response,filename='wanted.png')
     await ctx.send(file=file)  
 ```
 
@@ -104,17 +100,17 @@ async def wanted(ctximage_url:str):
 
 #### -  InvalidOption
 
-This excpetion is raised when the feature chose ie. wanted is not a valid feature from the available options.
+This exception is raised when the feature chose ie. wanted is not a valid feature from the available options.
 
 #### -  BadUrl
 
-The api uses regex to validate url's. When an imrpoper url is passed to the API this exception is raised
+The api uses regex to validate urls. When an improper url is passed to the API this exception is raised
 
 #### -  ValueError
 
-This is when the API returns a non 200 code ie means an error occured. This exception throws the status code along with a message explaining the status code. The description of status codes can be found in the API docs.
+This is when the API returns a non 200 code ie means an error occurred. This exception throws the status code along with a message explaining the status code. The description of status codes can be found in the API docs.
 
-### Categories and their susbequent features
+### Categories and their subsequent features
 
 - - -
 
