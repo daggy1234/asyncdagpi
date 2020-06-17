@@ -1,7 +1,7 @@
 # asyncdagpi
 An async wrapper for http://dagpi.tk
 
-[![Build Status](https://travis-ci.com/Daggy1234/asyncdagpi.svg?branch=master)](https://travis-ci.com/Daggy1234/asyncdagpi)[![License](https://img.shields.io/github/license/daggy1234/asyncdagpi)](https://mit-license.org/)[![codestyle](https://img.shields.io/badge/code%20style-black-000000.svg)](https://pypi.org/project/black/)
+[![Build Status](https://travis-ci.com/Daggy1234/asyncdagpi.svg?branch=master)](https://travis-ci.com/Daggy1234/asyncdagpi)[![License](https://img.shields.io/github/license/daggy1234/asyncdagpi)](https://mit-license.org/)[![codestyle](https://img.shields.io/badge/code%20style-black-000000.svg)](https://pypi.org/project/black/) [version](https://img.shields.io/pypi/v/asyncdagpi) [python](https://img.shields.io/pypi/pyversions/asyncdagpi) 
 
 ## Documentation for asyncdagpi
 
