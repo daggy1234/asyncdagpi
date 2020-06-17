@@ -1,11 +1,14 @@
 from asyncdagpi.http import http
 import re
 
+
 class InvalidOption(Exception):
     pass
 
+
 class BadUrl(Exception):
     pass
+
 
 class Client:
     __slots__ = ("httpclient", "baseurl", "token")
@@ -17,19 +20,20 @@ class Client:
 
     def urlconstructor(self, func) -> str:
         return f"{self.baseurl}/{func}"
-    def validateurl(self,url):
+
+    def validateurl(self, url):
         regex = re.compile(
-            r'^(?:http|ftp)s?://'  # http:// or https://
-            r'(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?)|'  # domain...
-            r'localhost|'  # localhost...
-            r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})'  # ...or ip
-            r'(?::\d+)?'  # optional port
-            r'(?:/?|[/?]\S+)$', re.IGNORECASE)
-        y = re.match(regex,url)
+            r"^(?:http|ftp)s?://"  # http:// or https://
+            r"(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?)|"  # domain...
+            r"localhost|"  # localhost...
+            r"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})"  # ...or ip
+            r"(?::\d+)?"  # optional port
+            r"(?:/?|[/?]\S+)$",
+            re.IGNORECASE,
+        )
+        y = re.match(regex, url)
         if not y:
-            raise BadUrl('The url passed is badly framed')
-
-
+            raise BadUrl("The url passed is badly framed")
 
     def headerconstructor(self, image_url, text: str = None, name: str = None) -> dict:
         if name != None and text != None:

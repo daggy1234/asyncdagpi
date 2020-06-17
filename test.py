@@ -1,9 +1,11 @@
 import asyncio
 from asyncdagpi.client import Client
 import os
-token = os.environ.get('token')
+
+token = os.environ.get("token")
 if not token:
-    raise OSError('There is no token')
+    raise OSError("There is no token")
+
 
 async def main(token):
 
