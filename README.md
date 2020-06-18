@@ -62,7 +62,7 @@ The examples below depict a few use cases
 
 ```python
 async def wanted(image_url:str):
-    response = await API_CLIENT.staticimage('wanted',image_url,bytes=True)
+    response = await API_CLIENT.staticimage('wanted',image_url)
     return (response)
     
 ```
