@@ -28,6 +28,18 @@ class http:
     async def session_create(self):
         self.session = aiohttp.ClientSession()
 
+    async def returnresponse(self, option, response):
+        if self.session == None:
+            await self.session_create()
+            if option:
+                async with self.session.get(response) as r:
+                    byt = await r.read()
+                    io = BytesIO(byt)
+                    io.seek(0)
+                    return (io)
+            else:
+                return (response)
+
     async def post(self, url, headers):
         if self.session == None:
             await self.session_create()

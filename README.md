@@ -54,15 +54,24 @@ async def wanted(image_url:str):
 
 - - -
 
-The client returns an BytesIO object as a default response. The BytesIO response can be used in a lot of ways. Read the documentation here : [BytesIOdocs](https://docs.python.org/3/library/io.html) in the BytesIO section.
+The client returns an url as a default response. If the `bytes=True` parameter is passed then a BytesIO object is returned instead! The BytesIO response can be used in a lot of ways. Read the documentation here : [BytesIOdocs](https://docs.python.org/3/library/io.html) in the BytesIO section.
 
 The examples below depict a few use cases
+
+**Obtaining a url to share**
+
+```python
+async def wanted(image_url:str):
+    response = await API_CLIENT.staticimage('wanted',image_url,bytes=True)
+    return (response)
+    
+```
 
 **Saving Response to file**
 
 ```python
 async def wanted(image_url:str):
-    response = await API_CLIENT.staticimage('wanted',image_url)
+    response = await API_CLIENT.staticimage('wanted',image_url,bytes=True)
     with open('wanted.png''wb') as out:
         out.write(response.read())
 ```
@@ -72,11 +81,11 @@ async def wanted(image_url:str):
 ```python
 from PIL import Image
 async def wanted(image_url:str):
-    response = await API_CLIENT.staticimage('wanted',image_url)
+    response = await API_CLIENT.staticimage('wanted',image_url,bytes=True)
     image = Image.open(response)
 ```
 
-**Using the Discord.py library and sending response as a file**
+**Using the Discord.py library and sending response as a an image in an embed**
 
 `please do remember to get a discord api token and run the bot using that.`
 
@@ -90,8 +99,9 @@ bot = commands.Bot(command_prefix = '.')
 @bot.command()
 async def wanted(ctximage_url:str):
     response = await API_CLIENT.staticimage('wanted',image_url)
-    file = discord.File(response,filename='wanted.png')
-    await ctx.send(file=file)  
+    embed = discord.Embed(title='DAGPI image')
+    embed.set_image(url=response)
+    await ctx.send(embed=embed)  
 ```
 
 ### 6) Handling Exceptions
@@ -116,7 +126,7 @@ This is when the API returns a non 200 code ie means an error occurred. This exc
 
 ### staticimage
 
-This returns an png image (as BytesIO) and requires the image_url for a static image.
+This returns an png image as an API url or (as BytesIO if `bytes=True`) and requires the image_url for a static image.
 
  ```python
 API_CLIENT.usertextimage(feature,image_url)
@@ -137,7 +147,7 @@ Features:
 
 ### Gif
 
-Returns a gif (as BytesIO). Takes either  a static_image url or a gif url and returns a gif. Irrespective of the inupt output is always a gif.
+Returns a gif as an API url or (as BytesIO if `bytes=True`) . Takes either  a static_image url or a gif url and returns a gif. Irrespective of the inupt output is always a gif.
 
  ```python
 API_CLIENT.usertextimage(feature,image_url)
@@ -160,7 +170,7 @@ Features:
 
 ### usertextimage
 
-Returns a png (as BytesIO). Takes in the following arguments
+Returns a png image as an API url or (as BytesIO if `bytes=True`). Takes in the following arguments
 
 ```python
 API_CLIENT.usertextimage(feature,image_url,text,name)
@@ -178,7 +188,8 @@ Features:
 
 #### textimage
 
-Depending in the feature and imput either returns a static or gif image as BytesIO.
+Depending in the feature and imput either returns a static or gif image.
+returns an API url or (as BytesIO if `bytes=True`)
 
 ```python
 API_CLIENT.usertextimage(feature,image_url,text)
