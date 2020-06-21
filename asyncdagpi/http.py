@@ -36,9 +36,9 @@ class http:
                     byt = await r.read()
                     io = BytesIO(byt)
                     io.seek(0)
-                    return (io)
+                    return io
             else:
-                return (response)
+                return response
 
     async def post(self, url, headers):
         if self.session == None:

@@ -47,7 +47,7 @@ You can use the client with a feature as follows:
 
 ```python
 async def wanted(image_url:str):
-    response = await API_CLIENT.staticimage('wanted'image_url)
+    response = await API_CLIENT.staticimage('wanted',image_url)
 ```
 
 ### 5) Using the Response
@@ -164,6 +164,7 @@ Features:
 - invert
 - pixel
 - sepia
+- deepfry
 - wasted
 - gay
 - charcoal

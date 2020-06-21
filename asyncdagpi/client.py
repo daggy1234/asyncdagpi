@@ -14,7 +14,6 @@ import re
 import aiohttp
 
 
-
 class InvalidOption(Exception):
     pass
 
@@ -33,7 +32,6 @@ class Client:
 
     def urlconstructor(self, func) -> str:
         return f"{self.baseurl}/{func}"
-
 
     def validateurl(self, url):
         regex = re.compile(
@@ -63,7 +61,7 @@ class Client:
             postdict = {"token": self.token, "url": image_url}
         return postdict
 
-    async def staticimage(self, feature: str, image_url: str,bytes=False):
+    async def staticimage(self, feature: str, image_url: str, bytes=False):
         feature_list = ["wanted", "evil", "bad", "hitler", "angel", "trash", "satan"]
         if feature not in feature_list:
             raise InvalidOption(f"{feature} is not a valid static feature")
@@ -71,10 +69,10 @@ class Client:
             url = self.urlconstructor(feature)
             header = self.headerconstructor(image_url)
             response = await self.httpclient.post(url, header)
-            finalresponse = await self.httpclient.returnresponse(bytes,response)
-            return (finalresponse)
+            finalresponse = await self.httpclient.returnresponse(bytes, response)
+            return finalresponse
 
-    async def gif(self, feature: str, image_url: str,bytes=False):
+    async def gif(self, feature: str, image_url: str, bytes=False):
         feature_list = [
             "paint",
             "solar",
@@ -85,7 +83,7 @@ class Client:
             "wasted",
             "gay",
             "charcoal",
-            "deepfry"
+            "deepfry",
         ]
         if feature not in feature_list:
             raise InvalidOption(f"{feature} is not a valid gif feature")
@@ -95,10 +93,10 @@ class Client:
             header = self.headerconstructor(image_url)
             response = await self.httpclient.post(url, header)
             finalresponse = await self.httpclient.returnresponse(bytes, response)
-            return (finalresponse)
+            return finalresponse
 
     async def usertextimage(
-        self, feature: str, image_url: str, text: str, name: str = None,bytes=False
+        self, feature: str, image_url: str, text: str, name: str = None, bytes=False
     ):
         feature_list = ["tweet", "quote"]
         if feature not in feature_list:
@@ -109,9 +107,9 @@ class Client:
             header = self.headerconstructor(image_url, text, name)
             response = await self.httpclient.post(url, header)
             finalresponse = await self.httpclient.returnresponse(bytes, response)
-            return (finalresponse)
+            return finalresponse
 
-    async def textimage(self, feature: str, image_url: str, text: str,bytes=False):
+    async def textimage(self, feature: str, image_url: str, text: str, bytes=False):
         feature_list = ["meme", "thoughtimage"]
         if feature not in feature_list:
             raise InvalidOption(f"{feature} is not a valid textimage feature")
@@ -121,6 +119,7 @@ class Client:
             header = self.headerconstructor(image_url, text)
             response = await self.httpclient.post(url, header)
             finalresponse = await self.httpclient.returnresponse(bytes, response)
-            return (finalresponse)
+            return finalresponse
+
     async def close(self):
         await self.httpclient.close_session()

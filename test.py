@@ -29,6 +29,7 @@ if not API_TOKEN:
 
 API_CLIENT = Client(API_TOKEN)
 
+
 async def main():
     """Main Function to test the Library for the CI"""
 

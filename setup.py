@@ -2,14 +2,14 @@ from setuptools import find_packages, setup
 
 setup(
     name="asyncdagpi",
-    version='2.0.0',
+    version="2.0.2",
     license="MIT",
     description="Asynchronous API wrapper for the Dagbot API (http://dagpi.tk)",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
     url="https://github.com/Daggy1234/asyncdagpi",
     author="Daggy1234",
-    pacakges=find_packages(),
+    pacakges=["asyncdagpi"],
     install_requires=["aiohttp"],
     classifiers=[
         "Development Status :: 5 - Production/Stable",
