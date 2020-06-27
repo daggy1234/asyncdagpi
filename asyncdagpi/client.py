@@ -28,7 +28,7 @@ class Client:
     def __init__(self, authtoken: str):
         self.token = authtoken
         self.httpclient = http()
-        self.baseurl = "http://dagpi.tk/api"
+        self.baseurl = "https://dagpi.tk/api"
 
     def urlconstructor(self, func) -> str:
         return f"{self.baseurl}/{func}"
@@ -46,7 +46,12 @@ class Client:
         y = re.match(regex, url)
         if not y:
             raise BadUrl("The url passed is badly framed")
-
+    async def respcheck(self,option,response_url):
+        if option:
+            y = await self.httpclient.getbytes(response_url)
+            return (y)
+        else:
+            return response_url
     def headerconstructor(self, image_url, text: str = None, name: str = None) -> dict:
         if name != None and text != None:
             postdict = {
@@ -69,8 +74,8 @@ class Client:
             url = self.urlconstructor(feature)
             header = self.headerconstructor(image_url)
             response = await self.httpclient.post(url, header)
-            finalresponse = await self.httpclient.returnresponse(bytes, response)
-            return finalresponse
+            response = await self.respcheck(bytes,response)
+            return response
 
     async def gif(self, feature: str, image_url: str, bytes=False):
         feature_list = [
@@ -84,6 +89,9 @@ class Client:
             "gay",
             "charcoal",
             "deepfry",
+            "night",
+            "jail",
+            "polaroid"
         ]
         if feature not in feature_list:
             raise InvalidOption(f"{feature} is not a valid gif feature")
@@ -92,8 +100,8 @@ class Client:
             url = self.urlconstructor(feature)
             header = self.headerconstructor(image_url)
             response = await self.httpclient.post(url, header)
-            finalresponse = await self.httpclient.returnresponse(bytes, response)
-            return finalresponse
+            response = await self.respcheck(bytes, response)
+            return response
 
     async def usertextimage(
         self, feature: str, image_url: str, text: str, name: str = None, bytes=False
@@ -106,8 +114,8 @@ class Client:
             url = self.urlconstructor(feature)
             header = self.headerconstructor(image_url, text, name)
             response = await self.httpclient.post(url, header)
-            finalresponse = await self.httpclient.returnresponse(bytes, response)
-            return finalresponse
+            response = await self.respcheck(bytes, response)
+            return response
 
     async def textimage(self, feature: str, image_url: str, text: str, bytes=False):
         feature_list = ["meme", "thoughtimage"]
@@ -118,8 +126,8 @@ class Client:
             url = self.urlconstructor(feature)
             header = self.headerconstructor(image_url, text)
             response = await self.httpclient.post(url, header)
-            finalresponse = await self.httpclient.returnresponse(bytes, response)
-            return finalresponse
+            response = await self.respcheck(bytes, response)
+            return response
 
     async def close(self):
         await self.httpclient.close_session()

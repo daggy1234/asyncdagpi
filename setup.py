@@ -2,9 +2,9 @@ from setuptools import find_packages, setup
 
 setup(
     name="asyncdagpi",
-    version="2.0.3",
+    version="2.2.0",
     license="MIT",
-    description="Asynchronous API wrapper for the Dagbot API (http://dagpi.tk)",
+    description="Asynchronous API wrapper for the Dagbot API (https://dagpi.tk)",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
     url="https://github.com/Daggy1234/asyncdagpi",

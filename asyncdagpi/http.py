@@ -23,33 +23,27 @@ class http:
             404: "The api is down rightnow",
             401: "Invalid token",
             400: "Unable to use url",
+            500: "Api server has a problem/Invalid URL"
         }
 
     async def session_create(self):
         self.session = aiohttp.ClientSession()
-
-    async def returnresponse(self, option, response):
+    async def getbytes(self,url):
         if self.session == None:
             await self.session_create()
-            if option:
-                async with self.session.get(response) as r:
-                    byt = await r.read()
-                    io = BytesIO(byt)
-                    io.seek(0)
-                    return io
-            else:
-                return response
-
+        async with self.session.get(url) as r:
+            byt = await r.read()
+            io = BytesIO(byt)
+            io.seek(0)
+            return io
     async def post(self, url, headers):
         if self.session == None:
             await self.session_create()
 
         async with self.session.post(url, headers=headers) as r:
             if r.status == 200:
-                bytes = await r.read()
-                io = BytesIO(bytes)
-                io.seek(0)
-                return io
+                json = await r.json()
+                return (json['url'])
             else:
                 try:
                     ectx = self.codedict[r.status]

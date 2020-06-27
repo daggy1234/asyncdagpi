@@ -8,7 +8,7 @@ An async wrapper for http://dagpi.tk
 ### 1) Obtain a token
 
 - - -
-Join the discord server [here](http://server.daggy.tech) and verify yourself. Once done you can easily apply for a token via the process detailed.
+Join the discord server [here](https://server.daggy.tech) and verify yourself. Once done you can easily apply for a token via the process detailed.
 
 ### 2) Install the library
 
@@ -41,7 +41,7 @@ With this you should have a working API client that can help you authenticate an
 - textimage
 
 These categories have a lot of features. A list of features can be found below or in the API documentation at 
-[docs](http://dagpi.tk/docs)
+[docs](https://dagpi.tk/docs)
 
 You can use the client with a feature as follows:
 
@@ -97,7 +97,7 @@ import discord
 from discord.ext import commands
 bot = commands.Bot(command_prefix = '.')
 @bot.command()
-async def wanted(ctximage_url:str):
+async def wanted(ctx,image_url:str):
     response = await API_CLIENT.staticimage('wanted',image_url)
     embed = discord.Embed(title='DAGPI image')
     embed.set_image(url=response)
@@ -168,6 +168,9 @@ Features:
 - wasted
 - gay
 - charcoal
+- jail
+- polaroid
+- night
 
 ### usertextimage
 
