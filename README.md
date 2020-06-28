@@ -25,7 +25,7 @@ pip install asyncdagpi
 - - -
 
 ```python
-from asycncdagpi import Client
+from asyncdagpi import Client
 API_CLIENT = Client('insert_your_token')
 ```
 
