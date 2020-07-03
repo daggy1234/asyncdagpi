@@ -11,7 +11,7 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 
 import aiohttp
 from io import BytesIO
-
+from . import exceptions
 
 class http:
     __slots__ = ("session", "codedict")
@@ -19,11 +19,13 @@ class http:
     def __init__(self):
         self.session = None
         self.codedict = {
-            400: "Invalid link",
-            404: "The api is down rightnow",
-            401: "Invalid token",
-            400: "Unable to use url",
-            500: "Api server has a problem/Invalid URL"
+            400: exceptions.BadUrl('The url passed is poorly framed'),
+            404: exceptions.APIError(404,'Dagpi is down'),
+            401: exceptions.IncorrectToken('Your token is invalid'),
+            408: exceptions.ImageUnaccesible(408,"The API was unable to connect and download your image"),
+            415: exceptions.ImageUnaccesible(415,"The API was unable to find an image at your url"),
+            429: exceptions.RateLimited('You are being rate limited by the api.'),
+            500: exceptions.APIError(500,'Internal API error')
         }
 
     async def session_create(self):
@@ -47,9 +49,10 @@ class http:
             else:
                 try:
                     ectx = self.codedict[r.status]
+                    raise ectx
                 except KeyError:
-                    ectx = "Unknown Exception"
-                raise ValueError(f"Raised {r.status}:{ectx}")
+                    ectx = excptions.UnknownError(r.status)
+                raise ectx
 
     async def close_session(self):
         if self.session != None:

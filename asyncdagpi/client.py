@@ -12,16 +12,7 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 from asyncdagpi.http import http
 import re
 import aiohttp
-
-
-class InvalidOption(Exception):
-    pass
-
-
-class BadUrl(Exception):
-    pass
-
-
+from . import exceptions
 class Client:
     __slots__ = ("httpclient", "baseurl", "token")
 
@@ -45,7 +36,7 @@ class Client:
         )
         y = re.match(regex, url)
         if not y:
-            raise BadUrl("The url passed is badly framed")
+            raise exceptions.BadUrl("The url passed is badly framed")
     async def respcheck(self,option,response_url):
         if option:
             y = await self.httpclient.getbytes(response_url)
@@ -67,9 +58,9 @@ class Client:
         return postdict
 
     async def staticimage(self, feature: str, image_url: str, bytes=False):
-        feature_list = ["wanted", "evil", "bad", "hitler", "angel", "trash", "satan"]
+        feature_list = ["wanted", "evil", "bad", "hitler", "angel", "trash", "satan","triggered","obama"]
         if feature not in feature_list:
-            raise InvalidOption(f"{feature} is not a valid static feature")
+            raise exceptions.InvalidOption(f"{feature} is not a valid static feature")
         else:
             url = self.urlconstructor(feature)
             header = self.headerconstructor(image_url)
@@ -94,7 +85,7 @@ class Client:
             "polaroid"
         ]
         if feature not in feature_list:
-            raise InvalidOption(f"{feature} is not a valid gif feature")
+            raise exceptions.InvalidOption(f"{feature} is not a valid gif feature")
         else:
             self.validateurl(image_url)
             url = self.urlconstructor(feature)
@@ -108,7 +99,7 @@ class Client:
     ):
         feature_list = ["tweet", "quote"]
         if feature not in feature_list:
-            raise InvalidOption(f"{feature} is not a valid usertextimage feature")
+            raise exceptions.InvalidOption(f"{feature} is not a valid usertextimage feature")
         else:
             self.validateurl(image_url)
             url = self.urlconstructor(feature)
@@ -118,9 +109,9 @@ class Client:
             return response
 
     async def textimage(self, feature: str, image_url: str, text: str, bytes=False):
-        feature_list = ["meme", "thoughtimage"]
+        feature_list = ["thoughtimage"]
         if feature not in feature_list:
-            raise InvalidOption(f"{feature} is not a valid textimage feature")
+            raise exceptions.InvalidOption(f"{feature} is not a valid textimage feature")
         else:
             self.validateurl(image_url)
             url = self.urlconstructor(feature)

@@ -107,18 +107,46 @@ async def wanted(ctx,image_url:str):
 ### 6) Handling Exceptions
 
 - - -
+You can import exceptions from asyncdagpi.
 
+```python
+from asyncdagpi import exceptions
+try:
+    #request
+except exceptions.ImageUnaccesible:
+    print('No image at your url')
+```
 #### -  InvalidOption
 
-This exception is raised when the feature chose ie. wanted is not a valid feature from the available options.
+This exception is raised when the feature chosen is not in the feature list ie. wanted is not a valid feature from the available options.
 
 #### -  BadUrl
 
 The api uses regex to validate urls. When an improper url is passed to the API this exception is raised
 
-#### -  ValueError
+#### -  IncorrectToken
 
-This is when the API returns a non 200 code ie means an error occurred. This exception throws the status code along with a message explaining the status code. The description of status codes can be found in the API docs.
+The token passed is invalid according to the api.
+
+#### -  RateLimited
+
+You are exceeding the maximum number of requests the api can take.
+
+#### -  FileTooLarge
+
+The file passed os too large for the API to process
+
+#### -  APIError
+
+The api raised an error. Issue with the API
+
+#### -  ImageUnaccesible
+
+The API was unable to find an image at your url within timeout and 
+
+#### - UnkownError
+
+This is when the API returns a non 200 code ie means an error occurred. This exception throws the status code along with a message explaining the status code. 
 
 ### Categories and their subsequent features
 
