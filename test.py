@@ -24,11 +24,11 @@ from asyncdagpi.client import Client
 import asyncdagpi.exceptions
 
 
-# API_TOKEN = os.environ.get("token")
-# if not API_TOKEN:
-#     raise OSError("There is no token")
+API_TOKEN = os.environ.get("token")
+if not API_TOKEN:
+    raise OSError("There is no token")
 
-API_CLIENT = Client('VBOr4PxSRWsIaklZ4RrxxYPQ46db8rJMsJEx066Gbfi26RMHcH0CYRZujfykdotO')
+
 
 
 async def main():
