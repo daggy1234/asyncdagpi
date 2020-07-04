@@ -28,14 +28,12 @@ API_TOKEN = os.environ.get("token")
 if not API_TOKEN:
     raise OSError("There is no token")
 
-
-
 API_CLIENT = Client(API_TOKEN)
 
 async def main():
     """Main Function to test the Library for the CI"""
 
-    y = await API_CLIENT.staticimage("bad", "https://www.youtube.com/")
+    y = await API_CLIENT.staticimage("bad", "https://dagbot-is.the-be.st/logo.png")
     print(y)
     await API_CLIENT.close()
 
