@@ -25,7 +25,8 @@ class http:
             408: exceptions.ImageUnaccesible(408,"The API was unable to connect and download your image"),
             415: exceptions.ImageUnaccesible(415,"The API was unable to find an image at your url"),
             429: exceptions.RateLimited('You are being rate limited by the api.'),
-            500: exceptions.APIError(500,'Internal API error')
+            500: exceptions.APIError(500,'Internal API error'),
+            413: exceptions.FileTooLarge("The image is too large to use")
         }
 
     async def session_create(self):

@@ -58,7 +58,7 @@ class Client:
         return postdict
 
     async def staticimage(self, feature: str, image_url: str, bytes=False):
-        feature_list = ["wanted", "evil", "bad", "hitler", "angel", "trash", "satan","triggered","obama"]
+        feature_list = ["wanted", "evil", "bad", "hitler", "angel", "trash", "satan","triggered","obama","hog","sobel","5g1g","whyareyougay","ascii","colors","rgbdata"]
         if feature not in feature_list:
             raise exceptions.InvalidOption(f"{feature} is not a valid static feature")
         else:
@@ -82,7 +82,8 @@ class Client:
             "deepfry",
             "night",
             "jail",
-            "polaroid"
+            "polaroid",
+            "edge"
         ]
         if feature not in feature_list:
             raise exceptions.InvalidOption(f"{feature} is not a valid gif feature")
