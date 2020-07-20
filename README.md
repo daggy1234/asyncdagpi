@@ -172,6 +172,14 @@ Features:
 - angel
 - trash
 - satan
+- triggered
+- obama
+- 5g1g
+- hog
+- whyareyougay
+- ascii
+- colors 
+- rgbdata
 
 ### Gif
 
@@ -234,4 +242,4 @@ API_CLIENT.usertextimage(feature,image_url,text)
 Features:
 
 - Thoughtimage: always returns a static response
-- meme : based in type of input image_url returns a gif or png as BytesIO
+
