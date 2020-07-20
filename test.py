@@ -33,7 +33,7 @@ API_CLIENT = Client(API_TOKEN)
 async def main():
     """Main Function to test the Library for the CI"""
 
-    y = await API_CLIENT.staticimage("bad", "https://dagbot-is.the-be.st/logo.png")
+    y = await API_CLIENT.staticimage("colors", "https://dagbot-is.the-be.st/logo.png")
     print(y)
     await API_CLIENT.close()
 

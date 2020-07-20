@@ -43,8 +43,8 @@ class Client:
             return (y)
         else:
             return response_url
-    def headerconstructor(self, image_url, text: str = None, name: str = None) -> dict:
-        if name != None and text != None:
+    def headerconstructor(self, image_url, text: str = None, name: str = None,url2: str = None) -> dict:
+        if name != None and text != None :
             postdict = {
                 "token": self.token,
                 "url": image_url,
@@ -53,17 +53,33 @@ class Client:
             }
         elif text != None:
             postdict = {"token": self.token, "url": image_url, "text": text}
+        elif url2 != None:
+            postdict = {"token": self.token, "url": image_url,"url2":url2}
         else:
             postdict = {"token": self.token, "url": image_url}
         return postdict
 
     async def staticimage(self, feature: str, image_url: str, bytes=False):
-        feature_list = ["wanted", "evil", "bad", "hitler", "angel", "trash", "satan","triggered","obama","hog","sobel","5g1g","whyareyougay","ascii","colors","rgbdata"]
+        feature_list = ["wanted", "evil", "bad", "hitler", "angel", "trash", "satan","triggered","obama","hog","sobel","ascii","colors","rgbdata"]
         if feature not in feature_list:
             raise exceptions.InvalidOption(f"{feature} is not a valid static feature")
         else:
+            self.validateurl(image_url)
             url = self.urlconstructor(feature)
             header = self.headerconstructor(image_url)
+            response = await self.httpclient.post(url, header)
+            response = await self.respcheck(bytes,response)
+            return response
+
+    async def multiimage(self,feature: str, image_url: str, second_image_url: str, bytes=False):
+        feature_list = ["5g1g","whyareyougay"]
+        if feature not in feature_list:
+            raise exceptions.InvalidOption(f"{feature} is not a valid multiimage feature")
+        else:
+            self.validateurl(image_url)
+            self.validateurl(second_image_url)
+            url = self.urlconstructor(feature)
+            header = self.headerconstructor(image_url,url2=second_image_url)
             response = await self.httpclient.post(url, header)
             response = await self.respcheck(bytes,response)
             return response

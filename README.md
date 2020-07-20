@@ -157,7 +157,7 @@ This is when the API returns a non 200 code ie means an error occurred. This exc
 This returns an png image as an API url or (as BytesIO if `bytes=True`) and requires the image_url for a static image.
 
  ```python
-API_CLIENT.usertextimage(feature,image_url)
+API_CLIENT.staticimage(feature,image_url)
 
 # feature - one of the features
 # image_url - a static image url
@@ -174,19 +174,33 @@ Features:
 - satan
 - triggered
 - obama
-- 5g1g
 - hog
-- whyareyougay
 - ascii
 - colors 
 - rgbdata
+
+### multiimage
+
+This returns an png image as an API url or (as BytesIO if `bytes=True`) and requires the 2 image urls for the multiimage to be produced.
+
+```python
+API_CLIENT.multiimage(feature,image_url,second_image_url)
+#feature: one of the features
+#image_url url for first image
+#second_image_url: url for image no2
+```
+
+Features:
+
+- 5g1g
+- whyareyougay
 
 ### Gif
 
 Returns a gif as an API url or (as BytesIO if `bytes=True`) . Takes either  a static_image url or a gif url and returns a gif. Irrespective of the inupt output is always a gif.
 
  ```python
-API_CLIENT.usertextimage(feature,image_url)
+API_CLIENT.gif(feature,image_url)
 
 # feature - one of the features
 # image_url - a gif or static image_url
@@ -232,7 +246,7 @@ Depending in the feature and imput either returns a static or gif image.
 returns an API url or (as BytesIO if `bytes=True`)
 
 ```python
-API_CLIENT.usertextimage(feature,image_url,text)
+API_CLIENT.textimage(feature,image_url,text)
 
 # feature - one of the features
 # image_url - a static image url
