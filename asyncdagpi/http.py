@@ -52,7 +52,7 @@ class http:
                     ectx = self.codedict[r.status]
                     raise ectx
                 except KeyError:
-                    ectx = excptions.UnknownError(r.status)
+                    ectx = exceptions.UnknownError(r.status)
                 raise ectx
 
     async def close_session(self):
