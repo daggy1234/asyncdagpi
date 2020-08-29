@@ -26,7 +26,7 @@ class APIError(Exception):
 class FileTooLarge(Exception):
     """The image is too large for the API"""
     pass
-class UnkownError(Exception):
+class UnknownError(Exception):
     """HTTP Status code not known"""
     def __init__(self,code):
         self.httplist = list(HTTPStatus)
