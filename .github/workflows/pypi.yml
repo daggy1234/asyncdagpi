@@ -1,15 +1,21 @@
-name: Build and Publish
+name: Release
 
-on: release
+on:
+  push:
+    tags:
+      - '*.*.*'
 
 jobs:
-  bdist:
+  release:
     name: Release
     runs-on: ubuntu-latest
     env:
       python-version: '3.8'
     steps:
       - uses: actions/checkout@v2
+      - name: Get tag
+        id: tag
+        run: echo ::set-output name=tag::${GITHUB_REF#refs/tags/}
       - name: Set up Python ${{ env.python-version }}
         uses: actions/setup-python@v1
         with:
@@ -17,14 +23,24 @@ jobs:
       - name: Get Python version
         id: python-version
         run: |
-             echo ::set-output name=version::$(python -c "import sys; print('-'.join(str(v) for v in sys.version_info))")
+          echo ::set-output name=version::$(python -c "import sys; print('-'.join(str(v) for v in sys.version_info))")
       - name: Install Poetry
         uses: dschep/install-poetry-action@v1.3
         with:
-           create_virtualenvs: 'true'
+          create_virtualenvs: 'true'
       - name: Set Poetry config
         run: |
-            poetry config virtualenvs.in-project true
+          poetry config virtualenvs.in-project true
+      - name: Get package version
+        id: package-version
+        run: echo ::set-output name=version::$(poetry version | grep -Po "\d+\.\d+\.\d+$")
+      - name: Check if tag matches package version
+        if: steps.tag.outputs.tag != steps.package-version.outputs.version
+        run: |
+          echo Tag: ${{ steps.tag.outputs.tag }}
+          echo Package version: ${{ steps.package-version.outputs.version }}
+          echo Tag and package version do not match
+          exit 1
       - name: Cache Poetry virtualenv
         uses: actions/cache@v1
         id: cache
@@ -33,7 +49,17 @@ jobs:
           key: poetry-venv-${{ runner.os }}-${{ steps.python-version.outputs.version }}
       - name: Install/update package and dependencies
         run: poetry install
+      - name: Create release ${{ steps.tag.outputs.tag }}
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.tag.outputs.tag }}
+          release_name: ${{ steps.tag.outputs.tag }}
+          draft: 'false'
+          prerelease: 'false'
       - name: Build and publish to PyPi
         env:
-          POETRY_PYPI_TOKEN_PYPI: ${{ secrets.PYPI_TOKEN }}
+          POETRY_PYPI_TOKEN_PYPI: ${{ secrets.PYPI_PASSWORD }}
         run: poetry publish --build
