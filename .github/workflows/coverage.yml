@@ -38,6 +38,6 @@ jobs:
           poetry run flake8 asyncdagpi --count --select=E9,F63,F7,F82 --show-source --statistics
           poetry run flake8 asyncdagpi --count --exit-zero  --statistics
     - name: Test with Pytest and measure coverage
-      run: poetry run pytest --cov-report=xml --cov=pecho tests/
+      run: poetry run pytest --cov-report=xml --cov=asyncdagpi tests/
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v1
