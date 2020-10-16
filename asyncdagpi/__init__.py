@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Discord API Wrapper
+Asyncdagpi
 ~~~~~~~~~~~~~~~~~~~
 An async wrapper for dagpi
 :copyright: (c) 2020 Daggy

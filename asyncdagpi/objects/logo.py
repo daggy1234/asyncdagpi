@@ -1,6 +1,7 @@
 import json
 from typing import Dict
 
+
 class Logo(object):
 
     def __init__(self, json: Dict):

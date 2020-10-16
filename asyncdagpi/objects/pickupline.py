@@ -17,6 +17,7 @@ class PickupLine(object):
         line: :class:`str`
             String Containing Pickup Line
     """
+
     def __init__(self, json: Dict):
         self.dict = json
         self.category = json.get("category")
