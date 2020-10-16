@@ -6,7 +6,7 @@ from asyncdagpi import __version__, Client, errors, ImageFeatures, Image
 
 
 def test_version():
-    assert __version__ == '2.0.0'
+    assert __version__ == '2.0.2'
 
 
 def test_url_regex():
