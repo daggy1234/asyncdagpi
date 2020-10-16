@@ -14,8 +14,8 @@ jobs:
         python-version: 3.8
     - name: Install Dependencies
       run: |
+        pip install pytest flake8
         pip install poetry
-        pip install pytest, flake8
         pip install pytest-cov
         poetry install -v
     - name: Run Tests
