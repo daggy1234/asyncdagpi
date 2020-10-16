@@ -2,11 +2,7 @@ import os
 
 import pytest
 
-from asyncdagpi import __version__, Client, errors, ImageFeatures, Image
-
-
-def test_version():
-    assert __version__ == '2.0.2'
+from asyncdagpi import Client, errors, ImageFeatures, Image
 
 
 def test_url_regex():
