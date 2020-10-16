@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.6, 3.7, 3.8, 3]
+        python-version: [3.6, 3.7, 3.8]
     env:
       PYTHON: ${{ matrix.python-version }}
       DAGPI_TOKEN: ${{ secrets.DAGPI_TOKEN }}
@@ -35,8 +35,8 @@ jobs:
       run: poetry install
     - name: lint
       run: |
-          poetry run flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-          poetry run flake8 . --count --exit-zero  --statistics
+          poetry run flake8 asyncdagpi --count --select=E9,F63,F7,F82 --show-source --statistics
+          poetry run flake8 asyncdagpi --count --exit-zero  --statistics
     - name: Test with Pytest and measure coverage
       run: poetry run pytest --cov-report=xml --cov=pecho tests/
     - name: Upload coverage to Codecov
