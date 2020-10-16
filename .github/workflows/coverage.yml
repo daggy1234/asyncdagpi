@@ -16,12 +16,12 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
     - name: Install Poetry
-        uses: dschep/install-poetry-action@v1.3
-        with:
-          create_virtualenvs: 'true'
+      uses: dschep/install-poetry-action@v1.3
+      with:
+        create_virtualenvs: 'true'
     - name: Get Python version
-        id: python-version
-        run: echo ::set-output name=version::$(python -c "import sys; print('-'.join(str(v) for v in sys.version_info))")
+      id: python-version
+      run: echo ::set-output name=version::$(python -c "import sys; print('-'.join(str(v) for v in sys.version_info))")
     - name: Set Poetry config
       run: |
           poetry config virtualenvs.in-project true
