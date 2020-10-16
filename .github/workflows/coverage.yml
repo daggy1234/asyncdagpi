@@ -1,5 +1,5 @@
 name: Code Coverage and Linting
-on: [push, pull]
+on: [push, pull_request]
 jobs:
   coverage-and-linting:
     runs-on: ubuntu-latest
