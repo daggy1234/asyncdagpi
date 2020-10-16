@@ -4,33 +4,36 @@ on: release
 
 jobs:
   bdist:
-    name: Build source distribution
+    name: Release
     runs-on: ubuntu-latest
+    env:
+      python-version: '3.8'
     steps:
       - uses: actions/checkout@v2
-
-      - uses: actions/setup-python@v2
-        name: Install Python
+      - name: Set up Python ${{ env.python-version }}
+        uses: actions/setup-python@v1
         with:
-          python-version: '3.8'
-
-      - name: Build sdist
-        run: python setup.py bdist_wheel
-
-      - uses: actions/upload-artifact@v2
+        python-version: ${{ env.python-version }}
+      - name: Get Python version
+        id: python-version
+        run: |
+             echo ::set-output name=version::$(python -c "import sys; print('-'.join(str(v) for v in sys.version_info))")
+      - name: Install Poetry
+        uses: dschep/install-poetry-action@v1.3
         with:
-          path: dist/*
-
-  upload_pypi:
-    needs: [bdist]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/download-artifact@v2
+           create_virtualenvs: 'true'
+      - name: Set Poetry config
+        run: |
+            poetry config virtualenvs.in-project true
+      - name: Cache Poetry virtualenv
+        uses: actions/cache@v1
+        id: cache
         with:
-          name: artifact
-          path: dist
-
-      - uses: pypa/gh-action-pypi-publish@master
-        with:
-          user: __token__
-          password: ${{ secrets.PYPI_PASSWORD }}
+          path: .venv
+          key: poetry-venv-${{ runner.os }}-${{ steps.python-version.outputs.version }}
+      - name: Install/update package and dependencies
+        run: poetry install
+      - name: Build and publish to PyPi
+        env:
+          POETRY_PYPI_TOKEN_PYPI: ${{ secrets.PYPI_TOKEN }}
+        run: poetry publish --build
