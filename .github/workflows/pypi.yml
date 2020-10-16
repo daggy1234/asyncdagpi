@@ -13,7 +13,7 @@ jobs:
       - name: Set up Python ${{ env.python-version }}
         uses: actions/setup-python@v1
         with:
-        python-version: ${{ env.python-version }}
+          python-version: ${{ env.python-version }}
       - name: Get Python version
         id: python-version
         run: |
