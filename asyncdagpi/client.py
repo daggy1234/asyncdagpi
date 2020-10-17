@@ -8,12 +8,13 @@ from .http import HTTP
 from .image_features import ImageFeatures
 from .objects import WTP, PickupLine, Logo
 
-url_regex = r"http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]| " \
-            r"(?:%[0-9a-fA-F][0-9a-fA-F]))+"
+url_regex = (
+    r"http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]| "
+    r"(?:%[0-9a-fA-F][0-9a-fA-F]))+"
+)
 
 
 class Client:
-
     def __init__(self, token: str, **kwargs):
         """
 
@@ -42,15 +43,12 @@ class Client:
         if not isinstance(url, str):
             raise BadUrl("URL is not a String")
 
-        regex = re.compile(
-            url_regex,
-            re.IGNORECASE)
+        regex = re.compile(url_regex, re.IGNORECASE)
         match = re.match(regex, url)
         if not match:
             raise BadUrl("URL did not pass Regex")
 
-    async def image_process(self, feature: ImageFeatures, url: str, **kwargs) \
-            -> Image:
+    async def image_process(self, feature: ImageFeatures, url: str, **kwargs) -> Image:
         """
         feature: :class:`ImageFeature`
             a dagpi ImageFeature class

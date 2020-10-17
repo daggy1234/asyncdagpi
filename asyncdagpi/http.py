@@ -17,38 +17,36 @@ error_dict = {
     422: errors.ApiError("API was unable to manipulate the Image"),
     500: errors.ApiError("Internal Server Error"),
     429: errors.RateLimited("You are being Rate_limited"),
-    403: errors.Unauthorised("403 Returned")
+    403: errors.Unauthorised("403 Returned"),
 }
 
 
 class HTTP:
     """
-    HTTP Client
-    -----------
-    Represents an HTTP client sending HTTP requests to the top.gg API.
-        .. _aiohttp session:
-https://aiohttp.readthedocs.io/en/stable/client_reference.html#client-session
-        Parameters
-        ----------
-        token: :class:`str`
-            A dagpi Token from https://dagpi.xyz
-        **kwargs:
-            **session : Optional[aiohttp session]
-                The session used to request to the API
-            **loop: Optional[asyncio loop]
-                The asyncio loop to use
+        HTTP Client
+        -----------
+        Represents an HTTP client sending HTTP requests to the top.gg API.
+            .. _aiohttp session:
+    https://aiohttp.readthedocs.io/en/stable/client_reference.html#client-session
+            Parameters
+            ----------
+            token: :class:`str`
+                A dagpi Token from https://dagpi.xyz
+            **kwargs:
+                **session : Optional[aiohttp session]
+                    The session used to request to the API
+                **loop: Optional[asyncio loop]
+                    The asyncio loop to use
     """
 
-    __slots__ = ("client", "base_url", "token", "loop",
-                 "user_agent", "ratelimiter")
+    __slots__ = ("client", "base_url", "token", "loop", "user_agent", "ratelimiter")
 
     def __init__(self, token: str, **kwargs):
         self.base_url = "https://api.dagpi.xyz"
         self.token = token
-        self.loop = loop = kwargs.get('loop', None) or asyncio.get_event_loop()
-        self.client = kwargs.get('session') or aiohttp.ClientSession(loop=loop)
-        self.ratelimiter = RateLimiter(max_calls=60, period=60,
-                                       callback=limited)
+        self.loop = loop = kwargs.get("loop", None) or asyncio.get_event_loop()
+        self.client = kwargs.get("session") or aiohttp.ClientSession(loop=loop)
+        self.ratelimiter = RateLimiter(max_calls=60, period=60, callback=limited)
         self.user_agent = "AsyncDagpi v{__version__} Python/Python/ \
         {sys.version_info[0]}.{sys.version_info[1]} aiohttp/{2}"
 
@@ -64,10 +62,7 @@ https://aiohttp.readthedocs.io/en/stable/client_reference.html#client-session
             if not self.token:
                 raise errors.Unauthorised("Please Provide a dagpi token")
 
-            headers = {
-                "Authorization": self.token,
-                'User-Agent': self.user_agent
-            }
+            headers = {"Authorization": self.token, "User-Agent": self.user_agent}
 
             request_url = self.base_url + "/data/" + url
             if kwargs.get("image"):
@@ -79,8 +74,10 @@ https://aiohttp.readthedocs.io/en/stable/client_reference.html#client-session
                         return js
 
                     else:
-                        raise errors.ApiError(f"{resp.status}. \
-                        Request was great but Dagpi did not send a JSON")
+                        raise errors.ApiError(
+                            f"{resp.status}. \
+                        Request was great but Dagpi did not send a JSON"
+                        )
                 else:
                     try:
                         error = error_dict[resp.status]
@@ -103,31 +100,30 @@ https://aiohttp.readthedocs.io/en/stable/client_reference.html#client-session
             if not self.token:
                 raise errors.Unauthorised("Please Provide a dagpi token")
 
-            headers = {
-                "Authorization": self.token,
-                'User-Agent': self.user_agent
-            }
+            headers = {"Authorization": self.token, "User-Agent": self.user_agent}
 
             request_url = self.base_url + "/image" + url
-            async with self.client.get(request_url, headers=headers,
-                                       params=params) as resp:
+            async with self.client.get(
+                request_url, headers=headers, params=params
+            ) as resp:
                 resp_time = resp.headers["X-Process-Time"][:5]
-                print('GET {} has returned {} taking {}s'.format(resp.url,
-                                                                 resp.status,
-                                                                 resp_time))
+                print(
+                    "GET {} has returned {} taking {}s".format(
+                        resp.url, resp.status, resp_time
+                    )
+                )
                 if 300 >= resp.status >= 200:
-                    if resp.headers["Content-Type"] in \
-                            ["image/png", "image/gif"]:
-                        form = resp.headers["Content-Type"].replace("image/",
-                                                                    "")
+                    if resp.headers["Content-Type"] in ["image/png", "image/gif"]:
+                        form = resp.headers["Content-Type"].replace("image/", "")
 
                         raw_byte = await resp.read()
-                        return Image(raw_byte, form, resp_time,
-                                     params.get("url"))
+                        return Image(raw_byte, form, resp_time, params.get("url"))
 
                     else:
-                        raise errors.ApiError(f"{resp.status}. \
-                    Request was great but Dagpi did not send an Image back")
+                        raise errors.ApiError(
+                            f"{resp.status}. \
+                    Request was great but Dagpi did not send an Image back"
+                        )
                 else:
                     try:
                         error = error_dict[resp.status]

@@ -13,7 +13,6 @@ class BaseDagpiObject:
 
 
 class Logo(BaseDagpiObject):
-
     def __init__(self, data: Dict):
         self.dict = data
         self.question = data.get("question")
@@ -48,7 +47,6 @@ class PickupLine(BaseDagpiObject):
 
 
 class WTP(BaseDagpiObject):
-
     def __init__(self, data: Dict):
         mon = data.get("Data")
         self.dict = data

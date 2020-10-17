@@ -21,8 +21,9 @@ class Image(object):
             URL for the image passed to the API
     """
 
-    def __init__(self, byt: bytes, image_format: str, process_time: str,
-                 original_url: str):
+    def __init__(
+        self, byt: bytes, image_format: str, process_time: str, original_url: str
+    ):
         self.image = BytesIO(byt)
         self.format = image_format
         self.process_time = process_time
@@ -49,5 +50,5 @@ class Image(object):
             - path: path to write to can be relative/absolute. default is ./
         """
         path = kwargs.get("path", ".")
-        with open("{}/{}.{}".format(path, name, self.format), 'wb') as file:
+        with open("{}/{}.{}".format(path, name, self.format), "wb") as file:
             file.write(self.read())
