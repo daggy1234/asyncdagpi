@@ -16,10 +16,10 @@ __license__ = "MIT"
 __copyright__ = "Copyright 2020 Daggy1234"
 __version__ = "3.0.0"
 
-from .http import HTTP
-from .image_features import ImageFeatures
 from .client import Client
+from .http import HTTP
 from .image import Image
+from .image_features import ImageFeatures
 from .objects import WTP, Logo, PickupLine
 
 VersionInfo = namedtuple("VersionInfo", "major minor micro releaselevel serial")
