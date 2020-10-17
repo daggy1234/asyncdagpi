@@ -19,7 +19,7 @@ __version__ = '3.0.0'
 from .http import HTTP
 from .image_features import ImageFeatures
 from .client import Client
-from .Image import Image
+from .image import Image
 from .objects import WTP, Logo, PickupLine
 
 VersionInfo = namedtuple('VersionInfo',
