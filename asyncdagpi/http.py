@@ -7,7 +7,7 @@ import aiohttp
 from ratelimiter import RateLimiter
 
 from . import errors
-from .Image import Image
+from .image import Image
 
 log = logging.getLogger(__name__)
 
