@@ -2,7 +2,7 @@ import re
 import time
 from typing import Dict
 
-from .Image import Image
+from .image import Image
 from .errors import BadUrl, InvalidFeature
 from .http import HTTP
 from .image_features import ImageFeatures
