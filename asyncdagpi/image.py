@@ -46,7 +46,7 @@ class Image(object):
         name: :class:`str`
             the name of the file to save
         kwargs: Optional To Pass in
-            - path: path to write to can be relative/absolute. default is .
+            - path: path to write to can be relative/absolute. default is ./
         """
         path = kwargs.get("path", ".")
         with open("{}/{}.{}".format(path, name, self.format), 'wb') as file:
