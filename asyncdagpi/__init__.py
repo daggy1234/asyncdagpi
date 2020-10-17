@@ -25,5 +25,5 @@ from .objects import WTP, Logo, PickupLine
 VersionInfo = namedtuple('VersionInfo',
                          'major minor micro releaselevel serial')
 
-version_info = VersionInfo(major=2, minor=0, micro=0, releaselevel='stable',
+version_info = VersionInfo(major=3, minor=0, micro=0, releaselevel='stable',
                            serial=0)

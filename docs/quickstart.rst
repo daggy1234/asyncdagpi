@@ -47,7 +47,7 @@ Discord.py
 
     @bot.command()
     async def pixel(ctx, member: discord.Member):
-        url = str(member.avatar_url_as(format="png", static_format="gif", size=1024))
+        url = str(member.avatar_url_as(format="gif", static_format="png", size=1024))
         img = await dagpi.image_process(ImageFeatures.pixel(), url)
         file = discord.File(fp=img.image,filename=f"pixel.{img.format}")
 

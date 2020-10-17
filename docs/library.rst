@@ -73,8 +73,7 @@ Image Response
 Data Response Models
 --------------------
 
-.. autoclass:: objects
-    :members:
+Data Objects returbed by some Data API endpoints
 
 WTP
 ~~~

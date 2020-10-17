@@ -2,9 +2,9 @@ import re
 import time
 from typing import Dict
 
-from .image import Image
 from .errors import BadUrl, InvalidFeature
 from .http import HTTP
+from .image import Image
 from .image_features import ImageFeatures
 from .objects import WTP, PickupLine, Logo
 
