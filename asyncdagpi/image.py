@@ -21,9 +21,8 @@ class Image(object):
             URL for the image passed to the API
     """
 
-    def __init__(
-        self, byt: bytes, image_format: str, process_time: str, original_url: str
-    ):
+    def __init__(self, byt: bytes, image_format: str, process_time: str,
+                 original_url: str):
         self.image = BytesIO(byt)
         self.format = image_format
         self.process_time = process_time

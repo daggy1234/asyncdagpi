@@ -11,10 +11,8 @@ from .objects import Logo
 from .objects import PickupLine
 from .objects import WTP
 
-url_regex = (
-    r"http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]| "
-    r"(?:%[0-9a-fA-F][0-9a-fA-F]))+"
-)
+url_regex = (r"http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]| "
+             r"(?:%[0-9a-fA-F][0-9a-fA-F]))+")
 
 
 class Client:
@@ -51,7 +49,8 @@ class Client:
         if not match:
             raise BadUrl("URL did not pass Regex")
 
-    async def image_process(self, feature: ImageFeatures, url: str, **kwargs) -> Image:
+    async def image_process(self, feature: ImageFeatures, url: str,
+                            **kwargs) -> Image:
         """
         feature: :class:`ImageFeature`
             a dagpi ImageFeature class
