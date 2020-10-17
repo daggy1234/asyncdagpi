@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 """
 Asyncdagpi
 ~~~~~~~~~~~~~~~~~~~
@@ -7,7 +6,6 @@ An async wrapper for dagpi
 :copyright: (c) 2020 Daggy
 :license: MIT, see LICENSE for more details.
 """
-
 from collections import namedtuple
 
 __title__ = "asyncdagpi"
