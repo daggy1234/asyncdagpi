@@ -2,11 +2,14 @@ import re
 import time
 from typing import Dict
 
-from .errors import BadUrl, InvalidFeature
+from .errors import BadUrl
+from .errors import InvalidFeature
 from .http import HTTP
 from .image import Image
 from .image_features import ImageFeatures
-from .objects import WTP, Logo, PickupLine
+from .objects import Logo
+from .objects import PickupLine
+from .objects import WTP
 
 url_regex = (
     r"http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]| "
