@@ -1,6 +1,7 @@
 # asyncdagpi
 
-[![Build Status](https://travis-ci.com/Daggy1234/asyncdagpi.svg?branch=master)](https://travis-ci.com/Daggy1234/asyncdagpi) [![License](https://img.shields.io/github/license/daggy1234/asyncdagpi)](https://mit-license.org/) ![version](https://img.shields.io/pypi/v/asyncdagpi) ![python](https://img.shields.io/pypi/pyversions/asyncdagpi) [![Documentation Status](https://readthedocs.org/projects/asyncdagpi/badge/?version=latest)](https://asyncdagpi.readthedocs.io/en/latest/?badge=latest)
+[![Build Status](https://travis-ci.com/Daggy1234/asyncdagpi.svg?branch=master)](https://travis-ci.com/Daggy1234/asyncdagpi) [![License](https://img.shields.io/github/license/daggy1234/asyncdagpi)](https://mit-license.org/) ![version](https://img.shields.io/pypi/v/asyncdagpi) ![python](https://img.shields.io/pypi/pyversions/asyncdagpi) [![Documentation Status](https://readthedocs.org/projects/asyncdagpi/badge/?version=latest)](https://asyncdagpi.readthedocs.io/en/latest/?badge=latest)[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FDaggy1234%2Fasyncdagpi.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FDaggy1234%2Fasyncdagpi?ref=badge_shield)
+
 
 Powerful Asynchronous Wrapper for dagpi https://dagpi.xyz
 
@@ -69,3 +70,7 @@ im = Image.open(img.image)
 
 ### For More Thorough Examples and Feature list read the documentation.
 
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FDaggy1234%2Fasyncdagpi.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FDaggy1234%2Fasyncdagpi?ref=badge_large)
