@@ -1,21 +1,25 @@
 # asyncdagpi
 
-[![Build Status](https://travis-ci.com/Daggy1234/asyncdagpi.svg?branch=master)](https://travis-ci.com/Daggy1234/asyncdagpi) [![License](https://img.shields.io/github/license/daggy1234/asyncdagpi)](https://mit-license.org/) ![version](https://img.shields.io/pypi/v/asyncdagpi) ![python](https://img.shields.io/pypi/pyversions/asyncdagpi) [![Documentation Status](https://readthedocs.org/projects/asyncdagpi/badge/?version=latest)](https://asyncdagpi.readthedocs.io/en/latest/?badge=latest)[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FDaggy1234%2Fasyncdagpi.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FDaggy1234%2Fasyncdagpi?ref=badge_shield)
-
+[![Build Status](https://travis-ci.com/Daggy1234/asyncdagpi.svg?branch=master)](https://travis-ci.com/Daggy1234/asyncdagpi)
+[![License](https://img.shields.io/github/license/daggy1234/asyncdagpi)](https://mit-license.org/)
+![version](https://img.shields.io/pypi/v/asyncdagpi)
+![python](https://img.shields.io/pypi/pyversions/asyncdagpi)
+[![Documentation Status](https://readthedocs.org/projects/asyncdagpi/badge/?version=latest)](https://asyncdagpi.readthedocs.io/en/latest/?badge=latest)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FDaggy1234%2Fasyncdagpi.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FDaggy1234%2Fasyncdagpi?ref=badge_shield)
 
 Powerful Asynchronous Wrapper for dagpi https://dagpi.xyz
 
-Installation
-----
+## Installation
 
 ```shell script
 pip install asyncdagpi
 ```
 
-Data API
----
+## Data API
 
-Some endpoints like WTP, PickupLine and Logo will return Objects while Waifu will return a Dictionary. Everything else will return a string.
+Some endpoints like WTP, PickupLine and Logo will return Objects while Waifu
+will return a Dictionary. Everything else will return a string.
+
 ```python
 from asyncdagpi import Client
 dagpi = Client("dagpi token")
@@ -25,9 +29,10 @@ wtp = await dagpi.wtp()
 roast = await dagpi.roast()
 ```
 
-Image Manipulation
----
-All Image endpoints return an Image object. This has many properties that can be useful for developers. For Basic implementations are displayed
+## Image Manipulation
+
+All Image endpoints return an Image object. This has many properties that can be
+useful for developers. For Basic implementations are displayed
 
 #### Discord.py
 
@@ -57,7 +62,9 @@ img = await dagpi.image_process(ImageFeatures.pixel(), "https://dagbot-is.the-be
 img.write("pixel")
 #will create pixel.png in this case
 ```
+
 #### Python Pillow
+
 ```python
 from asyncdagpi import ImageFeatures, Client
 from PIL import Image
@@ -67,10 +74,8 @@ img = await dagpi.image_process(ImageFeatures.pixel(), "https://dagbot-is.the-be
 im = Image.open(img.image)
 ```
 
-
 ### For More Thorough Examples and Feature list read the documentation.
 
-
-
 ## License
+
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FDaggy1234%2Fasyncdagpi.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FDaggy1234%2Fasyncdagpi?ref=badge_large)
