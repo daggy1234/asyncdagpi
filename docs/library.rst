@@ -73,7 +73,12 @@ Image Response
 Data Response Models
 --------------------
 
-Data Objects returbed by some Data API endpoints
+Data Objects returbed by some Data API endpoints. The base class is.
+
+.. autoclass:: BaseDagpiObject
+    :members:
+
+All the below models are subclasses and will have all the same methods available to them.
 
 WTP
 ~~~

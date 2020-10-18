@@ -40,3 +40,31 @@ async def test_image():
     img = await c.image_process(ImageFeatures.pixel(),
                                 "https://dagbot-is.the-be.st/logo.png")
     assert isinstance(img, Image)
+
+
+@pytest.mark.asyncio
+async def test_image_unaccesible():
+    tok = os.getenv("DAGPI_TOKEN")
+    c = Client(tok)
+    try:
+        omg = await c.image_process(ImageFeatures.wanted(), "https://google.com")
+    except Exception as e:
+        assert isinstance(e, errors.ImageUnaccesible)
+
+@pytest.mark.asyncio
+async def test_data():
+    tok = os.getenv("DAGPI_TOKEN")
+    c = Client(tok)
+    dat = await c.wtp()
+    assert dat.name
+    logo = await c.logo()
+    assert isinstance(str(logo), str)
+
+
+@pytest.mark.asyncio
+async def test_ping():
+    tok = os.getenv("DAGPI_TOKEN")
+    c = Client(tok)
+    image_ping = await c.image_ping()
+    assert isinstance(image_ping, float)
+

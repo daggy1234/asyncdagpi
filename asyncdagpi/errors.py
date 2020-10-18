@@ -49,7 +49,8 @@ class ImageUnaccesible(AsyncDagpiException):
     def __init__(self, error_code, message):
         self.error_code = error_code
         self.message = message
-        super.__init__(self.error_code, f'{self.error_code} ---> \
+        super(ImageUnaccesible, self).__init__(self.error_code,
+                                               f'{self.error_code} ---> \
         {self.message}')
 
     def __str__(self):

@@ -111,16 +111,16 @@ https://aiohttp.readthedocs.io/en/stable/client_reference.html#client-session
             request_url = self.base_url + "/image" + url
             async with self.client.get(request_url, headers=headers,
                                        params=params) as resp:
-                resp_time = resp.headers["X-Process-Time"][:5]
-                print('GET {} has returned {} taking {}s'.format(resp.url,
-                                                                 resp.status,
-                                                                 resp_time))
                 if 300 >= resp.status >= 200:
                     if resp.headers["Content-Type"] in \
                             ["image/png", "image/gif"]:
                         form = resp.headers["Content-Type"].replace("image/",
                                                                     "")
-
+                        resp_time = resp.headers["X-Process-Time"][:5]
+                        print('GET {} has returned {} taking {}s'.format(
+                            resp.url,
+                            resp.status,
+                            resp_time))
                         raw_byte = await resp.read()
                         return Image(raw_byte, form, resp_time,
                                      params.get("url"))
@@ -129,6 +129,9 @@ https://aiohttp.readthedocs.io/en/stable/client_reference.html#client-session
                         raise errors.ApiError(f"{resp.status}. \
                     Request was great but Dagpi did not send an Image back")
                 else:
+                    print('GET {} has returned {}'.format(
+                        resp.url,
+                        resp.status))
                     try:
                         error = error_dict[resp.status]
                         raise error
