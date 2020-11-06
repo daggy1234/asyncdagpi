@@ -1,7 +1,7 @@
 import os
 
 import pytest
-import typing
+
 from asyncdagpi import Client, errors, ImageFeatures, Image
 
 
@@ -63,10 +63,12 @@ async def test_parameter_error():
     tok = os.getenv("DAGPI_TOKEN")
     c = Client(tok)
     try:
-        await c.image_process(ImageFeatures.discord(), "https://dagpi.xyz/dagpi.png")
+        await c.image_process(ImageFeatures.discord(),
+                              "https://dagpi.xyz/dagpi.png")
     except Exception as e:
         assert isinstance(e, errors.ParameterError)
     await c.close()
+
 
 @pytest.mark.asyncio
 async def test_data():
@@ -87,4 +89,3 @@ async def test_ping():
     await c.data_ping()
     await c.close()
     assert isinstance(image_ping, float)
-

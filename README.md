@@ -6,15 +6,14 @@ Powerful Asynchronous Wrapper for dagpi https://dagpi.xyz
 
 ## Installation
 
-
 ```shell script
 pip install asyncdagpi
 ```
 
 ## Data API
 
-
 Some endpoints like WTP, PickupLine and Logo will return Objects while Waifu will return a Dictionary. Everything else will return a string.
+
 ```python
 from asyncdagpi import Client
 dagpi = Client("dagpi token")

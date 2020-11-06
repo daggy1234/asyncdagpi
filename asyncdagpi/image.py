@@ -2,6 +2,7 @@ from io import BytesIO
 
 
 class Image(object):
+
     """
     An AsyncDagpi Image Returned
     This has special properties that can enhance the experience.
@@ -29,14 +30,22 @@ class Image(object):
         self.original_image = original_url
 
     def size(self) -> int:
-        """Returns the Size of the Image"""
+        """
+        Returns the Size of the Image
+        """
         return self.image.__sizeof__()
 
     def __repr__(self) -> str:
-        """A description of the Image"""
+        """
+        A description of the Image
+        """
         return "AsyncDagpi.Image format={}".format(self.format)
 
     def read(self) -> bytes:
+        """
+        Get raw Image bytes
+        :return: :class:`bytes`
+        """
         return self.image.read()
 
     def write(self, name: str, **kwargs):

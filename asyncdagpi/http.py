@@ -20,6 +20,7 @@ error_dict = {
 
 
 class HTTP:
+
     """
     HTTP Client
     -----------
@@ -160,6 +161,8 @@ https://aiohttp.readthedocs.io/en/stable/client_reference.html#client-session
 
 
 def limited(until):
-    """Handles Rate limiting Messages"""
+    """
+    Handles Rate limiting Messages
+    """
     duration = int(round(until - time.time()))
     log.warning("Rate limited, Retrying in {:d} seconds".format(duration))

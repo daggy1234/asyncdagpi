@@ -3,6 +3,7 @@ from typing import Dict
 
 
 class BaseDagpiObject:
+
     """
     Base AsyncDagpi object
 
@@ -13,8 +14,8 @@ class BaseDagpiObject:
             dict: :class:`Dict`
     """
 
-    def __init__(self, dict: Dict):
-        self.dict = dict
+    def __init__(self, dictionary: Dict):
+        self.dict = dictionary
 
     def __str__(self) -> str:
         """
@@ -32,6 +33,7 @@ class BaseDagpiObject:
 
 
 class Logo(BaseDagpiObject):
+
     """
         A Dagpi Logo Object. A subclass of asyncdagpi.BaseDagpiObject
 
@@ -70,6 +72,7 @@ class Logo(BaseDagpiObject):
 
 
 class PickupLine(BaseDagpiObject):
+
     """
     A Dagpi PickupLine
 
@@ -93,6 +96,7 @@ class PickupLine(BaseDagpiObject):
 
 
 class WTP(BaseDagpiObject):
+
     """
            A Dagpi PickupLine. A subclass of AsyncDagpi object
 

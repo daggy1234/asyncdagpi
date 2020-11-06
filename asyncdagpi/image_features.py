@@ -1,4 +1,5 @@
 class ImageFeatures:
+
     """
     Base ImageFatures that asyncdagpi has
     """
@@ -270,7 +271,8 @@ class ImageFeatures:
 
     @classmethod
     def thought_image(cls):
-        """Wraps Image and Text into a thought
+        """
+        Wraps Image and Text into a thought
         Needs:
             - text
             - image

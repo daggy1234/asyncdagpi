@@ -14,23 +14,24 @@ url_regex = r"http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]| " \
 
 class Client:
 
+    """
+    Initialisation
+    ~~~~~~~~~~~~~~
+
+
+    :param token: Your Dagpi Api token
+    :param logging: Wether or not to log api requests (default True)
+    :param **kwargs: Extra arguments you may pass this can include
+
+        * loop: an asyncio event loop for the asyncdagpi to use
+        * session: an aiohttp ClientSession for dagpi to use
+
+
+    This will initialise an AsyncDagpiClient that you can use for making
+    dagpi requests.
+    """
+
     def __init__(self, token: str, logging: bool = True, **kwargs):
-        """
-        Initialisation
-        ~~~~~~~~~~~~~~
-
-
-        :param token: Your Dagpi Api token
-        :param logging: Wether or not to log api requests (default True)
-        :param **kwargs: Extra arguments you may pass this can include
-
-            * loop: an asyncio event loop for the asyncdagpi to use
-            * session: an aiohttp ClientSession for dagpi to use
-
-
-        This will initialise an AsyncDagpiClient that you can use for making
-        dagpi requests.
-        """
 
         self.token = token
         self.logging = logging
@@ -116,7 +117,9 @@ class Client:
         return obj["joke"]
 
     async def pickup_line(self) -> PickupLine:
-        """Get a PickupLine"""
+        """
+        Get a PickupLine
+        """
 
         return PickupLine(await self.http.data_request("pickupline"))
 
@@ -137,7 +140,9 @@ class Client:
         return start - end
 
     async def image_ping(self) -> float:
-        """Returns a float with the Image API's ping"""
+        """
+        Returns a float with the Image API's ping
+        """
         start = time.perf_counter()
         await self.http.data_request("/", image=True)
         end = time.perf_counter()
