@@ -14,7 +14,7 @@ __title__ = "asyncdagpi"
 __author__ = "Daggy1234"
 __license__ = "MIT"
 __copyright__ = "Copyright 2020 Daggy1234"
-__version__ = '3.1.0'
+__version__ = '3.2.0'
 
 from .http import HTTP
 from .image_features import ImageFeatures
