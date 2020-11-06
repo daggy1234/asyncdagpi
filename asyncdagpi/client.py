@@ -14,14 +14,14 @@ url_regex = r"http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]| " \
 
 class Client:
 
-    def __init__(self, token: str, **kwargs):
+    def __init__(self, token: str, logging: bool = True, **kwargs):
         """
-
         Initialisation
         ~~~~~~~~~~~~~~
 
 
         :param token: Your Dagpi Api token
+        :param logging: Wether or not to log api requests (default True)
         :param **kwargs: Extra arguments you may pass this can include
 
             * loop: an asyncio event loop for the asyncdagpi to use
@@ -33,9 +33,11 @@ class Client:
         """
 
         self.token = token
+        self.logging = logging
         self.session = kwargs.get("session")
         self.loop = kwargs.get("loop")
-        self.http = HTTP(self.token, loop=self.loop, session=self.session)
+        self.http = HTTP(self.token, logging, loop=self.loop,
+                         session=self.session)
 
     @staticmethod
     def url_test(url: str):
@@ -74,27 +76,42 @@ class Client:
         return await self.http.image_request(feature.value, params=params)
 
     async def wtp(self) -> WTP:
-        """get a WTP data object"""
+        """
+        get a WTP data object
+        :returns: :class:`asyncdagpi.WTP`
+        """
         raw_data = await self.http.data_request("wtp")
         return WTP(raw_data)
 
     async def logo(self) -> Logo:
-        """get a Logo data object"""
+        """
+        get a Logo data object
+        :returns: :class:`asyncdagpi.Logo`
+        """
         raw_data = await self.http.data_request("logo")
         return Logo(raw_data)
 
     async def roast(self) -> str:
-        """Returns a string with a Roast"""
+        """
+        Returns a string with a Roast
+        :returns: :class:`str`
+        """
         obj = await self.http.data_request("roast")
         return obj["roast"]
 
     async def yomama(self) -> str:
-        """Returns a YoMama Joke String"""
+        """
+        Returns a YoMama Joke String
+        :returns: :class:`str`
+        """
         obj = await self.http.data_request("yomama")
         return obj["description"]
 
     async def joke(self) -> str:
-        """Gets a Funny Joke"""
+        """
+        Gets a Funny Joke
+        :returns: :class:`str`
+        """
         obj = await self.http.data_request("joke")
         return obj["joke"]
 
@@ -115,7 +132,7 @@ class Client:
         Returns a float with the Data API's ping
         """
         start = time.perf_counter()
-        await self.http.data_request("/")
+        await self.http.data_request("wtp")
         end = time.perf_counter()
         return start - end
 

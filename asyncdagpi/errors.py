@@ -34,17 +34,23 @@ class RateLimited(AsyncDagpiException):
 
 
 class FileTooLarge(AsyncDagpiException):
-    """The image at source exceeds 10 MegaBytes"""
+    """
+    The image at source exceeds 10 MegaBytes
+    """
     pass
 
 
 class InvalidFeature(AsyncDagpiException):
-    """The feature chosen is not valid"""
+    """
+    The feature chosen is not valid
+    """
     pass
 
 
 class ImageUnaccesible(AsyncDagpiException):
-    """The API was unable to get an image at your location"""
+    """
+    The API was unable to get an image at your location
+    """
 
     def __init__(self, error_code, message):
         self.error_code = error_code
@@ -54,6 +60,10 @@ class ImageUnaccesible(AsyncDagpiException):
         {self.message}')
 
     def __str__(self):
+        """
+        String Explaining the error
+        :return: :class:`str`
+        """
         return f'{self.error_code} ---> {self.message}'
 
 

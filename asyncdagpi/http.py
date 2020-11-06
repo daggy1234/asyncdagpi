@@ -1,10 +1,9 @@
+import aiohttp
 import asyncio
 import logging
 import time
-from typing import Dict
-
-import aiohttp
 from ratelimiter import RateLimiter
+from typing import Dict
 
 from . import errors
 from .image import Image
@@ -14,7 +13,6 @@ log = logging.getLogger(__name__)
 error_dict = {
     400: errors.ParameterError("Parameters passed were incorrect"),
     413: errors.FileTooLarge("The Image Passed is too large"),
-    422: errors.ApiError("API was unable to manipulate the Image"),
     500: errors.ApiError("Internal Server Error"),
     429: errors.RateLimited("You are being Rate_limited"),
     403: errors.Unauthorised("403 Returned")
@@ -30,8 +28,10 @@ class HTTP:
 https://aiohttp.readthedocs.io/en/stable/client_reference.html#client-session
         Parameters
         ----------
-        token: :class:`str`
+        :param token: :class:`str`
             A dagpi Token from https://dagpi.xyz
+        :param logging :class:`bool`
+            Wether or not to log dagpi
         **kwargs:
             **session : Optional[aiohttp session]
                 The session used to request to the API
@@ -40,11 +40,12 @@ https://aiohttp.readthedocs.io/en/stable/client_reference.html#client-session
     """
 
     __slots__ = ("client", "base_url", "token", "loop",
-                 "user_agent", "ratelimiter")
+                 "user_agent", "ratelimiter", "logging")
 
-    def __init__(self, token: str, **kwargs):
+    def __init__(self, token: str, logging: bool, **kwargs):
         self.base_url = "https://api.dagpi.xyz"
         self.token = token
+        self.logging = logging
         self.loop = loop = kwargs.get('loop', None) or asyncio.get_event_loop()
         self.client = kwargs.get('session') or aiohttp.ClientSession(loop=loop)
         self.ratelimiter = RateLimiter(max_calls=60, period=60,
@@ -112,16 +113,17 @@ https://aiohttp.readthedocs.io/en/stable/client_reference.html#client-session
             async with self.client.get(request_url, headers=headers,
                                        params=params) as resp:
                 if 300 >= resp.status >= 200:
-                    if resp.headers["Content-Type"] in \
+                    if resp.headers["Content-Type"].lower() in \
                             ["image/png", "image/gif"]:
                         form = resp.headers["Content-Type"].replace("image/",
                                                                     "")
                         resp_time = resp.headers["X-Process-Time"][:5]
-                        print('GET {} has returned {} taking {}s'.format(
-                            resp.url,
-                            resp.status,
-                            resp_time))
                         raw_byte = await resp.read()
+                        if self.logging:
+                            log.info(
+                                '[Dagpi Image] GET {} has returned {}'.format(
+                                    resp.url,
+                                    resp.status))
                         return Image(raw_byte, form, resp_time,
                                      params.get("url"))
 
@@ -129,9 +131,6 @@ https://aiohttp.readthedocs.io/en/stable/client_reference.html#client-session
                         raise errors.ApiError(f"{resp.status}. \
                     Request was great but Dagpi did not send an Image back")
                 else:
-                    print('GET {} has returned {}'.format(
-                        resp.url,
-                        resp.status))
                     try:
                         error = error_dict[resp.status]
                         raise error
@@ -141,8 +140,20 @@ https://aiohttp.readthedocs.io/en/stable/client_reference.html#client-session
                             raise errors.ImageUnaccesible(415, js["message"])
                         elif resp.status == 400:
                             raise errors.ParameterError(400, js["message"])
+                        elif resp.status == 422:
+                            try:
+                                mstr = ""
+                                for val in js["detail"]:
+                                    base = "{} is {}".format(val["loc"][1],
+                                                             val["type"])
+                                    mstr += (base + "\t")
+                                raise errors.ParameterError(mstr)
+                            except KeyError:
+                                raise errors.ApiError(
+                                    "API was unable to manipulate the Image")
                         else:
                             raise errors.ApiError("Unknown API Error Occurred")
+
 
     async def close(self):
         await self.client.close()

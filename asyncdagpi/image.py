@@ -43,7 +43,7 @@ class Image(object):
         """
         Writes the Image Object to file
 
-        name: :class:`str`
+        :param name: :class:`str`
             the name of the file to save
         kwargs: Optional To Pass in
             - path: path to write to can be relative/absolute. default is ./

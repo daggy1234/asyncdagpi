@@ -1,7 +1,7 @@
 import os
 
 import pytest
-
+import typing
 from asyncdagpi import Client, errors, ImageFeatures, Image
 
 
@@ -21,6 +21,7 @@ async def test_no_auth():
         await c.wtp()
     except Exception as e:
         assert isinstance(e, errors.Unauthorised)
+    await c.close()
 
 
 @pytest.mark.asyncio
@@ -31,6 +32,7 @@ async def test_feature_check():
         await c.image_process('bad', 'https://dagbot-is.the-be.st/logo.png')
     except Exception as e:
         assert isinstance(e, errors.InvalidFeature)
+    await c.close()
 
 
 @pytest.mark.asyncio
@@ -39,7 +41,10 @@ async def test_image():
     c = Client(tok)
     img = await c.image_process(ImageFeatures.pixel(),
                                 "https://dagbot-is.the-be.st/logo.png")
+    await c.close()
     assert isinstance(img, Image)
+    assert isinstance(img.read(), bytes)
+    assert isinstance(repr(img), str)
 
 
 @pytest.mark.asyncio
@@ -47,9 +52,21 @@ async def test_image_unaccesible():
     tok = os.getenv("DAGPI_TOKEN")
     c = Client(tok)
     try:
-        omg = await c.image_process(ImageFeatures.wanted(), "https://google.com")
+        await c.image_process(ImageFeatures.wanted(), "https://google.com")
     except Exception as e:
         assert isinstance(e, errors.ImageUnaccesible)
+    await c.close()
+
+
+@pytest.mark.asyncio
+async def test_parameter_error():
+    tok = os.getenv("DAGPI_TOKEN")
+    c = Client(tok)
+    try:
+        await c.image_process(ImageFeatures.discord(), "https://dagpi.xyz/dagpi.png")
+    except Exception as e:
+        assert isinstance(e, errors.ParameterError)
+    await c.close()
 
 @pytest.mark.asyncio
 async def test_data():
@@ -58,6 +75,7 @@ async def test_data():
     dat = await c.wtp()
     assert dat.name
     logo = await c.logo()
+    await c.close()
     assert isinstance(str(logo), str)
 
 
@@ -66,5 +84,7 @@ async def test_ping():
     tok = os.getenv("DAGPI_TOKEN")
     c = Client(tok)
     image_ping = await c.image_ping()
+    await c.data_ping()
+    await c.close()
     assert isinstance(image_ping, float)
 

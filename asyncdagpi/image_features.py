@@ -1,167 +1,271 @@
 class ImageFeatures:
+    """
+    Base ImageFatures that asyncdagpi has
+    """
 
     def __init__(self, value: str, description: str):
         self.value = value
         self.description = description
 
     def __str__(self) -> str:
+        """
+        Get a string of the feature
+        :return: :class:`string`
+        """
         return self.value.replace("/", "")
+
+    def __repr__(self) -> str:
+        """
+        get a string describing the object
+        :return: :class:`str`
+        """
+        return "<asyncdagpi.ImageFeature feature={} >".format(
+            self.value.replace("/", ""))
 
     @classmethod
     def pixel(cls):
-        """Pixelate an Image"""
+        """
+        Pixelate an Image
+        """
         return cls("/pixel/", "Pixelate an Image")
 
     @classmethod
     def colors(cls):
-        """Analyse and get an Image's Color Top 5 Colors"""
+        """
+        Analyse and get an Image's Color Top 5 Colors
+        """
         return cls("/colors/", "Analyse and get an Image's Color Top 5 Colors")
 
     @classmethod
     def wanted(cls):
-        """Get a wanted poster of an Image"""
+        """
+        Get a wanted poster of an Image.
+        """
         return cls("/wanted/", "Get a wanted poster of an Image")
 
     @classmethod
     def triggered(cls):
-        """Get a triggered Image gif"""
+        """
+        Get a triggered Image gif
+        """
         return cls("/triggered/", "Get a triggered Image gif")
 
     @classmethod
     def wasted(cls):
-        """GTA V Wasted screen"""
+        """
+        GTA V Wasted screen.
+        """
         return cls("/wasted/", "GTA V Wasted screen")
 
     @classmethod
     def five_guys_one_girl(cls):
-        """No I have never heard of this meme. Takes in 2 Image URL"""
+        """
+        No I have never heard of this meme. Takes in 2 Image URL.
+        Needs:
+            - url
+            - url2
+        """
         return cls("/5g1g/",
                    "No I have never heard of this meme. Takes in 2 Image URL")
 
     @classmethod
     def why_are_you_gay(cls):
-        """The infamous Why are you gay. Takes in 2 Image URL"""
+        """
+        The infamous Why are you gay. Takes in 2 Image URL.
+        Needs:
+            - url
+            - url2
+        """
         return cls("/whyareyougay/",
                    "The infamous  Why are you gay. Takes in 2 Image URL")
 
     @classmethod
     def invert(cls):
-        """Invert an Image"""
+        """
+        Invert an Image.
+        """
         return cls("/invert/", "Invert an Image")
 
     @classmethod
     def sobel(cls):
-        """Cool SOBEL filter for Images. Only png's"""
-        return cls("/sobel/", "Cool SOBEL filter for Images. Only png's")
+        """
+        Cool SOBEL filter for Images. Only png's.
+        """
+        return cls("/sobel/", "Cool SOBEL filter for Images.")
+
+    @classmethod
+    def triangle(cls):
+        """
+        Cool triangle edge detection for Images. Only png's.
+        """
+        return cls("/triangle/", "Cool triangle edge detection for Images.")
 
     @classmethod
     def hog(cls):
-        """Histogram of Oriented Gradients"""
+        """
+        Histogram of Oriented Gradients.
+        """
         return cls("/hog/", "Histogram of Oriented Gradients")
 
     @classmethod
     def blur(cls):
-        """Blurs an entire Image"""
+        """
+        Blurs an entire Image.
+        """
         return cls("/blur/", "Blurs an entire Image")
 
     @classmethod
     def rgb(cls):
-        """Get RGB information from an image"""
+        """
+        Get RGB information from an image.
+        """
         return cls("/rgb/", "Get RGB information from an image")
 
     @classmethod
     def angel(cls):
-        """Make an Image Angelic"""
+        """
+        Make an Image Angelic.
+        """
         return cls("/angel/", "Make an Image angelic")
 
     @classmethod
     def satan(cls):
-        """Make an Image the devil"""
+        """
+        Make an Image the devil.
+        """
         return cls("/satan/", "Make an Image the devil")
 
     @classmethod
     def hitler(cls):
-        """Make an Image as bad as hitler"""
+        """
+        Make an Image as bad as hitler.
+        """
         return cls("/hitler/", "Make an Image as bad as hitler")
 
     @classmethod
     def obama(cls):
-        """The obama meme of someone awarding themselves"""
+        """
+        The obama meme of someone awarding themselves.
+        """
         return cls("/obama/", "The obama meme of someone awarding themselves")
 
     @classmethod
     def bad(cls):
-        """This image is bad."""
+        """
+        This image is bad.
+        """
         return cls("/bad/", "This image is bad")
 
     @classmethod
     def sith(cls):
-        """Laughs in Sithlord"""
+        """
+        Laughs in Sithlord
+        """
         return cls("/sith/", "Laughs in Sithlord")
 
     @classmethod
     def jail(cls):
-        """Put an Image behind bars"""
+        """
+        Put an Image behind bars.
+        """
         return cls("/jail/", "Put an Image behind bars")
 
     @classmethod
     def gay(cls):
-        """represent! Pastes a pride flag on an image"""
+        """
+        represent! Pastes a pride flag on an image.
+        """
         return cls("/gay/", "represent! Pastes a pride flag on an image")
 
     @classmethod
     def trash(cls):
-        """Makes an Image trash"""
+        """
+        Makes an Image trash.
+        """
         return cls("/trash/", "Makes an Image trash")
 
     @classmethod
     def deepfry(cls):
-        """Deepfries an Image"""
+        """
+        Deepfries an Image.
+        """
         return cls("/deepfry/", "Deepfries an Image")
 
     @classmethod
     def ascii(cls):
-        """Turns an Image into a ascii-fied image"""
+        """
+        Turns an Image into a ascii-fied image.
+        """
         return cls("/ascii/", "Turns an Image into a ascii-fied image")
 
     @classmethod
     def charcoal(cls):
-        """Turns an Image into a charcoal sketch"""
+        """
+        Turns an Image into a charcoal sketch.
+        """
         return cls("/charcoal/", "Turns an Image into a charcoal sketch")
 
     @classmethod
     def poster(cls):
-        """Posterizes an image"""
+        """
+        Posterizes an image.
+        """
         return cls("/poster/", "Posterizes an image")
 
     @classmethod
     def sepia(cls):
-        """Makes an image sepia tone"""
+        """
+        Makes an image sepia tone.
+        """
         return cls("/sepia/", "Makes an image sepia tone")
 
     @classmethod
     def polaroid(cls):
-        """Frames an Image like a printed polaroid"""
+        """
+        Frames an Image like a printed polaroid.
+        """
         return cls("/polaroid/", "Frames an Image like a printed polaroid")
 
     @classmethod
     def swirl(cls):
-        """Swirls the center of Image"""
+        """
+        Swirls the center of Image.
+        """
         return cls("/swirl/", "Swirls the center of Image")
 
     @classmethod
     def paint(cls):
-        """Turns an Image into an oil painting"""
+        """
+        Turns an Image into an oil painting.
+        """
         return cls("/paint/", "Turns an Image into an oil painting")
 
     @classmethod
     def night(cls):
-        """Turns day into night on an Image"""
+        """
+        Turns day into night on an Image.
+        """
         return cls("/night/", "Turns day into night on an Image")
 
     @classmethod
+    def magik(cls):
+        """
+        Magik an Image
+        """
+        return cls("/magik/", "Magik an Image")
+
+    @classmethod
+    def rainbow(cls):
+        """
+        Rainbow light effect on image
+        """
+        return cls("/rainbow/", "Rainbow light effect on image")
+
+    @classmethod
     def solar(cls):
-        """Solarizes an Image"""
+        """
+        Solarizes an Image.
+        """
         return cls("/solar/", "Solarizes an Image")
 
     @classmethod
@@ -194,3 +298,24 @@ class ImageFeatures:
             - quote
         """
         return cls("/discord/", "Generated a realistic Discord Message")
+
+    @classmethod
+    def retro_meme(cls):
+        """
+        old 2012 advice animals style meme
+        Needs:
+            - top_text
+            - bottom_text
+            - image
+        """
+        return cls("/retromeme/", "Generated a realistic Discord Message")
+
+    @classmethod
+    def modern_meme(cls):
+        """
+        Mordern meme with text scaling
+        Needs:
+            - text
+            - image
+        """
+        return cls("/modernmeme/", "Modern New meme style meme")

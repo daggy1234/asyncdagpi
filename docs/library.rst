@@ -33,6 +33,15 @@ This example initalises a basic client
   from asyncdagpi import Client
   client = Client("your token")
 
+.. tip::
+    You can also disable logging
+
+.. code:: python
+
+    from asyncdagpi import Client
+    client = Client(token, logging=False)
+
+
 You can also setup a more advance client by passing in your own aiohttp ClientSession and Event Loop.
 in thd case of discord.py it is adviseable to use the *bot.loop* as the event loop.
 
@@ -45,6 +54,7 @@ in thd case of discord.py it is adviseable to use the *bot.loop* as the event lo
   loop = #Your Asyncio Event Loop
   session = #Your Aiohttp session
   client = Client(token, loop=loop, session=session)
+
 
 Given Below is All of the methods of the Client.
 

@@ -4,7 +4,7 @@ from typing import Dict
 
 class BaseDagpiObject:
     """
-        Base AsyncDagpi object
+    Base AsyncDagpi object
 
         .. container:: Attributes
 
@@ -12,15 +12,22 @@ class BaseDagpiObject:
 
             dict: :class:`Dict`
     """
+
     def __init__(self, dict: Dict):
         self.dict = dict
 
     def __str__(self) -> str:
-        """Returns a string of the data"""
+        """
+        Returns a string of the data
+        :returns :class:`str`
+        """
         return json.dumps(self.dict)
 
     def raw_data(self) -> Dict:
-        """Dictionary with Raw Data"""
+        """
+        Dictionary with Raw Data
+        :returns :class:`Dict`
+        """
         return self.dict
 
 
@@ -49,6 +56,7 @@ class Logo(BaseDagpiObject):
             wiki_url: :class:`str`
                 String containing Wikipedia URL for brand
         """
+
     def __init__(self, data: Dict):
         super(Logo, self).__init__(data)
         self.dict = data
@@ -113,6 +121,7 @@ class WTP(BaseDagpiObject):
                question: :class:`str`
                    String containing url for question image
            """
+
     def __init__(self, data: Dict):
         super(WTP, self).__init__(data)
         mon = data.get("Data")

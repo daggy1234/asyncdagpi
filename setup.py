@@ -14,7 +14,7 @@ setup(
     include_package_data=True,
     url="https://github.com/Daggy1234/asyncdagpi",
     project_urls={
-        "Documentation": "https://discordpy.readthedocs.io/en/latest/",
+        "Documentation": "https://asyncdagpi.rtfd.io",
         "Issue tracker": "https://github.com/Daggy1234/asyncdagpi/issues",
         "Website": "https://dagpi.xyz"
       },
