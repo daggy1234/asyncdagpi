@@ -39,7 +39,7 @@ https://aiohttp.readthedocs.io/en/stable/client_reference.html#client-session
     """
 
     __slots__ = ("client", "base_url", "token", "loop",
-                 "user_agent", "ratelimiter", "logging")
+                 "user_agent", "logging")
 
     def __init__(self, token: str, logging_enabled: bool, **kwargs):
         self.base_url = "https://api.dagpi.xyz"
@@ -97,59 +97,59 @@ https://aiohttp.readthedocs.io/en/stable/client_reference.html#client-session
             Asyncdagpi Image Object
         """
 
-        async with self.ratelimiter:
-            if not self.token:
-                raise errors.Unauthorised("Please Provide a dagpi token")
 
-            headers = {
-                "Authorization": self.token,
-                'User-Agent': self.user_agent
-            }
+        if not self.token:
+            raise errors.Unauthorised("Please Provide a dagpi token")
 
-            request_url = self.base_url + "/image" + url
-            async with self.client.get(request_url, headers=headers,
-                                       params=params) as resp:
-                if 300 >= resp.status >= 200:
-                    if resp.headers["Content-Type"].lower() in \
-                            ["image/png", "image/gif"]:
-                        form = resp.headers["Content-Type"].replace("image/",
-                                                                    "")
-                        resp_time = resp.headers["X-Process-Time"][:5]
-                        raw_byte = await resp.read()
-                        if self.logging:
-                            log.info(
-                                '[Dagpi Image] GET {} has returned {}'.format(
-                                    resp.url,
-                                    resp.status))
-                        return Image(raw_byte, form, resp_time,
-                                     params.get("url"))
+        headers = {
+            "Authorization": self.token,
+            'User-Agent': self.user_agent
+        }
 
-                    else:
-                        raise errors.ApiError(f"{resp.status}. \
-                    Request was great but Dagpi did not send an Image back")
+        request_url = self.base_url + "/image" + url
+        async with self.client.get(request_url, headers=headers,
+                                   params=params) as resp:
+            if 300 >= resp.status >= 200:
+                if resp.headers["Content-Type"].lower() in \
+                        ["image/png", "image/gif"]:
+                    form = resp.headers["Content-Type"].replace("image/",
+                                                                "")
+                    resp_time = resp.headers["X-Process-Time"][:5]
+                    raw_byte = await resp.read()
+                    if self.logging:
+                        log.info(
+                            '[Dagpi Image] GET {} has returned {}'.format(
+                                resp.url,
+                                resp.status))
+                    return Image(raw_byte, form, resp_time,
+                                 params.get("url"))
+
                 else:
-                    try:
-                        error = error_dict[resp.status]
-                        raise error
-                    except KeyError:
-                        js = await resp.json()
-                        if resp.status == 415:
-                            raise errors.ImageUnaccesible(415, js["message"])
-                        elif resp.status == 400:
-                            raise errors.ParameterError(400, js["message"])
-                        elif resp.status == 422:
-                            try:
-                                mstr = ""
-                                for val in js["detail"]:
-                                    base = "{} is {}".format(val["loc"][1],
-                                                             val["type"])
-                                    mstr += (base + "\t")
-                                raise errors.ParameterError(mstr)
-                            except KeyError:
-                                raise errors.ApiError(
-                                    "API was unable to manipulate the Image")
-                        else:
-                            raise errors.ApiError("Unknown API Error Occurred")
+                    raise errors.ApiError(f"{resp.status}. \
+                Request was great but Dagpi did not send an Image back")
+            else:
+                try:
+                    error = error_dict[resp.status]
+                    raise error
+                except KeyError:
+                    js = await resp.json()
+                    if resp.status == 415:
+                        raise errors.ImageUnaccesible(415, js["message"])
+                    elif resp.status == 400:
+                        raise errors.ParameterError(400, js["message"])
+                    elif resp.status == 422:
+                        try:
+                            mstr = ""
+                            for val in js["detail"]:
+                                base = "{} is {}".format(val["loc"][1],
+                                                         val["type"])
+                                mstr += (base + "\t")
+                            raise errors.ParameterError(mstr)
+                        except KeyError:
+                            raise errors.ApiError(
+                                "API was unable to manipulate the Image")
+                    else:
+                        raise errors.ApiError("Unknown API Error Occurred")
 
     async def close(self):
         await self.client.close()
