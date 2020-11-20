@@ -1,8 +1,6 @@
 import aiohttp
 import asyncio
 import logging
-import time
-from ratelimiter import RateLimiter
 from typing import Dict
 
 from . import errors
@@ -43,14 +41,12 @@ https://aiohttp.readthedocs.io/en/stable/client_reference.html#client-session
     __slots__ = ("client", "base_url", "token", "loop",
                  "user_agent", "ratelimiter", "logging")
 
-    def __init__(self, token: str, logging: bool, **kwargs):
+    def __init__(self, token: str, logging_enabled: bool, **kwargs):
         self.base_url = "https://api.dagpi.xyz"
         self.token = token
-        self.logging = logging
+        self.logging = logging_enabled
         self.loop = loop = kwargs.get('loop', None) or asyncio.get_event_loop()
         self.client = kwargs.get('session') or aiohttp.ClientSession(loop=loop)
-        self.ratelimiter = RateLimiter(max_calls=60, period=60,
-                                       callback=limited)
         self.user_agent = "AsyncDagpi v{__version__} Python/Python/ \
         {sys.version_info[0]}.{sys.version_info[1]} aiohttp/{2}"
 
@@ -62,33 +58,33 @@ https://aiohttp.readthedocs.io/en/stable/client_reference.html#client-session
         :return: :class:`Dict`
             Python Dictionary
         """
-        async with self.ratelimiter:
-            if not self.token:
-                raise errors.Unauthorised("Please Provide a dagpi token")
 
-            headers = {
-                "Authorization": self.token,
-                'User-Agent': self.user_agent
-            }
+        if not self.token:
+            raise errors.Unauthorised("Please Provide a dagpi token")
 
-            request_url = self.base_url + "/data/" + url
-            if kwargs.get("image"):
-                request_url = self.base_url + "/image/"
-            async with self.client.get(request_url, headers=headers) as resp:
-                if 300 >= resp.status >= 200:
-                    if resp.headers["Content-Type"] == "application/json":
-                        js = await resp.json()
-                        return js
+        headers = {
+            "Authorization": self.token,
+            'User-Agent': self.user_agent
+        }
 
-                    else:
-                        raise errors.ApiError(f"{resp.status}. \
-                        Request was great but Dagpi did not send a JSON")
+        request_url = self.base_url + "/data/" + url
+        if kwargs.get("image"):
+            request_url = self.base_url + "/image/"
+        async with self.client.get(request_url, headers=headers) as resp:
+            if 300 >= resp.status >= 200:
+                if resp.headers["Content-Type"] == "application/json":
+                    js = await resp.json()
+                    return js
+
                 else:
-                    try:
-                        error = error_dict[resp.status]
-                        raise error
-                    except KeyError:
-                        raise errors.ApiError("Unknown API Error Occurred")
+                    raise errors.ApiError(f"{resp.status}. \
+                    Request was great but Dagpi did not send a JSON")
+            else:
+                try:
+                    error = error_dict[resp.status]
+                    raise error
+                except KeyError:
+                    raise errors.ApiError("Unknown API Error Occurred")
 
     async def image_request(self, url: str, params: dict) -> Image:
         """
@@ -155,14 +151,5 @@ https://aiohttp.readthedocs.io/en/stable/client_reference.html#client-session
                         else:
                             raise errors.ApiError("Unknown API Error Occurred")
 
-
     async def close(self):
         await self.client.close()
-
-
-def limited(until):
-    """
-    Handles Rate limiting Messages
-    """
-    duration = int(round(until - time.time()))
-    log.warning("Rate limited, Retrying in {:d} seconds".format(duration))

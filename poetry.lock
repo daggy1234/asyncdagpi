@@ -347,17 +347,6 @@ optional = false
 python-versions = "*"
 
 [[package]]
-name = "ratelimiter"
-version = "1.2.0.post0"
-description = "Simple python rate limiting object"
-category = "main"
-optional = false
-python-versions = "*"
-
-[package.extras]
-test = ["pytest (>=3.0)", "pytest-asyncio"]
-
-[[package]]
 name = "requests"
 version = "2.24.0"
 description = "Python HTTP for Humans."
@@ -558,7 +547,7 @@ testing = ["pytest (>=3.5,<3.7.3 || >3.7.3)", "pytest-checkdocs (>=1.2.3)", "pyt
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.6"
-content-hash = "a6f277552942e41e8937e27f34474b143a2d15f4f8183d3bbf0dd34b040ee682"
+content-hash = "6e688aae87e0ee538303f754a9667e95907c4727adc1be39c7f5651fd6ab5f79"
 
 [metadata.files]
 aiohttp = [
@@ -606,6 +595,7 @@ chardet = [
 ]
 colorama = [
     {file = "colorama-0.4.4-py2.py3-none-any.whl", hash = "sha256:9f47eda37229f68eee03b24b9748937c7dc3868f906e8ba69fbcbdd3bc5dc3e2"},
+    {file = "colorama-0.4.4.tar.gz", hash = "sha256:5941b2b48a20143d2267e95b1c2a7603ce057ee39fd88e7329b0c292aa16869b"},
 ]
 coverage = [
     {file = "coverage-5.3-cp27-cp27m-macosx_10_13_intel.whl", hash = "sha256:bd3166bb3b111e76a4f8e2980fa1addf2920a4ca9b2b8ca36a3bc3dedc618270"},
@@ -806,10 +796,6 @@ pytest-cov = [
 pytz = [
     {file = "pytz-2020.1-py2.py3-none-any.whl", hash = "sha256:a494d53b6d39c3c6e44c3bec237336e14305e4f29bbf800b599253057fbb79ed"},
     {file = "pytz-2020.1.tar.gz", hash = "sha256:c35965d010ce31b23eeb663ed3cc8c906275d6be1a34393a1d73a41febf4a048"},
-]
-ratelimiter = [
-    {file = "ratelimiter-1.2.0.post0-py3-none-any.whl", hash = "sha256:a52be07bc0bb0b3674b4b304550f10c769bbb00fead3072e035904474259809f"},
-    {file = "ratelimiter-1.2.0.post0.tar.gz", hash = "sha256:5c395dcabdbbde2e5178ef3f89b568a3066454a6ddc223b76473dac22f89b4f7"},
 ]
 requests = [
     {file = "requests-2.24.0-py2.py3-none-any.whl", hash = "sha256:fe75cc94a9443b9246fc7049224f75604b113c36acb93f87b80ed42c44cbb898"},

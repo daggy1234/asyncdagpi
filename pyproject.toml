@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "asyncdagpi"
-version = "3.2.0"
+version = "3.2.1"
 description = "An Asynchronos API wrapper for https://dagpi.xyz"
 license = "MIT"
 readme = "README.md"
@@ -10,7 +10,6 @@ authors = ["Daggy1234 <daggy@daggy.tech>"]
 [tool.poetry.dependencies]
 python = "^3.6"
 aiohttp = "^3.6.3"
-ratelimiter = "^1.2.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
