@@ -42,9 +42,11 @@ async def test_image():
     img = await c.image_process(ImageFeatures.pixel(),
                                 "https://dagbot-is.the-be.st/logo.png")
     await c.close()
+    img.write("some.png")
     assert isinstance(img, Image)
     assert isinstance(img.read(), bytes)
     assert isinstance(repr(img), str)
+    assert isinstance(img.size(), int)
 
 
 @pytest.mark.asyncio

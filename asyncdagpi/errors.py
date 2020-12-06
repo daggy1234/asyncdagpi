@@ -1,5 +1,4 @@
 class AsyncDagpiException(Exception):
-
     """
     AsyncDagpi base exception class
     use this base class to catch any AsyncDagpi errors.
@@ -8,7 +7,6 @@ class AsyncDagpiException(Exception):
 
 
 class ApiError(AsyncDagpiException):
-    
     """
     Raised when Dagpi has an error it does not know how to handle
     """
@@ -23,7 +21,6 @@ class BadUrl(AsyncDagpiException):
 
 
 class Unauthorised(AsyncDagpiException):
-
     """
     Raised for an API 401
     """
@@ -31,7 +28,6 @@ class Unauthorised(AsyncDagpiException):
 
 
 class RateLimited(AsyncDagpiException):
-
     """
     You are exceeding the API's rate limits and built in Ratelimit handler
     Essentially a 429
@@ -40,7 +36,6 @@ class RateLimited(AsyncDagpiException):
 
 
 class FileTooLarge(AsyncDagpiException):
-
     """
     The image at source exceeds 10 MegaBytes
     """
@@ -48,7 +43,6 @@ class FileTooLarge(AsyncDagpiException):
 
 
 class InvalidFeature(AsyncDagpiException):
-
     """
     The feature chosen is not valid
     """
@@ -56,7 +50,6 @@ class InvalidFeature(AsyncDagpiException):
 
 
 class ImageUnaccesible(AsyncDagpiException):
-
     """
     The API was unable to get an image at your location
     """
@@ -77,7 +70,6 @@ class ImageUnaccesible(AsyncDagpiException):
 
 
 class ParameterError(AsyncDagpiException):
-
     """
     Parameters passed were not Sufficient
     """

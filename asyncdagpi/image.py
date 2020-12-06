@@ -2,7 +2,6 @@ from io import BytesIO
 
 
 class Image(object):
-
     """
     An AsyncDagpi Image Returned
     This has special properties that can enhance the experience.

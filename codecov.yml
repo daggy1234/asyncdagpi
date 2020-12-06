@@ -1,0 +1,2 @@
+ignore:
+  - asyncdagpi/image_features.py

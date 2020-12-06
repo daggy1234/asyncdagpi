@@ -1,5 +1,4 @@
 class ImageFeatures:
-
     """
     Base ImageFatures that asyncdagpi has
     """
@@ -50,6 +49,20 @@ class ImageFeatures:
         Get a triggered Image gif
         """
         return cls("/triggered/", "Get a triggered Image gif")
+
+    @classmethod
+    def america(cls):
+        """
+        The waving american flag on an image.gif
+        """
+        return cls("/america/", "The waving american flag on an image.gif")
+
+    @classmethod
+    def communism(cls):
+        """
+        Glory of the soviet Union on an image.gif
+        """
+        return cls("/communism/", "Glory of the soviet Union on an image.gif")
 
     @classmethod
     def wasted(cls):
@@ -172,11 +185,63 @@ class ImageFeatures:
         return cls("/jail/", "Put an Image behind bars")
 
     @classmethod
+    def fedora(cls):
+        """
+        Tips. Fedora
+        """
+        return cls("/fedora/", "Tips fedora")
+
+    @classmethod
+    def delete(cls):
+        """
+        Delete some trash
+        """
+        return cls("/delete/", "Delete some trash")
+
+    @classmethod
+    def shatter(cls):
+        """
+        Broken like glass
+        """
+        return cls("/shatter/", "Broken like glass")
+
+    @classmethod
     def gay(cls):
         """
         represent! Pastes a pride flag on an image.
         """
         return cls("/gay/", "represent! Pastes a pride flag on an image")
+
+    @classmethod
+    def pride(cls):
+        """
+        Wraps Image and Text into a thought
+        Needs:
+            - text
+            - flag (one of these flags):
+                * asexual
+
+                * bisexual
+
+                * gay
+
+                * genderfluid
+
+                * genderqueer
+
+                * intersex
+
+                * lesbian
+
+                * nonbinary
+
+                * progress
+
+                * pan
+
+                * trans
+        """
+        return cls("/thoughtimage/", "Wraps Image and Text into a thought")
 
     @classmethod
     def trash(cls):
@@ -270,6 +335,16 @@ class ImageFeatures:
         return cls("/solar/", "Solarizes an Image")
 
     @classmethod
+    def captcha(cls):
+        """
+        Creates a realistic Captcha
+        Needs:
+            - text
+            - image
+        """
+        return cls("/captcha/", "Creates a realistic Captcha")
+
+    @classmethod
     def thought_image(cls):
         """
         Wraps Image and Text into a thought
@@ -298,8 +373,21 @@ class ImageFeatures:
             - text
             - image
             - quote
+            - dark (boolean) default is true
         """
         return cls("/discord/", "Generated a realistic Discord Message")
+
+    @classmethod
+    def youtube(cls):
+        """
+        Generated a realistic Yutube comment
+        Needs:
+            - text
+            - image
+            - quote
+            - dark (boolean) default is true
+        """
+        return cls("/yt/", "Generated a realistic Yutube comment")
 
     @classmethod
     def retro_meme(cls):
@@ -311,6 +399,17 @@ class ImageFeatures:
             - image
         """
         return cls("/retromeme/", "Generated a realistic Discord Message")
+
+    @classmethod
+    def motiv(cls):
+        """
+        old 2012 style Motiv memes
+        Needs:
+            - top_text
+            - bottom_text
+            - image
+        """
+        return cls("/motiv/", "old 2012 style Motiv memes")
 
     @classmethod
     def modern_meme(cls):

@@ -1,7 +1,8 @@
-import aiohttp
 import asyncio
 import logging
 from typing import Dict
+
+import aiohttp
 
 from . import errors
 from .image import Image
@@ -18,7 +19,6 @@ error_dict = {
 
 
 class HTTP:
-
     """
     HTTP Client
     -----------
@@ -96,7 +96,6 @@ https://aiohttp.readthedocs.io/en/stable/client_reference.html#client-session
         :return: :class:`asyncdagpi.Image`
             Asyncdagpi Image Object
         """
-
 
         if not self.token:
             raise errors.Unauthorised("Please Provide a dagpi token")

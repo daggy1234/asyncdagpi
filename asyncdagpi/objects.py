@@ -3,7 +3,6 @@ from typing import Dict
 
 
 class BaseDagpiObject:
-
     """
     Base AsyncDagpi object
 
@@ -33,7 +32,6 @@ class BaseDagpiObject:
 
 
 class Logo(BaseDagpiObject):
-
     """
         A Dagpi Logo Object. A subclass of asyncdagpi.BaseDagpiObject
 
@@ -72,7 +70,6 @@ class Logo(BaseDagpiObject):
 
 
 class PickupLine(BaseDagpiObject):
-
     """
     A Dagpi PickupLine
 
@@ -96,7 +93,6 @@ class PickupLine(BaseDagpiObject):
 
 
 class WTP(BaseDagpiObject):
-
     """
            A Dagpi PickupLine. A subclass of AsyncDagpi object
 
