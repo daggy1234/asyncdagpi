@@ -71,7 +71,8 @@ class Client:
         if not isinstance(feature, ImageFeatures):
             raise InvalidFeature("{} does not exist".format(str(feature)))
         self.url_test(url)
-        if (dark := kwargs.get("dark")) is not None:
+        dark = kwargs.get("dark")
+        if dark is not None:
             kwargs["dark"] = str(dark)
         params = {"url": url, **kwargs}
         return await self.http.image_request(feature.value, params=params)
