@@ -6,7 +6,7 @@ from .errors import BadUrl, InvalidFeature
 from .http import HTTP
 from .image import Image
 from .image_features import ImageFeatures
-from .objects import WTP, PickupLine, Logo
+from .objects import WTP, PickupLine, Logo, Headline
 
 url_regex = r"http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]| " \
             r"(?:%[0-9a-fA-F][0-9a-fA-F]))+"
@@ -71,6 +71,8 @@ class Client:
         if not isinstance(feature, ImageFeatures):
             raise InvalidFeature("{} does not exist".format(str(feature)))
         self.url_test(url)
+        if (dark := kwargs.get("dark")) is not None:
+            kwargs["dark"] = str(dark)
         params = {"url": url, **kwargs}
         return await self.http.image_request(feature.value, params=params)
 
@@ -114,12 +116,35 @@ class Client:
         obj = await self.http.data_request("joke")
         return obj["joke"]
 
+    async def fact(self) -> str:
+        """
+        Gets a Fun fact
+        :returns: :class:`str`
+        """
+        obj = await self.http.data_request("fact")
+        return obj["fact"]
+
+    async def eight_ball(self) -> str:
+        """
+        Gets an 8ball response
+        :returns: :class:`str`
+        """
+        obj = await self.http.data_request("8ball")
+        return obj["response"]
+
     async def pickup_line(self) -> PickupLine:
         """
         Get a PickupLine
         """
 
         return PickupLine(await self.http.data_request("pickupline"))
+
+    async def headline(self) -> Headline:
+        """
+        Get a PickupLine
+        """
+
+        return Headline(await self.http.data_request("headline"))
 
     async def waifu(self) -> Dict:
         """

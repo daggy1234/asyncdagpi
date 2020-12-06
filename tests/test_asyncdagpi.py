@@ -78,6 +78,10 @@ async def test_data():
     c = Client(tok)
     dat = await c.wtp()
     assert dat.name
+    pickup = await c.pickup_line()
+    assert pickup.line
+    headline = await c.headline()
+    assert headline.headline
     logo = await c.logo()
     await c.close()
     assert isinstance(str(logo), str)

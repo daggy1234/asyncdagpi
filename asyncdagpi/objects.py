@@ -136,3 +136,26 @@ class WTP(BaseDagpiObject):
         self.weight = mon.get("weight")
         self.question = data.get("question")
         self.answer = data.get("answer")
+
+
+class Headline(BaseDagpiObject):
+    """
+    A Dagpi Headline
+
+    .. container:: Attributes
+
+        **Attributes**
+
+        dict: :class:`Dict`
+            Dictionary with raw data (same returned by raw_data)
+        category: :class:`bool`
+            Value stating whether headline is true or false
+        headline: :class:`str`
+            String Containing headline
+    """
+
+    def __init__(self, data: Dict):
+        super(Headline, self).__init__(data)
+        self.dict = data
+        self.headline = data.get("text")
+        self.fake = data.get("fake")
