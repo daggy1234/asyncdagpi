@@ -64,7 +64,7 @@ Client
 .. autoclass:: Client
     :members:
 .. danger::
-  Closing the CLient means a new one must be initialised otherwise there will be errors.
+  Closing the Client means a new one must be initialised otherwise there will be errors.
 ImageFeatures
 =============
 
