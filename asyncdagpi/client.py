@@ -161,7 +161,7 @@ class Client:
         start = time.perf_counter()
         await self.http.data_request("wtp")
         end = time.perf_counter()
-        return start - end
+        return end - start
 
     async def image_ping(self) -> float:
         """
@@ -170,7 +170,7 @@ class Client:
         start = time.perf_counter()
         await self.http.data_request("/", image=True)
         end = time.perf_counter()
-        return start - end
+        return end - start
 
     async def close(self):
         """
