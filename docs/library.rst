@@ -24,9 +24,9 @@ Version Related Info
 
 Client
 ======
-This is the base asyncdagpi client you have to use to make request.
+This is the base asyncdagpi client you use to make requests.
 
-This example initalises a basic client
+This example initalises a basic client.
 
 .. code:: python
 
@@ -42,11 +42,11 @@ This example initalises a basic client
     client = Client(token, logging=False)
 
 
-You can also setup a more advance client by passing in your own aiohttp ClientSession and Event Loop.
-in thd case of discord.py it is adviseable to use the *bot.loop* as the event loop.
+You can also setup a more advance client by passing in your own aiohttp ClientSession and Event Loop. 
+If you are using discord.py it is adviseable to use the *bot.loop* as the event loop.
 
 .. warning::
-  Please use this only if you know what you are doing
+  Please use this only if you know what you are doing. Do not use the aiohttp session used by discord.py.
 
 .. code:: python
 
@@ -56,7 +56,7 @@ in thd case of discord.py it is adviseable to use the *bot.loop* as the event lo
   client = Client(token, loop=loop, session=session)
 
 
-Given Below is All of the methods of the Client.
+Below is all of the methods of the client.
 
 Client
 ------
@@ -83,7 +83,7 @@ Image Response
 Data Response Models
 --------------------
 
-Data Objects returbed by some Data API endpoints. The base class is.
+Data Objects returned by some Data API endpoints. The base class is.
 
 .. autoclass:: BaseDagpiObject
     :members:
@@ -111,21 +111,21 @@ PickupLine
 Errors
 ======
 
-Asyncdagpi has Custom Exception the
+Asyncdagpi incorporates custom exceptions
 
-.. tip:: AsyncDagpiExcpetion
+.. tip:: AsyncDagpiException
 
   This is the base excpetion
 
-AsyncDagpiExcpetion
+AsyncDagpiException
 -------------------
 
-The base asyncdagpi excpetions
+The base asyncdagpi exceptions
 
 Use this to catch errors from the wrapper
 
 
-SubExcpetions
+SubExceptions
 ~~~~~~~~~~~~~
 
 .. py:exception:: errors.BadUrl
