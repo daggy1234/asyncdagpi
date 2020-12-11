@@ -2,7 +2,7 @@ QuickStart
 ==========
 
 .. tip::
-    These are just quick quide to get you started. Read the API reference to properly use the library
+    These are just quick quide to get you started. Read the API reference to properly use the library.
 
 Installation
 ------------
@@ -23,15 +23,14 @@ Waifu will return a Dictionary. Everything else will return a string.
     dagpi = Client("dagpi token")
     # For WTP Object
     wtp = await dagpi.wtp()
-    #For Roast
+    # For Roast
     roast = await dagpi.roast()
 
 Image Manipulation
 ------------------
 
 All Image endpoints return an Image object. This has many properties
-that can be useful for developers. For Basic implementations are
-displayed
+that can be useful for developers. Three basic implementations are displayed.
 
 Discord.py
 ~~~~~~~~~~
