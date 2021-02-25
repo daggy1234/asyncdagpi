@@ -321,6 +321,13 @@ class ImageFeatures:
         return cls("/magik/", "Magik an Image")
 
     @classmethod
+    def stringify(cls):
+        """
+        Stringify an Image
+        """
+        return cls("/stringify/", "Stringify an Image")
+
+    @classmethod
     def rainbow(cls):
         """
         Rainbow light effect on image

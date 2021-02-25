@@ -2,7 +2,11 @@ import os
 
 import pytest
 
+import asyncdagpi
+
 from asyncdagpi import Client, errors, ImageFeatures, Image
+
+os.environ["DAGPI_TOKEN"] = "de4uq7M604dkUcvas3kvrog0PQBDtisbAT6ptRwkIr4H3oobAxWIGMH6dzv5q2hZ"
 
 
 def test_url_regex():

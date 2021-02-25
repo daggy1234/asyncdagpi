@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.com/Daggy1234/asyncdagpi.svg?branch=master)](https://travis-ci.com/Daggy1234/asyncdagpi) [![License](https://img.shields.io/github/license/daggy1234/asyncdagpi)](https://mit-license.org/) ![version](https://img.shields.io/pypi/v/asyncdagpi) [![python](https://img.shields.io/pypi/pyversions/asyncdagpi)](https://pypi.org/p/asyncdagpi) [![Documentation Status](https://readthedocs.org/projects/asyncdagpi/badge/?version=latest)](https://asyncdagpi.readthedocs.io/en/latest/?badge=latest) [![Codecov](https://img.shields.io/codecov/c/github/daggy1234/asyncdagpi?logo=codecov)](https://codecov.io/gh/daggy1234/asyncdagpi) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/ad36f1ea6211444792e84f32a14326dd)](https://www.codacy.com/gh/Daggy1234/asyncdagpi/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Daggy1234/asyncdagpi&amp;utm_campaign=Badge_Grade)
 
-Powerful Asynchronous Wrapper for dagpi https://dagpi.xyz
+Powerful Asynchronous Wrapper for dagpi [dagpi.xyz](https://dagpi.xyz)
 
 ## Installation
 
@@ -39,7 +39,7 @@ dagpi = Client("dagpi token")
 
 @bot.command()
 async def pixel(ctx, member: discord.Member):
-    url = str(member.avatar_url_as(format="png", static_format="gif", size=1024))
+    url = str(member.avatar_url_as(static_format="png", size=1024))
     img = await dagpi.image_process(ImageFeatures.pixel(), url)
     file = discord.File(fp=img.image,filename=f"pixel.{img.format}")
 
@@ -55,7 +55,9 @@ img = await dagpi.image_process(ImageFeatures.pixel(), "https://dagbot-is.the-be
 img.write("pixel")
 #will create pixel.png in this case
 ```
+
 ### Python Pillow
+
 ```python
 from asyncdagpi import ImageFeatures, Client
 from PIL import Image
@@ -65,6 +67,15 @@ img = await dagpi.image_process(ImageFeatures.pixel(), "https://dagbot-is.the-be
 im = Image.open(img.image)
 ```
 
+### Kwargs Example
+
+```python
+from asyncdagpi import ImageFeatures, Client
+
+dagpi = Client("dagpi token")
+img = await dagpi.image_process(ImageFeatures.tweet(), "https://dagbot-is.the-be.st/logo.png", text="This is asyncdagpi tweeting live from dagpi.xyz!", username="Asyncdagpi")
+```
+
 ### For More Thorough Examples and Feature list read the documentation
 
-https://asyncdagpi.rtfd.io
+[Docs](https://asyncdagpi.rtfd.io)
