@@ -94,6 +94,8 @@ async def test_ping():
     tok = os.getenv("DAGPI_TOKEN")
     c = Client(tok)
     image_ping = await c.image_ping()
-    await c.data_ping()
+    assert image_ping > 0
+    data_ping = await c.data_ping()
+    assert data_ping > 0
     await c.close()
     assert isinstance(image_ping, float)

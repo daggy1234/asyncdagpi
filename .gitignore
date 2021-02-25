@@ -4,4 +4,6 @@ test.png
 __pycache__
 _build
 .idea/
+dist/
 .vscode/
+some.png.png
