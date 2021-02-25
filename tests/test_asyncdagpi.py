@@ -18,7 +18,7 @@ def test_url_regex():
 
 @pytest.mark.asyncio
 async def test_no_auth():
-    c = Client("")
+    c = Client("bad token")
     try:
         await c.wtp()
     except Exception as e:
