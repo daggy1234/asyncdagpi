@@ -3,14 +3,14 @@ name: Release
 on:
   push:
     tags:
-      - '*.*.*'
+      - "*.*.*"
 
 jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
     env:
-      python-version: '3.8'
+      python-version: "3.8"
     steps:
       - uses: actions/checkout@v2
       - name: Get tag
@@ -55,8 +55,8 @@ jobs:
         with:
           tag_name: ${{ steps.tag.outputs.tag }}
           release_name: ${{ steps.tag.outputs.tag }}
-          draft: 'false'
-          prerelease: 'false'
+          draft: "false"
+          prerelease: "false"
       - name: Build and publish to PyPi
         env:
           POETRY_PYPI_TOKEN_PYPI: ${{ secrets.PYPI_PASSWORD }}

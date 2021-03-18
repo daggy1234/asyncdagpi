@@ -307,6 +307,70 @@ class ImageFeatures:
         return cls("/paint/", "Turns an Image into an oil painting")
 
     @classmethod
+    def sketch(cls):
+        """
+        How an artist would create an image.
+        """
+        return cls("/sketch/", "How an artist would create an image.")
+
+    @classmethod
+    def spin(cls):
+        """
+        the gif goes round and round.
+        """
+        return cls("/spin/", "the gif goes round and round")
+
+    @classmethod
+    def dissolve(cls):
+        """
+        Thanos snapped and back.
+        """
+        return cls("/dissolve/", "Thanos snapped and back.")
+
+    @classmethod
+    def neon(cls):
+        """
+        A cool multicolored glowing neon sign from an image.
+        """
+        return cls("/neon/", "A cool multicolored glowing neon sign form an image.")
+
+    @classmethod
+    def petpet(cls):
+        """
+        Pet Pet Pet.
+        """
+        return cls("/petpet/", "Pet Pet Pet.")
+
+    @classmethod
+    def comic(cls):
+        """
+        classic black and white comic.
+        """
+        return cls("/comic/", "Classic black and white commic.")
+
+    @classmethod
+    def burn(cls):
+        """
+        Burn an image untill there's molten remains.
+        """
+        return cls("/burn/", "Burn an image untill there's molten remains.")
+
+    @classmethod
+    def freeze(cls):
+        """
+        Get blasted by Mr.Freeze from batman.
+        """
+        return cls("/freeze/", "Get blasted by Mr.Freeze from batman.")
+
+    @classmethod
+    def earth(cls):
+        """
+        Become one with Rock.
+        """
+        return cls("/earth/", "Become one with rock.")
+
+
+    @classmethod
     def night(cls):
         """
         Turns day into night on an Image.
@@ -379,7 +443,7 @@ class ImageFeatures:
         Needs:
             - text
             - image
-            - quote
+            - username
             - dark (boolean) default is true
         """
         return cls("/discord/", "Generated a realistic Discord Message")
@@ -391,7 +455,7 @@ class ImageFeatures:
         Needs:
             - text
             - image
-            - quote
+            - username
             - dark (boolean) default is true
         """
         return cls("/yt/", "Generated a realistic Yutube comment")
