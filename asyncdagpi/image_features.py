@@ -215,9 +215,8 @@ class ImageFeatures:
     @classmethod
     def pride(cls):
         """
-        Wraps Image and Text into a thought
+        Pride flag overlay
         Needs:
-            - text
             - flag (one of these flags):
                 * asexual
 
@@ -241,7 +240,7 @@ class ImageFeatures:
 
                 * trans
         """
-        return cls("/thoughtimage/", "Wraps Image and Text into a thought")
+        return cls("/pride/", "Pride flag overlay")
 
     @classmethod
     def trash(cls):
