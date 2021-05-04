@@ -14,7 +14,7 @@ __title__ = "asyncdagpi"
 __author__ = "Daggy1234"
 __license__ = "MIT"
 __copyright__ = "Copyright 2020 Daggy1234"
-__version__ = '3.3.2'
+__version__ = '3.3.3'
 
 from .http import HTTP
 from .image_features import ImageFeatures
@@ -25,5 +25,5 @@ from .objects import WTP, Logo, PickupLine, BaseDagpiObject
 VersionInfo = namedtuple('VersionInfo',
                          'major minor micro releaselevel serial')
 
-version_info = VersionInfo(major=3, minor=3, micro=2, releaselevel='stable',
+version_info = VersionInfo(major=3, minor=3, micro=3, releaselevel='stable',
                            serial=0)
