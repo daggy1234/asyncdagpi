@@ -65,6 +65,20 @@ class ImageFeatures:
         return cls("/communism/", "Glory of the soviet Union on an image.gif")
 
     @classmethod
+    def spin(cls):
+        """
+        Brrrrrr
+        """
+        return cls("/spin/", "Brrrr")
+
+    @classmethod
+    def bomb(cls):
+        """
+        Kaboom
+        """
+        return cls("/bomb/", "Kaboom")
+
+    @classmethod
     def wasted(cls):
         """
         GTA V Wasted screen.
@@ -81,6 +95,17 @@ class ImageFeatures:
         """
         return cls("/5g1g/",
                    "No I have never heard of this meme. Takes in 2 Image URL")
+
+    @classmethod
+    def slap(cls):
+        """
+        Have someone slap someone.
+        Needs:
+            - url
+            - url2
+        """
+        return cls("/slap/",
+                   "Have someone slap someone.")
 
     @classmethod
     def why_are_you_gay(cls):
@@ -176,7 +201,6 @@ class ImageFeatures:
         Laughs in Sithlord
         """
         return cls("/sith/", "Laughs in Sithlord")
-
     @classmethod
     def jail(cls):
         """
@@ -239,6 +263,12 @@ class ImageFeatures:
                 * pan
 
                 * trans
+
+                * agender
+
+                * ally
+
+                * polysexual
         """
         return cls("/pride/", "Pride flag overlay")
 
@@ -290,6 +320,14 @@ class ImageFeatures:
         Frames an Image like a printed polaroid.
         """
         return cls("/polaroid/", "Frames an Image like a printed polaroid")
+
+
+    @classmethod
+    def glitch(cls):
+        """
+        *Cool Glitched image*
+        """
+        return cls("/glitch/", "*Cool Glitched image*")
 
     @classmethod
     def swirl(cls):
@@ -405,6 +443,20 @@ class ImageFeatures:
         return cls("/solar/", "Solarizes an Image")
 
     @classmethod
+    def petpet(cls):
+        """
+        Cool petpet gif
+        """
+        return cls("/petpet/", "cool petpet gof")
+
+    @classmethod
+    def bonk(cls):
+        """
+        Bonk Someone
+        """
+        return cls("/bonk/", "Bonk Someone")
+
+    @classmethod
     def captcha(cls):
         """
         Creates a realistic Captcha
@@ -490,3 +542,5 @@ class ImageFeatures:
             - image
         """
         return cls("/modernmeme/", "Modern New meme style meme")
+
+

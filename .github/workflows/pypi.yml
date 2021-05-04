@@ -29,16 +29,6 @@ jobs:
         with:
           virtualenvs-create: true
           virtualenvs-in-project: true
-      - name: Get package version
-        id: package-version
-        run: echo ::set-output name=version::$(poetry version | grep -Po "\d+\.\d+\.\d+$")
-      - name: Check if tag matches package version
-        if: steps.tag.outputs.tag != steps.package-version.outputs.version
-        run: |
-          echo Tag: ${{ steps.tag.outputs.tag }}
-          echo Package version: ${{ steps.package-version.outputs.version }}
-          echo Tag and package version do not match
-          exit 1
       - name: Cache Poetry virtualenv
         uses: actions/cache@v1
         id: cache
