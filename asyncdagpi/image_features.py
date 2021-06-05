@@ -551,3 +551,12 @@ class ImageFeatures:
             - pixels
         """
         return cls("/mosiac/", "Turn an image into a roman mosiac")
+
+    @classmethod
+    def cube(cls):
+        """
+        Turn an image into a cube
+        Needs:
+            - image
+        """
+        return cls("/cube/", "Turn an image into a cube")
