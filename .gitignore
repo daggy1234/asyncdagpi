@@ -7,3 +7,4 @@ _build
 dist/
 .vscode/
 some.png.png
+pyrightconfig.json

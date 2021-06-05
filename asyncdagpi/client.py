@@ -77,6 +77,20 @@ class Client:
         params = {"url": url, **kwargs}
         return await self.http.image_request(feature.value, params=params)
 
+    async def special_image_process(self, url: str) \
+            -> Image:
+        """
+
+        url: :class:`str`
+            the Url for the Image Passed
+
+        :return: :class:`asyncdagpi.Image`
+            Asyncdagpi Image Object
+        """
+        self.url_test(url)
+        params = {"url": url}
+        return await self.http.image_request("/special/", params=params)
+
     async def wtp(self) -> WTP:
         """
         get a WTP data object

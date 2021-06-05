@@ -2,10 +2,10 @@ import os
 
 import pytest
 
-import asyncdagpi
-
 from asyncdagpi import Client, errors, ImageFeatures, Image
 
+
+os.environ["DAGPI_TOKEN"] = "MTYyMDkwMzA1NQ.Dw2R9Fa6iLaPKebpiGDtDwOuqYRko1fV.614b2f93cf3ba64f"
 
 def test_url_regex():
     for url in ["hpps://dagbot.com", "http//dagbot.com", "https://dagcom"]:
@@ -50,6 +50,18 @@ async def test_image():
     assert isinstance(repr(img), str)
     assert isinstance(img.size(), int)
 
+
+@pytest.mark.asyncio
+async def test_image_special():
+    tok = os.getenv("DAGPI_TOKEN")
+    c = Client(tok)
+    img = await c.special_image_process("https://dagbot-is.the-be.st/logo.png")
+    await c.close()
+    img.write("some.png")
+    assert isinstance(img, Image)
+    assert isinstance(img.read(), bytes)
+    assert isinstance(repr(img), str)
+    assert isinstance(img.size(), int)
 
 @pytest.mark.asyncio
 async def test_image_unaccesible():

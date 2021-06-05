@@ -201,6 +201,7 @@ class ImageFeatures:
         Laughs in Sithlord
         """
         return cls("/sith/", "Laughs in Sithlord")
+
     @classmethod
     def jail(cls):
         """
@@ -321,7 +322,6 @@ class ImageFeatures:
         """
         return cls("/polaroid/", "Frames an Image like a printed polaroid")
 
-
     @classmethod
     def glitch(cls):
         """
@@ -405,7 +405,6 @@ class ImageFeatures:
         Become one with Rock.
         """
         return cls("/earth/", "Become one with rock.")
-
 
     @classmethod
     def night(cls):
@@ -542,5 +541,3 @@ class ImageFeatures:
             - image
         """
         return cls("/modernmeme/", "Modern New meme style meme")
-
-
