@@ -541,3 +541,13 @@ class ImageFeatures:
             - image
         """
         return cls("/modernmeme/", "Modern New meme style meme")
+    
+    @classmethod
+    def mosiac(cls):
+        """
+        Turn an image into a roman mosiac
+        Needs:
+            - image
+            - pixels
+        """
+        return cls("/mosiac/", "Turn an image into a roman mosiac")
