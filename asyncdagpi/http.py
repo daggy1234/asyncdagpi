@@ -26,7 +26,7 @@ class HTTP:
     """
     HTTP Client
     -----------
-    Represents an HTTP client sending HTTP requests to the top.gg API.
+    Represents an HTTP client sending HTTP requests to the dagpi API.
         .. _aiohttp session:
 https://aiohttp.readthedocs.io/en/stable/client_reference.html#client-session
         Parameters
