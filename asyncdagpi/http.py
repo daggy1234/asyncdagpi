@@ -77,13 +77,12 @@ https://aiohttp.readthedocs.io/en/stable/client_reference.html#client-session
             request_url = self.base_url + "/image/"
         async with self.client.get(request_url, headers=headers) as resp:
             if 300 >= resp.status >= 200:
-                if resp.headers["Content-Type"] == "application/json":
-                    js = await resp.json()
-                    return js
-
-                else:
+                if resp.headers["Content-Type"] != "application/json":
                     raise errors.ApiError(f"{resp.status}. \
                     Request was great but Dagpi did not send a JSON")
+                js = await resp.json()
+                return js
+
             else:
                 try:
                     error = error_dict[resp.status]
@@ -112,25 +111,26 @@ https://aiohttp.readthedocs.io/en/stable/client_reference.html#client-session
 
         request_url = self.base_url + "/image" + url
         async with self.client.get(request_url, headers=headers,
-                                   params=params) as resp:
+                                       params=params) as resp:
             if 300 >= resp.status >= 200:
-                if resp.headers["Content-Type"].lower() in \
-                        ["image/png", "image/gif"]:
-                    form = resp.headers["Content-Type"].replace("image/",
-                                                                "")
-                    resp_time = resp.headers["X-Process-Time"][:5]
-                    raw_byte = await resp.read()
-                    if self.logging:
-                        log.info(
-                            '[Dagpi Image] GET {} has returned {}'.format(
-                                resp.url,
-                                resp.status))
-                    return Image(raw_byte, form, resp_time,
-                                 params.get("url"))
-
-                else:
+                if resp.headers["Content-Type"].lower() not in [
+                    "image/png",
+                    "image/gif",
+                ]:
                     raise errors.ApiError(f"{resp.status}. \
                 Request was great but Dagpi did not send an Image back")
+                form = resp.headers["Content-Type"].replace("image/",
+                                                            "")
+                resp_time = resp.headers["X-Process-Time"][:5]
+                raw_byte = await resp.read()
+                if self.logging:
+                    log.info(
+                        '[Dagpi Image] GET {} has returned {}'.format(
+                            resp.url,
+                            resp.status))
+                return Image(raw_byte, form, resp_time,
+                             params.get("url"))
+
             else:
                 try:
                     error = error_dict[resp.status]
