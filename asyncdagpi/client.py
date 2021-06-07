@@ -13,8 +13,8 @@ url_regex = r"http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]| " \
 
 
 class Client:
+
     """
-    
     Initialisation
     ~~~~~~~~~~~~~~
 

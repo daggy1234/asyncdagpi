@@ -1,6 +1,6 @@
 class ImageFeatures:
+    
     """
-
     Base ImageFatures that asyncdagpi has
     """
 

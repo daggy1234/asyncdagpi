@@ -2,8 +2,8 @@ from io import BytesIO
 
 
 class Image(object):
-    """
     
+    """
     An AsyncDagpi Image Returned
     This has special properties that can enhance the experience.
 
@@ -24,6 +24,9 @@ class Image(object):
 
     def __init__(self, byt: bytes, image_format: str, process_time: str,
                  original_url: str):
+        """
+        Initialise an asyncdagpi.Image
+        """
         self.image = BytesIO(byt)
         self.format = image_format
         self.process_time = process_time

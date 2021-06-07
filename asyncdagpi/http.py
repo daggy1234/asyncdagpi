@@ -23,8 +23,8 @@ error_dict = {
 
 
 class HTTP:
+    
     """
-
     HTTP Client
     -----------
     Represents an HTTP client sending HTTP requests to the dagpi API.

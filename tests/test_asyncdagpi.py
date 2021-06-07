@@ -5,8 +5,6 @@ import pytest
 from asyncdagpi import Client, errors, ImageFeatures, Image
 
 
-os.environ["DAGPI_TOKEN"] = "MTYyMDkwMzA1NQ.Dw2R9Fa6iLaPKebpiGDtDwOuqYRko1fV.614b2f93cf3ba64f"
-
 def test_url_regex():
     for url in ["hpps://dagbot.com", "http//dagbot.com", "https://dagcom"]:
         try:
