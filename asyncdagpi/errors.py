@@ -1,7 +1,6 @@
 class AsyncDagpiException(Exception):
     """
-    AsyncDagpi base exception class
-    use this base class to catch any AsyncDagpi errors.
+    AsyncDagpi base exception class use this base class to catch any AsyncDagpi errors.
     """
     pass
 
@@ -55,6 +54,9 @@ class ImageUnaccesible(AsyncDagpiException):
     """
 
     def __init__(self, error_code, message):
+        """
+        Initialise the ImageUnaccessible Error
+        """
         self.error_code = error_code
         self.message = message
         super(ImageUnaccesible, self).__init__(self.error_code,

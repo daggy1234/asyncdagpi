@@ -24,6 +24,7 @@ error_dict = {
 
 class HTTP:
     """
+
     HTTP Client
     -----------
     Represents an HTTP client sending HTTP requests to the dagpi API.
@@ -46,6 +47,9 @@ https://aiohttp.readthedocs.io/en/stable/client_reference.html#client-session
                  "user_agent", "logging")
 
     def __init__(self, token: str, logging_enabled: bool, **kwargs):
+        """
+        Initialise the dagpi http client
+        """
         self.base_url = "https://api.dagpi.xyz"
         self.token = token
         self.logging = logging_enabled

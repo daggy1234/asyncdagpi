@@ -4,6 +4,7 @@ from typing import Dict
 
 class BaseDagpiObject:
     """
+    
     Base AsyncDagpi object
 
         .. container:: Attributes
@@ -14,6 +15,9 @@ class BaseDagpiObject:
     """
 
     def __init__(self, dictionary: Dict):
+        """
+        Initialise a BaseDagpiObject
+        """
         self.dict = dictionary
 
     def __str__(self) -> str:
@@ -58,6 +62,9 @@ class Logo(BaseDagpiObject):
         """
 
     def __init__(self, data: Dict):
+        """
+        Initialise a logo
+        """
         super(Logo, self).__init__(data)
         self.dict = data
         self.question = data.get("question")

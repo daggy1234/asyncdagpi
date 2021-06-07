@@ -1,9 +1,13 @@
 class ImageFeatures:
     """
+
     Base ImageFatures that asyncdagpi has
     """
 
     def __init__(self, value: str, description: str):
+        """
+        Initialise the dagpi Image feature
+        """
         self.value = value
         self.description = description
 
@@ -63,13 +67,6 @@ class ImageFeatures:
         Glory of the soviet Union on an image.gif
         """
         return cls("/communism/", "Glory of the soviet Union on an image.gif")
-
-    @classmethod
-    def spin(cls):
-        """
-        Brrrrrr
-        """
-        return cls("/spin/", "Brrrr")
 
     @classmethod
     def bomb(cls):
@@ -440,13 +437,6 @@ class ImageFeatures:
         Solarizes an Image.
         """
         return cls("/solar/", "Solarizes an Image")
-
-    @classmethod
-    def petpet(cls):
-        """
-        Cool petpet gif
-        """
-        return cls("/petpet/", "cool petpet gof")
 
     @classmethod
     def bonk(cls):
