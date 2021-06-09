@@ -1,5 +1,5 @@
 import json
-from typing import Dict, Any, List
+from typing import Dict, Any, List, Optional
 
 
 class BaseDagpiObject:
@@ -18,7 +18,7 @@ class BaseDagpiObject:
         """
         Initialise a BaseDagpiObject
         """
-        self.dict = dictionary
+        self.dict: Dict[str, Any] = dictionary
 
     def __str__(self) -> str:
         """
@@ -62,19 +62,19 @@ class Logo(BaseDagpiObject):
                 String containing Wikipedia URL for brand
         """
 
-    def __init__(self, data: Dict[str, str]):
+    def __init__(self, data: Dict[str, Any]):
         """
         Initialise a logo
         """
         super(Logo, self).__init__(data)
-        self.dict = data
-        self.question = data["question"]
-        self.answer = data["answer"]
-        self.brand = data.get("brand")
-        self.clue = data.get("clue")
-        self.easy = data.get("easy")
-        self.hint = data.get("hint")
-        self.wiki_url = data.get("wiki_url")
+        self.dict: Dict[str, Any] = data
+        self.question: str = data["question"]
+        self.answer: str = data["answer"]
+        self.brand: str = data["brand"]
+        self.clue: Optional[str] = data.get("clue")
+        self.easy: bool = data["easy"]
+        self.hint: str = data["hint"]
+        self.wiki_url: str = data["wiki_url"]
 
 
 class PickupLine(BaseDagpiObject):
@@ -96,9 +96,9 @@ class PickupLine(BaseDagpiObject):
 
     def __init__(self, data: Dict[str, str]):
         super(PickupLine, self).__init__(data)
-        self.dict = data
-        self.category = data["category"]
-        self.line = data["joke"]
+        self.dict: Dict[str, str] = data
+        self.category: str = data["category"]
+        self.line: str = data["joke"]
 
 
 # class Pokemon(TypedDict):
@@ -145,16 +145,16 @@ class WTP(BaseDagpiObject):
 
     def __init__(self, data: Dict[str, Any]):
         super(WTP, self).__init__(data)
-        mon = data["Data"]
-        self.dict = data
+        mon: Dict[str, Any] = data["Data"]
+        self.dict: Dict[str, Any] = data
         self.abilities: List[str] = mon["abilities"]
-        self.ascii: str = mon.get("ascii")
-        self.height: float = mon.get("height")
-        self.id: int = int(mon.get("id"))
-        self.link: str = mon.get("link")
-        self.name: str = mon.get("name")
-        self.type: List[str] = mon.get("type")
-        self.weight: float = mon.get("weight")
+        self.ascii: str = mon["ascii"]
+        self.height: float = mon["height"]
+        self.id: int = int(mon["id"])
+        self.link: str = mon["link"]
+        self.name: str = mon["name"]
+        self.type: List[str] = mon["type"]
+        self.weight: float = mon["weight"]
         self.question: str = data["question"]
         self.answer: str = data["answer"]
 
@@ -178,6 +178,6 @@ class Headline(BaseDagpiObject):
 
     def __init__(self, data: Dict[str, Any]):
         super(Headline, self).__init__(data)
-        self.dict = data
+        self.dict: Dict[str, Any] = data
         self.headline: str = data["text"]
         self.fake: bool = data["fake"]

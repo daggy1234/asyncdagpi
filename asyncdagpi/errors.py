@@ -11,8 +11,8 @@ class AsyncDagpiHttpException(AsyncDagpiException):
     """
 
     def __init__(self, status: int, message: str) -> None:
-        self.status = status
-        self.message = message
+        self.status: int = status
+        self.message: str = message
         super().__init__(message)
 
 
@@ -78,13 +78,13 @@ class ImageUnaccesible(AsyncDagpiHttpException):
         """
         Initialise the ImageUnaccessible Error
         """
-        self.error_code = error_code
-        self.message = message
+        self.error_code: int = error_code
+        self.message: str = message
         super(ImageUnaccesible, self).__init__(self.error_code,
                                                f'{self.error_code} ---> \
         {self.message}')
 
-    def __str__(self):
+    def __str__(self) -> str:
         """
         String Explaining the error
         :return: :class:`str`

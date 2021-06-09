@@ -9,22 +9,27 @@ An async wrapper for dagpi
 :license: MIT, see LICENSE for more details.
 """
 
-from collections import namedtuple
+from asyncdagpi.objects import WTP, Logo, PickupLine, BaseDagpiObject
+from asyncdagpi.image import Image
+from asyncdagpi.client import Client
+from asyncdagpi.image_features import ImageFeatures
+from asyncdagpi.http import HTTP
+from typing import NamedTuple
 
-__title__ = "asyncdagpi"
-__author__ = "Daggy1234"
-__license__ = "MIT"
-__copyright__ = "Copyright 2021 Daggy1234"
-__version__ = '4.0.0'
+__title__: str = "asyncdagpi"
+__author__: str = "Daggy1234"
+__license__: str = "MIT"
+__copyright__: str = "Copyright 2021 Daggy1234"
+__version__: str = '4.0.0'
 
-from .http import HTTP
-from .image_features import ImageFeatures
-from .client import Client
-from .image import Image
-from .objects import WTP, Logo, PickupLine, BaseDagpiObject
 
-VersionInfo = namedtuple('VersionInfo',
-                         'major minor micro releaselevel serial')
+class VersionInfo(NamedTuple):
+    major: int
+    minor: int
+    micro: int
+    releaselevel: str
+    serial: int
 
-version_info = VersionInfo(major=4, minor=0, micro=0, releaselevel='alpha',
-                           serial=0)
+
+version_info: VersionInfo = VersionInfo(major=4, minor=0, micro=0, releaselevel='alpha',
+                                        serial=0)

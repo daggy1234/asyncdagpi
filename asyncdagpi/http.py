@@ -1,18 +1,20 @@
 import asyncio
+from asyncio.events import AbstractEventLoop
 import logging
 from typing import Dict, Optional, Union, TYPE_CHECKING, Any
 
 import aiohttp
 
 from aiohttp import __version__ as aiov
+from aiohttp.client import ClientSession
 
-from . import errors
-from . import __version__
+from asyncdagpi import errors
+from asyncdagpi import __version__
 import sys
-from .image import Image
+from asyncdagpi.image import Image
 
 
-log = logging.getLogger(__name__)
+log: logging.Logger = logging.getLogger(__name__)
 
 error_dict: Dict[int, errors.AsyncDagpiHttpException] = {
     400: errors.ParameterError("Parameters passed were incorrect"),
@@ -57,12 +59,12 @@ https://aiohttp.readthedocs.io/en/stable/client_reference.html#client-session
         """
         Initialise the dagpi http client
         """
-        self.base_url = "https://api.dagpi.xyz"
-        self.token = token
-        self.logging = logging_enabled
-        self.loop = loop = loop or asyncio.get_event_loop()
-        self.client = session or aiohttp.ClientSession(loop=loop)
-        self.user_agent = "AsyncDagpi v{0} Python/Python/ \
+        self.base_url: str = "https://api.dagpi.xyz"
+        self.token: str = token
+        self.logging: bool = logging_enabled
+        self.loop: AbstractEventLoop = loop or asyncio.get_event_loop()
+        self.client: ClientSession = session or aiohttp.ClientSession(loop=loop)
+        self.user_agent: str = "AsyncDagpi v{0} Python/Python/ \
         {1}.{2} aiohttp/{3}".format(__version__, sys.version_info[0],
                                     sys.version_info[1], aiov)
 
@@ -166,5 +168,5 @@ https://aiohttp.readthedocs.io/en/stable/client_reference.html#client-session
                     else:
                         raise errors.ApiError("Unknown API Error Occurred")
 
-    async def close(self):
+    async def close(self) -> None:
         await self.client.close()

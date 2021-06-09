@@ -1,17 +1,17 @@
 import re
 import time
-from typing import Dict, Optional
+from typing import Dict, Optional, Any
 
-from .errors import BadUrl, InvalidFeature
-from .http import HTTP
-from .image import Image
-from .image_features import ImageFeatures
-from .objects import WTP, PickupLine, Logo, Headline
+from asyncdagpi.errors import BadUrl, InvalidFeature
+from asyncdagpi.http import HTTP
+from asyncdagpi.image import Image
+from asyncdagpi.image_features import ImageFeatures
+from asyncdagpi.objects import WTP, PickupLine, Logo, Headline
 from aiohttp import ClientSession
 from asyncio import AbstractEventLoop
 
 
-url_regex = r"http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]| " \
+url_regex: str = r"http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]| " \
             r"(?:%[0-9a-fA-F][0-9a-fA-F]))+"
 
 
@@ -43,15 +43,15 @@ class Client:
         loop: Optional[AbstractEventLoop] = None
     ):
 
-        self.token = token
-        self.logging = logging
-        self.session = session
-        self.loop = loop
-        self.http = HTTP(self.token, logging, loop=self.loop,
+        self.token: str = token
+        self.logging: bool = logging
+        self.session: Optional[ClientSession] = session
+        self.loop: Optional[AbstractEventLoop] = loop
+        self.http: HTTP = HTTP(self.token, logging, loop=self.loop,
                          session=self.session)
 
     @staticmethod
-    def url_test(url: str):
+    def url_test(url: str) -> None:
         if not isinstance(url, str):
             raise BadUrl("URL is not a String")
 
@@ -172,7 +172,7 @@ class Client:
 
         return Headline(await self.http.data_request("headline"))
 
-    async def waifu(self) -> Dict:
+    async def waifu(self) -> Dict[str, Any]:
         """
         Get a Random Anime Waifu.
         Does not return a model due to sheer complexity and impracticality.
@@ -197,7 +197,7 @@ class Client:
         end = time.perf_counter()
         return (end - start)
 
-    async def close(self):
+    async def close(self) -> None:
         """
         Shuts down the asyncdagpi Client
         """

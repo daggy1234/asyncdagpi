@@ -1,3 +1,7 @@
+from typing import Type, TypeVar
+
+IF = TypeVar('IF', bound='ImageFeatures')
+
 class ImageFeatures:
 
     """
@@ -8,8 +12,8 @@ class ImageFeatures:
         """
         Initialise the dagpi Image feature
         """
-        self.value = value
-        self.description = description
+        self.value: str = value
+        self.description: str = description
 
     def __str__(self) -> str:
         """
@@ -27,63 +31,63 @@ class ImageFeatures:
             self.value.replace("/", ""))
 
     @classmethod
-    def pixel(cls):
+    def pixel(cls: Type[IF]) -> IF:
         """
         Pixelate an Image
         """
         return cls("/pixel/", "Pixelate an Image")
 
     @classmethod
-    def colors(cls):
+    def colors(cls: Type[IF]) -> IF:
         """
         Analyse and get an Image's Color Top 5 Colors
         """
         return cls("/colors/", "Analyse and get an Image's Color Top 5 Colors")
 
     @classmethod
-    def wanted(cls):
+    def wanted(cls: Type[IF]) -> IF:
         """
         Get a wanted poster of an Image.
         """
         return cls("/wanted/", "Get a wanted poster of an Image")
 
     @classmethod
-    def triggered(cls):
+    def triggered(cls: Type[IF]) -> IF:
         """
         Get a triggered Image gif
         """
         return cls("/triggered/", "Get a triggered Image gif")
 
     @classmethod
-    def america(cls):
+    def america(cls: Type[IF]) -> IF:
         """
         The waving american flag on an image.gif
         """
         return cls("/america/", "The waving american flag on an image.gif")
 
     @classmethod
-    def communism(cls):
+    def communism(cls: Type[IF]) -> IF:
         """
         Glory of the soviet Union on an image.gif
         """
         return cls("/communism/", "Glory of the soviet Union on an image.gif")
 
     @classmethod
-    def bomb(cls):
+    def bomb(cls: Type[IF]) -> IF:
         """
         Kaboom
         """
         return cls("/bomb/", "Kaboom")
 
     @classmethod
-    def wasted(cls):
+    def wasted(cls: Type[IF]) -> IF:
         """
         GTA V Wasted screen.
         """
         return cls("/wasted/", "GTA V Wasted screen")
 
     @classmethod
-    def five_guys_one_girl(cls):
+    def five_guys_one_girl(cls: Type[IF]) -> IF:
         """
         No I have never heard of this meme. Takes in 2 Image URL.
         Needs:
@@ -94,7 +98,7 @@ class ImageFeatures:
                    "No I have never heard of this meme. Takes in 2 Image URL")
 
     @classmethod
-    def slap(cls):
+    def slap(cls: Type[IF]) -> IF:
         """
         Have someone slap someone.
         Needs:
@@ -105,7 +109,7 @@ class ImageFeatures:
                    "Have someone slap someone.")
 
     @classmethod
-    def why_are_you_gay(cls):
+    def why_are_you_gay(cls: Type[IF]) -> IF:
         """
         The infamous Why are you gay. Takes in 2 Image URL.
         Needs:
@@ -116,126 +120,126 @@ class ImageFeatures:
                    "The infamous  Why are you gay. Takes in 2 Image URL")
 
     @classmethod
-    def invert(cls):
+    def invert(cls: Type[IF]) -> IF:
         """
         Invert an Image.
         """
         return cls("/invert/", "Invert an Image")
 
     @classmethod
-    def sobel(cls):
+    def sobel(cls: Type[IF]) -> IF:
         """
         Cool SOBEL filter for Images. Only png's.
         """
         return cls("/sobel/", "Cool SOBEL filter for Images.")
 
     @classmethod
-    def triangle(cls):
+    def triangle(cls: Type[IF]) -> IF:
         """
         Cool triangle edge detection for Images. Only png's.
         """
         return cls("/triangle/", "Cool triangle edge detection for Images.")
 
     @classmethod
-    def hog(cls):
+    def hog(cls: Type[IF]) -> IF:
         """
         Histogram of Oriented Gradients.
         """
         return cls("/hog/", "Histogram of Oriented Gradients")
 
     @classmethod
-    def blur(cls):
+    def blur(cls: Type[IF]) -> IF:
         """
         Blurs an entire Image.
         """
         return cls("/blur/", "Blurs an entire Image")
 
     @classmethod
-    def rgb(cls):
+    def rgb(cls: Type[IF]) -> IF:
         """
         Get RGB information from an image.
         """
         return cls("/rgb/", "Get RGB information from an image")
 
     @classmethod
-    def angel(cls):
+    def angel(cls: Type[IF]) -> IF:
         """
         Make an Image Angelic.
         """
         return cls("/angel/", "Make an Image angelic")
 
     @classmethod
-    def satan(cls):
+    def satan(cls: Type[IF]) -> IF:
         """
         Make an Image the devil.
         """
         return cls("/satan/", "Make an Image the devil")
 
     @classmethod
-    def hitler(cls):
+    def hitler(cls: Type[IF]) -> IF:
         """
         Make an Image as bad as hitler.
         """
         return cls("/hitler/", "Make an Image as bad as hitler")
 
     @classmethod
-    def obama(cls):
+    def obama(cls: Type[IF]) -> IF:
         """
         The obama meme of someone awarding themselves.
         """
         return cls("/obama/", "The obama meme of someone awarding themselves")
 
     @classmethod
-    def bad(cls):
+    def bad(cls: Type[IF]) -> IF:
         """
         This image is bad.
         """
         return cls("/bad/", "This image is bad")
 
     @classmethod
-    def sith(cls):
+    def sith(cls: Type[IF]) -> IF:
         """
         Laughs in Sithlord
         """
         return cls("/sith/", "Laughs in Sithlord")
 
     @classmethod
-    def jail(cls):
+    def jail(cls: Type[IF]) -> IF:
         """
         Put an Image behind bars.
         """
         return cls("/jail/", "Put an Image behind bars")
 
     @classmethod
-    def fedora(cls):
+    def fedora(cls: Type[IF]) -> IF:
         """
         Tips. Fedora
         """
         return cls("/fedora/", "Tips fedora")
 
     @classmethod
-    def delete(cls):
+    def delete(cls: Type[IF]) -> IF:
         """
         Delete some trash
         """
         return cls("/delete/", "Delete some trash")
 
     @classmethod
-    def shatter(cls):
+    def shatter(cls: Type[IF]) -> IF:
         """
         Broken like glass
         """
         return cls("/shatter/", "Broken like glass")
 
     @classmethod
-    def gay(cls):
+    def gay(cls: Type[IF]) -> IF:
         """
         represent! Pastes a pride flag on an image.
         """
         return cls("/gay/", "represent! Pastes a pride flag on an image")
 
     @classmethod
-    def pride(cls):
+    def pride(cls: Type[IF]) -> IF:
         """
         Pride flag overlay
         Needs:
@@ -271,182 +275,182 @@ class ImageFeatures:
         return cls("/pride/", "Pride flag overlay")
 
     @classmethod
-    def trash(cls):
+    def trash(cls: Type[IF]) -> IF:
         """
         Makes an Image trash.
         """
         return cls("/trash/", "Makes an Image trash")
 
     @classmethod
-    def deepfry(cls):
+    def deepfry(cls: Type[IF]) -> IF:
         """
         Deepfries an Image.
         """
         return cls("/deepfry/", "Deepfries an Image")
 
     @classmethod
-    def ascii(cls):
+    def ascii(cls: Type[IF]) -> IF:
         """
         Turns an Image into a ascii-fied image.
         """
         return cls("/ascii/", "Turns an Image into a ascii-fied image")
 
     @classmethod
-    def charcoal(cls):
+    def charcoal(cls: Type[IF]) -> IF:
         """
         Turns an Image into a charcoal sketch.
         """
         return cls("/charcoal/", "Turns an Image into a charcoal sketch")
 
     @classmethod
-    def poster(cls):
+    def poster(cls: Type[IF]) -> IF:
         """
         Posterizes an image.
         """
         return cls("/poster/", "Posterizes an image")
 
     @classmethod
-    def sepia(cls):
+    def sepia(cls: Type[IF]) -> IF:
         """
         Makes an image sepia tone.
         """
         return cls("/sepia/", "Makes an image sepia tone")
 
     @classmethod
-    def polaroid(cls):
+    def polaroid(cls: Type[IF]) -> IF:
         """
         Frames an Image like a printed polaroid.
         """
         return cls("/polaroid/", "Frames an Image like a printed polaroid")
 
     @classmethod
-    def glitch(cls):
+    def glitch(cls: Type[IF]) -> IF:
         """
         *Cool Glitched image*
         """
         return cls("/glitch/", "*Cool Glitched image*")
 
     @classmethod
-    def swirl(cls):
+    def swirl(cls: Type[IF]) -> IF:
         """
         Swirls the center of Image.
         """
         return cls("/swirl/", "Swirls the center of Image")
 
     @classmethod
-    def paint(cls):
+    def paint(cls: Type[IF]) -> IF:
         """
         Turns an Image into an oil painting.
         """
         return cls("/paint/", "Turns an Image into an oil painting")
 
     @classmethod
-    def sketch(cls):
+    def sketch(cls: Type[IF]) -> IF:
         """
         How an artist would create an image.
         """
         return cls("/sketch/", "How an artist would create an image.")
 
     @classmethod
-    def spin(cls):
+    def spin(cls: Type[IF]) -> IF:
         """
         the gif goes round and round.
         """
         return cls("/spin/", "the gif goes round and round")
 
     @classmethod
-    def dissolve(cls):
+    def dissolve(cls: Type[IF]) -> IF:
         """
         Thanos snapped and back.
         """
         return cls("/dissolve/", "Thanos snapped and back.")
 
     @classmethod
-    def neon(cls):
+    def neon(cls: Type[IF]) -> IF:
         """
         A cool multicolored glowing neon sign from an image.
         """
         return cls("/neon/", "A cool multicolored glowing neon sign form an image.")
 
     @classmethod
-    def petpet(cls):
+    def petpet(cls: Type[IF]) -> IF:
         """
         Pet Pet Pet.
         """
         return cls("/petpet/", "Pet Pet Pet.")
 
     @classmethod
-    def comic(cls):
+    def comic(cls: Type[IF]) -> IF:
         """
         classic black and white comic.
         """
         return cls("/comic/", "Classic black and white commic.")
 
     @classmethod
-    def burn(cls):
+    def burn(cls: Type[IF]) -> IF:
         """
         Burn an image untill there's molten remains.
         """
         return cls("/burn/", "Burn an image untill there's molten remains.")
 
     @classmethod
-    def freeze(cls):
+    def freeze(cls: Type[IF]) -> IF:
         """
         Get blasted by Mr.Freeze from batman.
         """
         return cls("/freeze/", "Get blasted by Mr.Freeze from batman.")
 
     @classmethod
-    def earth(cls):
+    def earth(cls: Type[IF]) -> IF:
         """
         Become one with Rock.
         """
         return cls("/earth/", "Become one with rock.")
 
     @classmethod
-    def night(cls):
+    def night(cls: Type[IF]) -> IF:
         """
         Turns day into night on an Image.
         """
         return cls("/night/", "Turns day into night on an Image")
 
     @classmethod
-    def magik(cls):
+    def magik(cls: Type[IF]) -> IF:
         """
         Magik an Image
         """
         return cls("/magik/", "Magik an Image")
 
     @classmethod
-    def stringify(cls):
+    def stringify(cls: Type[IF]) -> IF:
         """
         Stringify an Image
         """
         return cls("/stringify/", "Stringify an Image")
 
     @classmethod
-    def rainbow(cls):
+    def rainbow(cls: Type[IF]) -> IF:
         """
         Rainbow light effect on image
         """
         return cls("/rainbow/", "Rainbow light effect on image")
 
     @classmethod
-    def solar(cls):
+    def solar(cls: Type[IF]) -> IF:
         """
         Solarizes an Image.
         """
         return cls("/solar/", "Solarizes an Image")
 
     @classmethod
-    def bonk(cls):
+    def bonk(cls: Type[IF]) -> IF:
         """
         Bonk Someone
         """
         return cls("/bonk/", "Bonk Someone")
 
     @classmethod
-    def captcha(cls):
+    def captcha(cls: Type[IF]) -> IF:
         """
         Creates a realistic Captcha
         Needs:
@@ -456,7 +460,7 @@ class ImageFeatures:
         return cls("/captcha/", "Creates a realistic Captcha")
 
     @classmethod
-    def thought_image(cls):
+    def thought_image(cls: Type[IF]) -> IF:
         """
         Wraps Image and Text into a thought
         Needs:
@@ -466,7 +470,7 @@ class ImageFeatures:
         return cls("/thoughtimage/", "Wraps Image and Text into a thought")
 
     @classmethod
-    def tweet(cls):
+    def tweet(cls: Type[IF]) -> IF:
         """
         Generates an accurate fake tweet
         Needs:
@@ -477,7 +481,7 @@ class ImageFeatures:
         return cls("/tweet/", "Generates an accurate fake tweet")
 
     @classmethod
-    def discord(cls):
+    def discord(cls: Type[IF]) -> IF:
         """
         Generated a realistic Discord Message
         Needs:
@@ -489,7 +493,7 @@ class ImageFeatures:
         return cls("/discord/", "Generated a realistic Discord Message")
 
     @classmethod
-    def youtube(cls):
+    def youtube(cls: Type[IF]) -> IF:
         """
         Generated a realistic Yutube comment
         Needs:
@@ -501,7 +505,7 @@ class ImageFeatures:
         return cls("/yt/", "Generated a realistic Yutube comment")
 
     @classmethod
-    def retro_meme(cls):
+    def retro_meme(cls: Type[IF]) -> IF:
         """
         old 2012 advice animals style meme
         Needs:
@@ -512,7 +516,7 @@ class ImageFeatures:
         return cls("/retromeme/", "Generated a realistic Discord Message")
 
     @classmethod
-    def motiv(cls):
+    def motiv(cls: Type[IF]) -> IF:
         """
         old 2012 style Motiv memes
         Needs:
@@ -523,7 +527,7 @@ class ImageFeatures:
         return cls("/motiv/", "old 2012 style Motiv memes")
 
     @classmethod
-    def modern_meme(cls):
+    def modern_meme(cls: Type[IF]) -> IF:
         """
         Mordern meme with text scaling
         Needs:
@@ -533,7 +537,7 @@ class ImageFeatures:
         return cls("/modernmeme/", "Modern New meme style meme")
 
     @classmethod
-    def mosiac(cls):
+    def mosiac(cls: Type[IF]) -> IF:
         """
         Turn an image into a roman mosiac
         Needs:
@@ -543,7 +547,7 @@ class ImageFeatures:
         return cls("/mosiac/", "Turn an image into a roman mosiac")
 
     @classmethod
-    def cube(cls):
+    def cube(cls: Type[IF]) -> IF:
         """
         Turn an image into a cube
         Needs:

@@ -28,10 +28,10 @@ class Image(object):
         """
         Initialise an asyncdagpi.Image
         """
-        self.image = BytesIO(byt)
-        self.format = image_format
-        self.process_time = process_time
-        self.original_image = original_url
+        self.image: BytesIO = BytesIO(byt)
+        self.format: str = image_format
+        self.process_time: str = process_time
+        self.original_image: str = original_url
 
     def size(self) -> int:
         """
@@ -52,7 +52,7 @@ class Image(object):
         """
         return self.image.read()
 
-    def write(self, name: str, *, path: Optional[str] = None):
+    def write(self, name: str, *, path: Optional[str] = None) -> None:
         """
         Writes the Image Object to file
 
