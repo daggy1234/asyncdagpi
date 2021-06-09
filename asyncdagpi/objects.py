@@ -1,5 +1,5 @@
 import json
-from typing import Dict, Any, TypedDict, List
+from typing import Dict, Any, List
 
 
 class BaseDagpiObject:
@@ -101,15 +101,15 @@ class PickupLine(BaseDagpiObject):
         self.line = data["joke"]
 
 
-class Pokemon(TypedDict):
-    abilities: List[str]
-    ascii: str
-    height: float
-    id: int
-    link: str
-    name: str
-    type: List[str]
-    weight: float
+# class Pokemon(TypedDict):
+#     abilities: List[str]
+#     ascii: str
+#     height: float
+#     id: int
+#     link: str
+#     name: str
+#     type: List[str]
+#     weight: float
 
 
 class WTP(BaseDagpiObject):
@@ -145,16 +145,16 @@ class WTP(BaseDagpiObject):
 
     def __init__(self, data: Dict[str, Any]):
         super(WTP, self).__init__(data)
-        mon: Pokemon = data["Data"]
+        mon = data["Data"]
         self.dict = data
-        self.abilities = mon.get("abilities")
-        self.ascii = mon.get("ascii")
-        self.height = mon.get("height")
-        self.id = int(mon.get("id"))
-        self.link = mon.get("link")
-        self.name = mon.get("name")
-        self.type = mon.get("type")
-        self.weight = mon.get("weight")
+        self.abilities: List[str] = mon["abilities"]
+        self.ascii: str = mon.get("ascii")
+        self.height: float = mon.get("height")
+        self.id: int = int(mon.get("id"))
+        self.link: str = mon.get("link")
+        self.name: str = mon.get("name")
+        self.type: List[str] = mon.get("type")
+        self.weight: float = mon.get("weight")
         self.question: str = data["question"]
         self.answer: str = data["answer"]
 
