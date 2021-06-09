@@ -153,7 +153,7 @@ class WTP(BaseDagpiObject):
         self.id: int = int(mon["id"])
         self.link: str = mon["link"]
         self.name: str = mon["name"]
-        self.type: List[str] = mon["type"]
+        self.type: List[str] = mon["Type"]
         self.weight: float = mon["weight"]
         self.question: str = data["question"]
         self.answer: str = data["answer"]

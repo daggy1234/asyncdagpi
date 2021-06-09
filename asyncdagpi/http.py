@@ -63,8 +63,9 @@ https://aiohttp.readthedocs.io/en/stable/client_reference.html#client-session
         self.logging: bool = logging_enabled
         self.loop: AbstractEventLoop = loop or asyncio.get_event_loop()
         self.client: ClientSession = session or aiohttp.ClientSession(loop=loop)
+        from asyncdagpi import __version__
         self.user_agent: str = "AsyncDagpi v{0} Python/Python/ \
-        {1}.{2} aiohttp/{3}".format(getattr("asyncdagpi", "__version__"), sys.version_info[0],
+        {1}.{2} aiohttp/{3}".format(__version__, sys.version_info[0],
                                     sys.version_info[1], aiov)
 
     async def data_request(self, url: str, *, image: Optional[bool] = None) -> Dict[str, Any]:
