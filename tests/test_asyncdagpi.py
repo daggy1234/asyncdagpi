@@ -4,7 +4,6 @@ import pytest
 
 from asyncdagpi import Client, errors, ImageFeatures, Image
 
-
 def test_url_regex():
     for url in ["hpps://dagbot.com", "http//dagbot.com", "https://dagcom"]:
         try:

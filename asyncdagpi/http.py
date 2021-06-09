@@ -1,6 +1,6 @@
 import asyncio
 import logging
-from typing import Dict
+from typing import Dict, Optional, Union, TYPE_CHECKING, Any
 
 import aiohttp
 
@@ -11,9 +11,10 @@ from . import __version__
 import sys
 from .image import Image
 
+
 log = logging.getLogger(__name__)
 
-error_dict = {
+error_dict: Dict[int, errors.AsyncDagpiHttpException] = {
     400: errors.ParameterError("Parameters passed were incorrect"),
     413: errors.FileTooLarge("The Image Passed is too large"),
     500: errors.ApiError("Internal Server Error"),
@@ -23,7 +24,7 @@ error_dict = {
 
 
 class HTTP:
-    
+
     """
     HTTP Client
     -----------
@@ -46,20 +47,26 @@ https://aiohttp.readthedocs.io/en/stable/client_reference.html#client-session
     __slots__ = ("client", "base_url", "token", "loop",
                  "user_agent", "logging")
 
-    def __init__(self, token: str, logging_enabled: bool, **kwargs):
+    def __init__(
+        self,
+        token: str,
+        logging_enabled: bool,
+        session: Optional[aiohttp.ClientSession],
+        loop: Optional[asyncio.AbstractEventLoop]
+    ):
         """
         Initialise the dagpi http client
         """
         self.base_url = "https://api.dagpi.xyz"
         self.token = token
         self.logging = logging_enabled
-        self.loop = loop = kwargs.get('loop', None) or asyncio.get_event_loop()
-        self.client = kwargs.get('session') or aiohttp.ClientSession(loop=loop)
+        self.loop = loop = loop or asyncio.get_event_loop()
+        self.client = session or aiohttp.ClientSession(loop=loop)
         self.user_agent = "AsyncDagpi v{0} Python/Python/ \
         {1}.{2} aiohttp/{3}".format(__version__, sys.version_info[0],
                                     sys.version_info[1], aiov)
 
-    async def data_request(self, url: str, **kwargs) -> Dict:
+    async def data_request(self, url: str, *, image: Optional[bool] = None) -> Dict[str, Any]:
         """
 
         url: :class:`str`
@@ -77,12 +84,12 @@ https://aiohttp.readthedocs.io/en/stable/client_reference.html#client-session
         }
 
         request_url = self.base_url + "/data/" + url
-        if kwargs.get("image"):
+        if image:
             request_url = self.base_url + "/image/"
         async with self.client.get(request_url, headers=headers) as resp:
             if 300 >= resp.status >= 200:
                 if resp.headers["Content-Type"] == "application/json":
-                    js = await resp.json()
+                    js: Dict[str, Any] = await resp.json()
                     return js
 
                 else:
@@ -95,7 +102,7 @@ https://aiohttp.readthedocs.io/en/stable/client_reference.html#client-session
                 except KeyError:
                     raise errors.ApiError("Unknown API Error Occurred")
 
-    async def image_request(self, url: str, params: dict) -> Image:
+    async def image_request(self, url: str, params: Dict[str, str]) -> Image:
         """
 
         url: :class:`str`
@@ -120,8 +127,8 @@ https://aiohttp.readthedocs.io/en/stable/client_reference.html#client-session
             if 300 >= resp.status >= 200:
                 if resp.headers["Content-Type"].lower() in \
                         ["image/png", "image/gif"]:
-                    form = resp.headers["Content-Type"].replace("image/",
-                                                                "")
+                    form: str = resp.headers["Content-Type"].replace("image/",
+                                                                     "")
                     resp_time = resp.headers["X-Process-Time"][:5]
                     raw_byte = await resp.read()
                     if self.logging:
@@ -130,7 +137,7 @@ https://aiohttp.readthedocs.io/en/stable/client_reference.html#client-session
                                 resp.url,
                                 resp.status))
                     return Image(raw_byte, form, resp_time,
-                                 params.get("url"))
+                                 params["url"])
 
                 else:
                     raise errors.ApiError(f"{resp.status}. \
@@ -144,7 +151,7 @@ https://aiohttp.readthedocs.io/en/stable/client_reference.html#client-session
                     if resp.status == 415:
                         raise errors.ImageUnaccesible(415, js["message"])
                     elif resp.status == 400:
-                        raise errors.ParameterError(400, js["message"])
+                        raise errors.ParameterError(js["message"])
                     elif resp.status == 422:
                         try:
                             mstr = ""

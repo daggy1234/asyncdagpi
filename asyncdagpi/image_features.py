@@ -1,5 +1,5 @@
 class ImageFeatures:
-    
+
     """
     Base ImageFatures that asyncdagpi has
     """
@@ -531,7 +531,7 @@ class ImageFeatures:
             - image
         """
         return cls("/modernmeme/", "Modern New meme style meme")
-    
+
     @classmethod
     def mosiac(cls):
         """

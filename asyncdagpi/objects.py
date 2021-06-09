@@ -1,9 +1,9 @@
 import json
-from typing import Dict
+from typing import Dict, Any, TypedDict, List
 
 
 class BaseDagpiObject:
-    
+
     """
     Base AsyncDagpi object
 
@@ -14,7 +14,7 @@ class BaseDagpiObject:
             dict: :class:`Dict`
     """
 
-    def __init__(self, dictionary: Dict):
+    def __init__(self, dictionary: Dict[str, Any]):
         """
         Initialise a BaseDagpiObject
         """
@@ -27,7 +27,7 @@ class BaseDagpiObject:
         """
         return json.dumps(self.dict)
 
-    def raw_data(self) -> Dict:
+    def raw_data(self) -> Dict[str, Any]:
         """
         Dictionary with Raw Data
         :returns :class:`Dict`
@@ -36,7 +36,7 @@ class BaseDagpiObject:
 
 
 class Logo(BaseDagpiObject):
-    
+
     """
         A Dagpi Logo Object. A subclass of asyncdagpi.BaseDagpiObject
 
@@ -62,14 +62,14 @@ class Logo(BaseDagpiObject):
                 String containing Wikipedia URL for brand
         """
 
-    def __init__(self, data: Dict):
+    def __init__(self, data: Dict[str, str]):
         """
         Initialise a logo
         """
         super(Logo, self).__init__(data)
         self.dict = data
-        self.question = data.get("question")
-        self.answer = data.get("answer")
+        self.question = data["question"]
+        self.answer = data["answer"]
         self.brand = data.get("brand")
         self.clue = data.get("clue")
         self.easy = data.get("easy")
@@ -78,7 +78,7 @@ class Logo(BaseDagpiObject):
 
 
 class PickupLine(BaseDagpiObject):
-    
+
     """
     A Dagpi PickupLine
 
@@ -94,15 +94,26 @@ class PickupLine(BaseDagpiObject):
             String Containing Pickup Line
     """
 
-    def __init__(self, data: Dict):
+    def __init__(self, data: Dict[str, str]):
         super(PickupLine, self).__init__(data)
         self.dict = data
-        self.category = data.get("category")
-        self.line = data.get("joke")
+        self.category = data["category"]
+        self.line = data["joke"]
+
+
+class Pokemon(TypedDict):
+    abilities: List[str]
+    ascii: str
+    height: float
+    id: int
+    link: str
+    name: str
+    type: List[str]
+    weight: float
 
 
 class WTP(BaseDagpiObject):
-    
+
     """
            A Dagpi PickupLine. A subclass of AsyncDagpi object
 
@@ -132,9 +143,9 @@ class WTP(BaseDagpiObject):
                    String containing url for question image
            """
 
-    def __init__(self, data: Dict):
+    def __init__(self, data: Dict[str, Any]):
         super(WTP, self).__init__(data)
-        mon = data.get("Data")
+        mon: Pokemon = data["Data"]
         self.dict = data
         self.abilities = mon.get("abilities")
         self.ascii = mon.get("ascii")
@@ -144,12 +155,12 @@ class WTP(BaseDagpiObject):
         self.name = mon.get("name")
         self.type = mon.get("type")
         self.weight = mon.get("weight")
-        self.question = data.get("question")
-        self.answer = data.get("answer")
+        self.question: str = data["question"]
+        self.answer: str = data["answer"]
 
 
 class Headline(BaseDagpiObject):
-    
+
     """
     A Dagpi Headline
 
@@ -165,8 +176,8 @@ class Headline(BaseDagpiObject):
             String Containing headline
     """
 
-    def __init__(self, data: Dict):
+    def __init__(self, data: Dict[str, Any]):
         super(Headline, self).__init__(data)
         self.dict = data
-        self.headline = data.get("text")
-        self.fake = data.get("fake")
+        self.headline: str = data["text"]
+        self.fake: bool = data["fake"]

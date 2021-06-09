@@ -5,40 +5,61 @@ class AsyncDagpiException(Exception):
     pass
 
 
-class ApiError(AsyncDagpiException):
+class AsyncDagpiHttpException(AsyncDagpiException):
+    """
+    AsyncDagpi base exception class use this base class to catch any AsyncDagpi errors.
+    """
+
+    def __init__(self, status: int, message: str) -> None:
+        self.status = status
+        self.message = message
+        super().__init__(message)
+
+
+class ApiError(AsyncDagpiHttpException):
     """
     Raised when Dagpi has an error it does not know how to handle
     """
-    pass
+
+    def __init__(self, message: str) -> None:
+        super().__init__(500, message)
 
 
-class BadUrl(AsyncDagpiException):
+class BadUrl(AsyncDagpiHttpException):
     """
     Exception raised when the URL is poorly framed or not of type String
     """
-    pass
+
+    def __init__(self, message: str) -> None:
+        super().__init__(400, message)
 
 
-class Unauthorised(AsyncDagpiException):
+class Unauthorised(AsyncDagpiHttpException):
     """
     Raised for an API 401
     """
-    pass
+
+    def __init__(self, message: str) -> None:
+        super().__init__(401, message)
 
 
-class RateLimited(AsyncDagpiException):
+class RateLimited(AsyncDagpiHttpException):
     """
     You are exceeding the API's rate limits and built in Ratelimit handler
     Essentially a 429
     """
-    pass
+
+    def __init__(self, message: str) -> None:
+        super().__init__(429, message)
 
 
-class FileTooLarge(AsyncDagpiException):
+class FileTooLarge(AsyncDagpiHttpException):
     """
     The image at source exceeds 10 MegaBytes
     """
-    pass
+
+    def __init__(self, message: str) -> None:
+        super().__init__(413, message)
 
 
 class InvalidFeature(AsyncDagpiException):
@@ -48,12 +69,12 @@ class InvalidFeature(AsyncDagpiException):
     pass
 
 
-class ImageUnaccesible(AsyncDagpiException):
+class ImageUnaccesible(AsyncDagpiHttpException):
     """
     The API was unable to get an image at your location
     """
 
-    def __init__(self, error_code, message):
+    def __init__(self, error_code: int, message: str):
         """
         Initialise the ImageUnaccessible Error
         """
@@ -71,8 +92,10 @@ class ImageUnaccesible(AsyncDagpiException):
         return f'{self.error_code} ---> {self.message}'
 
 
-class ParameterError(AsyncDagpiException):
+class ParameterError(AsyncDagpiHttpException):
     """
     Parameters passed were not Sufficient
     """
-    pass
+
+    def __init__(self, message: str) -> None:
+        super().__init__(400, message)

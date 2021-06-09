@@ -1,12 +1,18 @@
+from __future__ import annotations
 import re
 import time
-from typing import Dict
+from typing import Dict, Optional, TYPE_CHECKING
 
 from .errors import BadUrl, InvalidFeature
 from .http import HTTP
 from .image import Image
 from .image_features import ImageFeatures
 from .objects import WTP, PickupLine, Logo, Headline
+
+if TYPE_CHECKING:
+    from aiohttp import ClientSession
+    from asyncio import AbstractEventLoop
+
 
 url_regex = r"http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]| " \
             r"(?:%[0-9a-fA-F][0-9a-fA-F]))+"
@@ -31,12 +37,19 @@ class Client:
     dagpi requests.
     """
 
-    def __init__(self, token: str, logging: bool = True, **kwargs):
+    def __init__(
+        self,
+        token: str,
+        logging: bool = True,
+        *,
+        session: Optional[ClientSession] = None,
+        loop: Optional[AbstractEventLoop] = None
+    ):
 
         self.token = token
         self.logging = logging
-        self.session = kwargs.get("session")
-        self.loop = kwargs.get("loop")
+        self.session = session
+        self.loop = loop
         self.http = HTTP(self.token, logging, loop=self.loop,
                          session=self.session)
 
@@ -75,7 +88,7 @@ class Client:
         dark = kwargs.get("dark")
         if dark is not None:
             kwargs["dark"] = str(dark)
-        params = {"url": url, **kwargs}
+        params: Dict[str, str] = {"url": url, **kwargs}
         return await self.http.image_request(feature.value, params=params)
 
     async def special_image_process(self, url: str) \

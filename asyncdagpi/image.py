@@ -1,8 +1,9 @@
 from io import BytesIO
+from typing import Optional
 
 
 class Image(object):
-    
+
     """
     An AsyncDagpi Image Returned
     This has special properties that can enhance the experience.
@@ -42,7 +43,7 @@ class Image(object):
         """
         A description of the Image
         """
-        return "AsyncDagpi.Image format={}".format(self.format)
+        return "<AsyncDagpi.Image format={}>".format(self.format)
 
     def read(self) -> bytes:
         """
@@ -51,7 +52,7 @@ class Image(object):
         """
         return self.image.read()
 
-    def write(self, name: str, **kwargs):
+    def write(self, name: str, *, path: Optional[str] = None):
         """
         Writes the Image Object to file
 
@@ -60,6 +61,6 @@ class Image(object):
         kwargs: Optional To Pass in
             - path: path to write to can be relative/absolute. default is ./
         """
-        path = kwargs.get("path", ".")
+        path = path if path else "."
         with open("{}/{}.{}".format(path, name, self.format), 'wb') as file:
             file.write(self.read())
