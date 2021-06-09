@@ -9,12 +9,12 @@ An async wrapper for dagpi
 :license: MIT, see LICENSE for more details.
 """
 
-from asyncdagpi.objects import WTP, Logo, PickupLine, BaseDagpiObject
-from asyncdagpi.image import Image
-from asyncdagpi.client import Client
-from asyncdagpi.image_features import ImageFeatures
-from asyncdagpi.http import HTTP
+
 from typing import NamedTuple
+from .image_features import ImageFeatures
+from .client import Client
+from .image import Image
+from .objects import WTP, Logo, PickupLine, BaseDagpiObject
 
 __title__: str = "asyncdagpi"
 __author__: str = "Daggy1234"

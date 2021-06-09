@@ -2,11 +2,11 @@ import re
 import time
 from typing import Dict, Optional, Any
 
-from asyncdagpi.errors import BadUrl, InvalidFeature
-from asyncdagpi.http import HTTP
-from asyncdagpi.image import Image
-from asyncdagpi.image_features import ImageFeatures
-from asyncdagpi.objects import WTP, PickupLine, Logo, Headline
+from .errors import BadUrl, InvalidFeature
+from .http import HTTP
+from .image import Image
+from .image_features import ImageFeatures
+from .objects import WTP, PickupLine, Logo, Headline
 from aiohttp import ClientSession
 from asyncio import AbstractEventLoop
 
