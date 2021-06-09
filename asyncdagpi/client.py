@@ -1,17 +1,14 @@
-from __future__ import annotations
 import re
 import time
-from typing import Dict, Optional, TYPE_CHECKING
+from typing import Dict, Optional
 
 from .errors import BadUrl, InvalidFeature
 from .http import HTTP
 from .image import Image
 from .image_features import ImageFeatures
 from .objects import WTP, PickupLine, Logo, Headline
-
-if TYPE_CHECKING:
-    from aiohttp import ClientSession
-    from asyncio import AbstractEventLoop
+from aiohttp import ClientSession
+from asyncio import AbstractEventLoop
 
 
 url_regex = r"http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]| " \
