@@ -9,7 +9,7 @@ An async wrapper for dagpi
 :license: MIT, see LICENSE for more details.
 """
 
-
+import logging
 from typing import NamedTuple
 from .image_features import ImageFeatures
 from .client import Client
@@ -33,3 +33,5 @@ class VersionInfo(NamedTuple):
 
 version_info: VersionInfo = VersionInfo(major=4, minor=0, micro=0, releaselevel='alpha',
                                         serial=0)
+
+logging.getLogger(__name__).addHandler(logging.NullHandler())

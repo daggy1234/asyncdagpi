@@ -97,6 +97,14 @@ async def test_data():
     await c.close()
     assert isinstance(str(logo), str)
 
+@pytest.mark.asyncio
+async def test_image_kwargs():
+    tok = os.getenv("DAGPI_TOKEN")
+    c = Client(tok)
+    discord = await c.image_process(ImageFeatures.discord(), "https://dagbot-is.the-be.st/logo.png", text="Message", username="lol", dark=False)
+    await c.close()
+
+
 
 @pytest.mark.asyncio
 async def test_ping():

@@ -17,7 +17,7 @@ setup(
         "Documentation": "https://asyncdagpi.rtfd.io",
         "Issue tracker": "https://github.com/Daggy1234/asyncdagpi/issues",
         "Website": "https://dagpi.xyz"
-      },
+    },
     author="Daggy1234",
     packages=find_packages(),
     install_requires=["aiohttp"],
@@ -36,5 +36,5 @@ setup(
         'Topic :: Software Development :: Libraries',
         'Topic :: Software Development :: Libraries :: Python Modules',
         'Topic :: Utilities'
-        ],
+    ],
 )

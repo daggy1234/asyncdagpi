@@ -12,7 +12,7 @@ from asyncio import AbstractEventLoop
 
 
 url_regex: str = r"http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]| " \
-            r"(?:%[0-9a-fA-F][0-9a-fA-F]))+"
+    r"(?:%[0-9a-fA-F][0-9a-fA-F]))+"
 
 
 class Client:
@@ -23,7 +23,6 @@ class Client:
 
 
     :param token: Your Dagpi Api token
-    :param logging: Wether or not to log api requests (default True)
     :param **kwargs: Extra arguments you may pass this can include
 
         * loop: an asyncio event loop for the asyncdagpi to use
@@ -37,18 +36,16 @@ class Client:
     def __init__(
         self,
         token: str,
-        logging: bool = True,
         *,
         session: Optional[ClientSession] = None,
         loop: Optional[AbstractEventLoop] = None
     ):
 
         self.token: str = token
-        self.logging: bool = logging
         self.session: Optional[ClientSession] = session
         self.loop: Optional[AbstractEventLoop] = loop
-        self.http: HTTP = HTTP(self.token, logging, loop=self.loop,
-                         session=self.session)
+        self.http: HTTP = HTTP(self.token, loop=self.loop,
+                               session=self.session)
 
     @staticmethod
     def url_test(url: str) -> None:
@@ -62,7 +59,11 @@ class Client:
         if not match:
             raise BadUrl("URL did not pass Regex")
 
-    async def image_process(self, feature: ImageFeatures, url: str, **kwargs) \
+    async def image_process(
+        self,
+        feature: ImageFeatures,
+        url: str,
+        **kwargs: Any) \
             -> Image:
         """
         feature: :class:`ImageFeature`

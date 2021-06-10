@@ -2,6 +2,7 @@ from typing import Type, TypeVar
 
 IF = TypeVar('IF', bound='ImageFeatures')
 
+
 class ImageFeatures:
 
     """
@@ -29,6 +30,13 @@ class ImageFeatures:
         """
         return "<asyncdagpi.ImageFeature feature={} >".format(
             self.value.replace("/", ""))
+
+    @classmethod
+    def from_path(cls: Type[IF], path: str) -> IF:
+        """
+        Construct an Image Feature from it's path.
+        """
+        return cls(path, "")
 
     @classmethod
     def pixel(cls: Type[IF]) -> IF:

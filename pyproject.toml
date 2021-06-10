@@ -21,6 +21,15 @@ sphinx-bootstrap-theme = "^0.7.1"
 pytest-cov = "^2.10.1"
 autopep8 = "^1.5.5"
 
+[tool.pyright]
+reportUnnecessaryIsInstance=false
+
+[tool.autopep8]
+max_line_length = 120
+ignore = ["W605"]
+in-place = true
+recursive = true
+
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
