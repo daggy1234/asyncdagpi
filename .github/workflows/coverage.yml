@@ -28,7 +28,7 @@ jobs:
       - name: Flake8
         run: |
           poetry install
-          poetry run flake8
+          poetry run flake8 asyncdagpi --count --show-source --statistics
 
       - name: Run type checking
         run: |

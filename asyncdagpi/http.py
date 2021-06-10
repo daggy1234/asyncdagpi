@@ -128,11 +128,10 @@ https://aiohttp.readthedocs.io/en/stable/client_reference.html#client-session
                                                                      "")
                     resp_time = resp.headers["X-Process-Time"][:5]
                     raw_byte = await resp.read()
-                    if self.logging:
-                        log.info(
-                            '[Dagpi Image] GET {} has returned {}'.format(
-                                resp.url,
-                                resp.status))
+                    log.info(
+                        '[Dagpi Image] GET {} has returned {}'.format(
+                            resp.url,
+                            resp.status))
                     return Image(raw_byte, form, resp_time,
                                  params["url"])
 
