@@ -21,7 +21,7 @@ error_dict: Dict[int, errors.AsyncDagpiHttpException] = {
 }
 
 
-log = logging.getLogger(__name__)
+log: logging.Logger = logging.getLogger(__name__)
 
 
 class HTTP:
