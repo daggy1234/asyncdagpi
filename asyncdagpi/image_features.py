@@ -39,6 +39,20 @@ class ImageFeatures:
         return cls(path, "")
 
     @classmethod
+    def mirror(cls: Type[IF]) -> IF:
+        """
+        Flip image horizontally (left to right).
+        """
+        return cls("/mirror/", "Flip image horizontally (left to right).")
+
+    @classmethod
+    def flip(cls: Type[IF]) -> IF:
+        """
+        Flip the image vertically (top to bottom).
+        """
+        return cls("/flip/", "Flip the image vertically (top to bottom).")
+
+    @classmethod
     def pixel(cls: Type[IF]) -> IF:
         """
         Pixelate an Image
