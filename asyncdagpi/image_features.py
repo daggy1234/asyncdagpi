@@ -576,3 +576,21 @@ class ImageFeatures:
             - image
         """
         return cls("/cube/", "Turn an image into a cube")
+
+    @classmethod
+    def lego(cls: Type[IF]) -> IF:
+        """
+        image out of lego bricks
+        Needs:
+            - image
+        """
+        return cls("/lego/", "image out of lego bricks")
+
+    @classmethod
+    def expand(cls: Type[IF]) -> IF:
+        """
+        blown out of proportions
+        Needs:
+            - image
+        """
+        return cls("/expand/", "blown out of proportions")

@@ -182,6 +182,7 @@ class Headline(BaseDagpiObject):
         self.headline: str = data["text"]
         self.fake: bool = data["fake"]
 
+
 class Captcha(BaseDagpiObject):
     """
     An asyncdagpi Captcha
@@ -203,6 +204,7 @@ class Captcha(BaseDagpiObject):
         self.dict: Dict[str, Any] = data
         self.image: str = data["image"]
         self.answer: str = data["answer"]
+
 
 class Typeracer(BaseDagpiObject):
     """
