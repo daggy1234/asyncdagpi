@@ -181,3 +181,47 @@ class Headline(BaseDagpiObject):
         self.dict: Dict[str, Any] = data
         self.headline: str = data["text"]
         self.fake: bool = data["fake"]
+
+class Captcha(BaseDagpiObject):
+    """
+    An asyncdagpi Captcha
+
+    .. container:: Attributes
+
+        **Attributes**
+
+        dict: :class:`Dict`
+            Dictionary with raw data (same returned by raw_data)
+        image: :class:`str`
+            url for image with solution
+        answer: :class:`str`
+            string with captcha value
+    """
+
+    def __init__(self, data: Dict[str, Any]):
+        super(Captcha, self).__init__(data)
+        self.dict: Dict[str, Any] = data
+        self.image: str = data["image"]
+        self.answer: str = data["answer"]
+
+class Typeracer(BaseDagpiObject):
+    """
+    An asyncdagpi typeracer image
+
+    .. container:: Attributes
+
+        **Attributes**
+
+        dict: :class:`Dict`
+            Dictionary with raw data (same returned by raw_data)
+        image: :class:`str`
+            url for image with solution
+        sentence: :class:`str`
+            string with sentence
+    """
+
+    def __init__(self, data: Dict[str, Any]):
+        super(Typeracer, self).__init__(data)
+        self.dict: Dict[str, Any] = data
+        self.image: str = data["image"]
+        self.sentence: str = data["sentence"]

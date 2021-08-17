@@ -6,7 +6,7 @@ from .errors import BadUrl, InvalidFeature
 from .http import HTTP
 from .image import Image
 from .image_features import ImageFeatures
-from .objects import WTP, PickupLine, Logo, Headline
+from .objects import Captcha, Typeracer, WTP, PickupLine, Logo, Headline
 from aiohttp import ClientSession
 from asyncio import AbstractEventLoop
 
@@ -172,6 +172,20 @@ class Client:
         """
 
         return Headline(await self.http.data_request("headline"))
+
+    async def captcha(self) -> Captcha:
+        """
+        Get a captcha
+        """
+
+        return Captcha(await self.http.data_request("captcha"))
+
+    async def typeracer(self) -> Typeracer:
+        """
+        Get a sentence on an image
+        """
+
+        return Typeracer(await self.http.data_request("typeracer"))
 
     async def waifu(self) -> Dict[str, Any]:
         """
