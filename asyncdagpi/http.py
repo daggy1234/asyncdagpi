@@ -62,7 +62,8 @@ https://aiohttp.readthedocs.io/en/stable/client_reference.html#client-session
         self.client: ClientSession = session or aiohttp.ClientSession(loop=loop)
         self.ratelimits: Ratelimits = Ratelimits(None, None, None)
         from asyncdagpi import __version__
-        self.user_agent: str = f"AsyncDagpi v{__version__} Python/{sys.version_info[0]}.{sys.version_info[1]} aiohttp/{aiov}"
+        self.user_agent: str = f"AsyncDagpi v{__version__} Python/{sys.version_info[0]}.{sys.version_info[1]} \
+            aiohttp/{aiov}"
 
     async def data_request(self, url: str, *, image: Optional[bool] = None) -> Dict[str, Any]:
         """
