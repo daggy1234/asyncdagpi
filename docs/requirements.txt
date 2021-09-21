@@ -1,1 +1,1 @@
-sphinx-bootstrap-theme
+sphinx-press-theme

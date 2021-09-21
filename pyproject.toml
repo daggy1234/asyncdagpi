@@ -31,6 +31,8 @@ ignore = ["W605"]
 in-place = true
 recursive = true
 
+#  poetry run autopep8 --in-place --max-line-length 120 --ignore W605 --aggressive --aggressive --experimental  --recursive asyncdagpi
+
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"

@@ -7,27 +7,39 @@ from multidict import CIMultiDictProxy
 
 RL = TypeVar('RL', bound='Ratelimits')
 
+
 def maybe_convert(data: CIMultiDictProxy[str], key: str) -> Optional[int]:
     if val := data.get(key):
         try:
             return int(val)
-        except:
+        except BaseException:
             return None
     return None
+
 
 class Ratelimits:
 
     def __init__(self, limit: Optional[int], remaining: Optional[int], reset: Optional[int]) -> None:
         self.limit: Optional[int] = limit
-        self.remaining : Optional[int] = remaining
+        self.remaining: Optional[int] = remaining
         self.reset: Optional[datetime] = datetime.fromtimestamp(reset) if reset else None
 
     @classmethod
     def from_dict(cls: Type[RL], data: CIMultiDictProxy[str]) -> RL:
-        return cls(maybe_convert(data, 'x-ratelimit-limit'), maybe_convert(data, 'x-ratelimit-remaining'), maybe_convert(data, 'x-ratelimit-reset'))
+        return cls(
+            maybe_convert(
+                data,
+                'x-ratelimit-limit'),
+            maybe_convert(
+                data,
+                'x-ratelimit-remaining'),
+            maybe_convert(
+                data,
+                'x-ratelimit-reset'))
 
     def __repr__(self) -> str:
         return f"<asyncdagpi.Ratelimits limit={self.limit} remaining={self.remaining} reset={self.reset}>"
+
 
 class BaseDagpiObject:
 

@@ -65,7 +65,6 @@ class Client:
         """
         return self.http.ratelimits
 
-
     async def image_process(
         self,
         feature: ImageFeatures,

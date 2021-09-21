@@ -609,5 +609,5 @@ class ImageFeatures:
             image_feature = getattr(cls, feature)
             called = image_feature()
             return cls(called.value, called.description)
-        except:
+        except BaseException:
             return None

@@ -60,7 +60,7 @@ https://aiohttp.readthedocs.io/en/stable/client_reference.html#client-session
         self.token: str = token
         self.loop: AbstractEventLoop = loop or asyncio.get_event_loop()
         self.client: ClientSession = session or aiohttp.ClientSession(loop=loop)
-        self.ratelimits : Ratelimits = Ratelimits(None, None, None)
+        self.ratelimits: Ratelimits = Ratelimits(None, None, None)
         from asyncdagpi import __version__
         self.user_agent: str = f"AsyncDagpi v{__version__} Python/{sys.version_info[0]}.{sys.version_info[1]} aiohttp/{aiov}"
 
@@ -121,7 +121,7 @@ https://aiohttp.readthedocs.io/en/stable/client_reference.html#client-session
 
         request_url = self.base_url + "/image" + url
         async with self.client.get(request_url, headers=headers,
-                                       params=params) as resp:
+                                   params=params) as resp:
             self.ratelimits = Ratelimits.from_dict(resp.headers)
             if 300 >= resp.status >= 200:
                 if resp.headers["Content-Type"].lower() not in [
