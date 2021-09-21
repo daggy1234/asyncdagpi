@@ -43,7 +43,7 @@ class Image(object):
         """
         A description of the Image
         """
-        return "<AsyncDagpi.Image format={}>".format(self.format)
+        return f"<asyncdagpi.Image format={self.format}>"
 
     def read(self) -> bytes:
         """
@@ -61,6 +61,6 @@ class Image(object):
         kwargs: Optional To Pass in
             - path: path to write to can be relative/absolute. default is ./
         """
-        path = path if path else "."
+        path = path or "."
         with open("{}/{}.{}".format(path, name, self.format), 'wb') as file:
             file.write(self.read())

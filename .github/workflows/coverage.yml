@@ -1,15 +1,12 @@
 name: Code Coverage and Linting
 on: [push, pull_request]
 
-
 jobs:
-
-
   typechecks:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.6, 3.7, 3.8, 3.9]
+        python-version: [3.8, 3.9]
     steps:
       - uses: actions/checkout@master
       - name: Setup Python ${{ matrix.python-version }}
@@ -39,35 +36,35 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.6, 3.7, 3.8, 3.9]
+        python-version: [3.8, 3.9]
     env:
       PYTHON: ${{ matrix.python-version }}
       DAGPI_TOKEN: ${{ secrets.DAGPI_TOKEN }}
     steps:
-    - uses: actions/checkout@master
-    - name: Setup Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v1
-      with:
-        python-version: ${{ matrix.python-version }}
-    - name: Install Poetry
-      uses: snok/install-poetry@v1.1.1
-      with:
-        virtualenvs-create: true
-        virtualenvs-in-project: true
-    - name: Get Python version
-      id: python-version
-      run: echo ::set-output name=version::$(python -c "import sys; print('-'.join(str(v) for v in sys.version_info))")
-    - name: Cache Poetry virtualenv
-      uses: actions/cache@v1
-      id: cache
-      with:
-        path: .venv
-        key: poetry-venv-${{ runner.os }}-${{ steps.python-version.outputs.version }}
-    - name: Install/update package and dependencies
-      run: poetry install
+      - uses: actions/checkout@master
+      - name: Setup Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install Poetry
+        uses: snok/install-poetry@v1.1.1
+        with:
+          virtualenvs-create: true
+          virtualenvs-in-project: true
+      - name: Get Python version
+        id: python-version
+        run: echo ::set-output name=version::$(python -c "import sys; print('-'.join(str(v) for v in sys.version_info))")
+      - name: Cache Poetry virtualenv
+        uses: actions/cache@v1
+        id: cache
+        with:
+          path: .venv
+          key: poetry-venv-${{ runner.os }}-${{ steps.python-version.outputs.version }}
+      - name: Install/update package and dependencies
+        run: poetry install
 
-    - name: Test with Pytest and measure coverage
-      run: poetry run pytest --cov-report=xml --cov=asyncdagpi tests/
-    
-    - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v1
+      - name: Test with Pytest and measure coverage
+        run: poetry run pytest --cov-report=xml --cov=asyncdagpi tests/
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1

@@ -1,4 +1,4 @@
-from typing import Type, TypeVar
+from typing import Type, TypeVar, Optional
 
 IF = TypeVar('IF', bound='ImageFeatures')
 
@@ -28,8 +28,7 @@ class ImageFeatures:
         get a string describing the object
         :return: :class:`str`
         """
-        return "<asyncdagpi.ImageFeature feature={} >".format(
-            self.value.replace("/", ""))
+        return f"<asyncdagpi.ImageFeature feature={self.value.replace('/', '')} >"
 
     @classmethod
     def from_path(cls: Type[IF], path: str) -> IF:
@@ -594,3 +593,21 @@ class ImageFeatures:
             - image
         """
         return cls("/expand/", "blown out of proportions")
+
+    @classmethod
+    def from_string(cls: Type[IF], feature: str) -> Optional[IF]:
+        """Get an image feature from a string
+
+        Args:
+            cls (Type[IF]): class stuff
+            feature (str): string feature to try
+
+        Returns:
+            IF: Image Feature
+        """
+        try:
+            image_feature = getattr(cls, feature)
+            called = image_feature()
+            return cls(called.value, called.description)
+        except:
+            return None

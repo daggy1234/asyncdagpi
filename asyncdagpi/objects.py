@@ -1,6 +1,33 @@
 import json
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, List, Optional, TypeVar, Type
+from datetime import datetime
 
+from multidict import CIMultiDictProxy
+
+
+RL = TypeVar('RL', bound='Ratelimits')
+
+def maybe_convert(data: CIMultiDictProxy[str], key: str) -> Optional[int]:
+    if val := data.get(key):
+        try:
+            return int(val)
+        except:
+            return None
+    return None
+
+class Ratelimits:
+
+    def __init__(self, limit: Optional[int], remaining: Optional[int], reset: Optional[int]) -> None:
+        self.limit: Optional[int] = limit
+        self.remaining : Optional[int] = remaining
+        self.reset: Optional[datetime] = datetime.fromtimestamp(reset) if reset else None
+
+    @classmethod
+    def from_dict(cls: Type[RL], data: CIMultiDictProxy[str]) -> RL:
+        return cls(maybe_convert(data, 'x-ratelimit-limit'), maybe_convert(data, 'x-ratelimit-remaining'), maybe_convert(data, 'x-ratelimit-reset'))
+
+    def __repr__(self) -> str:
+        return f"<asyncdagpi.Ratelimits limit={self.limit} remaining={self.remaining} reset={self.reset}>"
 
 class BaseDagpiObject:
 
@@ -99,17 +126,6 @@ class PickupLine(BaseDagpiObject):
         self.dict: Dict[str, str] = data
         self.category: str = data["category"]
         self.line: str = data["joke"]
-
-
-# class Pokemon(TypedDict):
-#     abilities: List[str]
-#     ascii: str
-#     height: float
-#     id: int
-#     link: str
-#     name: str
-#     type: List[str]
-#     weight: float
 
 
 class WTP(BaseDagpiObject):

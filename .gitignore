@@ -7,5 +7,6 @@ _build
 dist/
 .vscode/
 some.png.png
+.venv/
 pyrightconfig.json
 some.png.gif

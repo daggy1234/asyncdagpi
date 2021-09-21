@@ -6,7 +6,7 @@ from .errors import BadUrl, InvalidFeature
 from .http import HTTP
 from .image import Image
 from .image_features import ImageFeatures
-from .objects import Captcha, Typeracer, WTP, PickupLine, Logo, Headline
+from .objects import Captcha, Typeracer, WTP, PickupLine, Logo, Headline, Ratelimits
 from aiohttp import ClientSession
 from asyncio import AbstractEventLoop
 
@@ -59,6 +59,13 @@ class Client:
         if not match:
             raise BadUrl("URL did not pass Regex")
 
+    @property
+    def ratelimits(self) -> Ratelimits:
+        """Get ratelimits for your client
+        """
+        return self.http.ratelimits
+
+
     async def image_process(
         self,
         feature: ImageFeatures,
@@ -81,7 +88,7 @@ class Client:
             Asyncdagpi Image Object
         """
         if not isinstance(feature, ImageFeatures):
-            raise InvalidFeature("{} does not exist".format(str(feature)))
+            raise InvalidFeature(f"{feature} does not exist")
         self.url_test(url)
         dark = kwargs.get("dark")
         if dark is not None:

@@ -14,7 +14,7 @@ from typing import NamedTuple
 from .image_features import ImageFeatures
 from .client import Client
 from .image import Image
-from .objects import WTP, Logo, PickupLine, BaseDagpiObject
+from .objects import WTP, Logo, PickupLine, BaseDagpiObject, Ratelimits
 
 __title__: str = "asyncdagpi"
 __author__: str = "Daggy1234"

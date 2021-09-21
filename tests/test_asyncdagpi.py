@@ -1,10 +1,9 @@
+from datetime import datetime
 import os
 
 import pytest
 
-from asyncdagpi import Client, errors, ImageFeatures, Image
-
-os.environ["DAGPI_TOKEN"] = "MTYyMDkwMzA1NQ.Dw2R9Fa6iLaPKebpiGDtDwOuqYRko1fV.614b2f93cf3ba64f"
+from asyncdagpi import Client, errors, ImageFeatures, Image, Ratelimits
 
 def test_url_regex():
     for url in ["hpps://dagbot.com", "http//dagbot.com", "https://dagcom"]:
@@ -35,6 +34,14 @@ async def test_feature_check():
         assert isinstance(e, errors.InvalidFeature)
     await c.close()
 
+
+@pytest.mark.asyncio
+async def test_feature_string_check():
+    tok = os.getenv("DAGPI_TOKEN")
+    c = Client(tok)
+    img = await c.image_process(ImageFeatures.from_string('gay'), 'https://dagbot-is.the-be.st/logo.png')
+    await c.close()
+    assert isinstance(img, Image)
 
 @pytest.mark.asyncio
 async def test_image():
@@ -105,6 +112,7 @@ async def test_image_kwargs():
     c = Client(tok)
     discord = await c.image_process(ImageFeatures.discord(), "https://dagbot-is.the-be.st/logo.png", text="Message", username="lol", dark=False)
     await c.close()
+    assert isinstance(discord, Image)
 
 
 
@@ -118,3 +126,13 @@ async def test_ping():
     assert data_ping > 0
     await c.close()
     assert isinstance(image_ping, float)
+
+@pytest.mark.asyncio
+async def test_rls():
+    tok = os.getenv("DAGPI_TOKEN")
+    c = Client(tok)
+    image_ping = await c.joke()
+    assert isinstance(c.ratelimits, Ratelimits)
+    assert isinstance(c.ratelimits.limit, int)
+    assert isinstance(c.ratelimits.remaining, int)
+    assert isinstance(c.ratelimits.reset, datetime)

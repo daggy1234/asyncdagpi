@@ -1,3 +1,4 @@
+from asyncdagpi.objects import Ratelimits
 import asyncio
 from asyncio.events import AbstractEventLoop
 import logging
@@ -44,7 +45,7 @@ https://aiohttp.readthedocs.io/en/stable/client_reference.html#client-session
     """
 
     __slots__ = ("client", "base_url", "token", "loop",
-                 "user_agent", "logging")
+                 "user_agent", "logging", "ratelimits")
 
     def __init__(
         self,
@@ -59,9 +60,9 @@ https://aiohttp.readthedocs.io/en/stable/client_reference.html#client-session
         self.token: str = token
         self.loop: AbstractEventLoop = loop or asyncio.get_event_loop()
         self.client: ClientSession = session or aiohttp.ClientSession(loop=loop)
+        self.ratelimits : Ratelimits = Ratelimits(None, None, None)
         from asyncdagpi import __version__
-        self.user_agent: str = "AsyncDagpi v{0} Python/{1}.{2} aiohttp/{3}".format(__version__, sys.version_info[0],
-                                                                                   sys.version_info[1], aiov)
+        self.user_agent: str = f"AsyncDagpi v{__version__} Python/{sys.version_info[0]}.{sys.version_info[1]} aiohttp/{aiov}"
 
     async def data_request(self, url: str, *, image: Optional[bool] = None) -> Dict[str, Any]:
         """
@@ -84,14 +85,14 @@ https://aiohttp.readthedocs.io/en/stable/client_reference.html#client-session
         if image:
             request_url = self.base_url + "/image/"
         async with self.client.get(request_url, headers=headers) as resp:
+            self.ratelimits = Ratelimits.from_dict(resp.headers)
             if 300 >= resp.status >= 200:
-                if resp.headers["Content-Type"] == "application/json":
-                    js: Dict[str, Any] = await resp.json()
-                    return js
-
-                else:
+                if resp.headers["Content-Type"] != "application/json":
                     raise errors.ApiError(f"{resp.status}. \
                     Request was great but Dagpi did not send a JSON")
+                js: Dict[str, Any] = await resp.json()
+                return js
+
             else:
                 try:
                     error = error_dict[resp.status]
@@ -120,24 +121,24 @@ https://aiohttp.readthedocs.io/en/stable/client_reference.html#client-session
 
         request_url = self.base_url + "/image" + url
         async with self.client.get(request_url, headers=headers,
-                                   params=params) as resp:
+                                       params=params) as resp:
+            self.ratelimits = Ratelimits.from_dict(resp.headers)
             if 300 >= resp.status >= 200:
-                if resp.headers["Content-Type"].lower() in \
-                        ["image/png", "image/gif"]:
-                    form: str = resp.headers["Content-Type"].replace("image/",
-                                                                     "")
-                    resp_time = resp.headers["X-Process-Time"][:5]
-                    raw_byte = await resp.read()
-                    log.info(
-                        '[Dagpi Image] GET {} has returned {}'.format(
-                            resp.url,
-                            resp.status))
-                    return Image(raw_byte, form, resp_time,
-                                 params["url"])
-
-                else:
+                if resp.headers["Content-Type"].lower() not in [
+                    "image/png",
+                    "image/gif",
+                ]:
                     raise errors.ApiError(f"{resp.status}. \
                 Request was great but Dagpi did not send an Image back")
+                form: str = resp.headers["Content-Type"].replace("image/",
+                                                                 "")
+                resp_time = resp.headers["X-Process-Time"][:5]
+                raw_byte = await resp.read()
+                log.info(
+                    f'[Dagpi Image] GET {resp.url} has returned {resp.status}')
+                return Image(raw_byte, form, resp_time,
+                             params["url"])
+
             else:
                 try:
                     error = error_dict[resp.status]
@@ -152,8 +153,7 @@ https://aiohttp.readthedocs.io/en/stable/client_reference.html#client-session
                         try:
                             mstr = ""
                             for val in js["detail"]:
-                                base = "{} is {}".format(val["loc"][1],
-                                                         val["type"])
+                                base = f'{val["loc"][1]} is {val["type"]}'
                                 mstr += (base + "\t")
                             raise errors.ParameterError(mstr)
                         except KeyError:
@@ -162,7 +162,7 @@ https://aiohttp.readthedocs.io/en/stable/client_reference.html#client-session
                     else:
                         raise errors.ApiError("Unknown API Error Occurred")
                 finally:
-                    log.error('[Dagpi Image] GET {} has returned {}'.format(resp.url, resp.status))
+                    log.error(f'[Dagpi Image] GET {resp.url} has returned {resp.status}')
 
     async def close(self) -> None:
         await self.client.close()
