@@ -11,18 +11,6 @@ Documentation
   library
 
 
-
-
-
-Additional
-==========
-
-.. toctree::
-   :maxdepth: 2
-
-  changelog
-
-
 Indices and tables
 ==================
 
