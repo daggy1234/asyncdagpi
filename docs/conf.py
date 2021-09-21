@@ -63,7 +63,7 @@ release = version
 #
 html_experimental_html5_writer = True
 html_theme = 'press'
-html_sidebars = {'**': ['localtoc.html']}
+html_sidebars = {'**': ['localtoc.html', 'searchbox.html', 'globaltoc.thml']}
 # html_theme = 'alabaster'
 
 html_logo = 'dagpib.png'
@@ -76,7 +76,7 @@ html_theme_options = {
 
     ],
     'bootswatch_theme': "flatly",
-    'external_links_links': [
+    'external_links': [
         ("Dagpi", "https://dagpi.xyz", True),
         ("Github", "https://github.com/Daggy1234/dagpi", True),
 
