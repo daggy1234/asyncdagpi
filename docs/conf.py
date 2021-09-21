@@ -49,7 +49,7 @@ master_doc = 'index'
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
-pygments_style = 'sphinx'
+# pygments_style = 'sphinx'
 
 version = ''
 with open('../asyncdagpi/__init__.py') as f:
@@ -77,8 +77,8 @@ html_theme_options = {
     ],
     'bootswatch_theme': "flatly",
     'external_links': [
-        ("Dagpi", "https://dagpi.xyz", True),
-        ("Github", "https://github.com/Daggy1234/dagpi", True),
+        ("Dagpi", "https://dagpi.xyz"),
+        ("Github", "https://github.com/Daggy1234/dagpi"),
 
     ],
 
