@@ -13,7 +13,6 @@
 import os
 import re
 import sys
-import sphinx_bootstrap_theme
 
 sys.path.insert(0, os.path.abspath('..'))
 sys.path.append(os.path.abspath('extensions'))
@@ -63,9 +62,8 @@ release = version
 # a list of builtin themes.
 #
 html_experimental_html5_writer = True
-html_theme = 'bootstrap'
+html_theme = 'press'
 html_sidebars = {'**': ['localtoc.html']}
-html_theme_path = sphinx_bootstrap_theme.get_html_theme_path()
 # html_theme = 'alabaster'
 
 html_logo = 'dagpib.png'
@@ -77,7 +75,12 @@ html_theme_options = {
         ("Github", "https://github.com/Daggy1234/dagpi", True),
 
     ],
-    'bootswatch_theme': "flatly"
+    'bootswatch_theme': "flatly",
+    'external_links_links': [
+        ("Dagpi", "https://dagpi.xyz", True),
+        ("Github", "https://github.com/Daggy1234/dagpi", True),
+
+    ],
 
 }
 html_static_path = ['_static']
