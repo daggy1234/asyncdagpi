@@ -1,7 +1,7 @@
-Changes
-=======
+Changelog
+==========
 
-V2.0.0
-------
+4.0.0
+------------
 
-The First Revision of Asyncdagpi
+Complete asyncdagpi rewrite
