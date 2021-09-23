@@ -79,3 +79,5 @@ img = await dagpi.image_process(ImageFeatures.tweet(), "https://dagbot-is.the-be
 ### For More Thorough Examples and Feature list read the documentation
 
 [Docs](https://asyncdagpi.rtfd.io)
+
+[Dagpi Docs](https://dagpi.docs.apiary.io)
