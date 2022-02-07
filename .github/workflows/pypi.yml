@@ -17,7 +17,7 @@ jobs:
         id: tag
         run: echo ::set-output name=tag::${GITHUB_REF#refs/tags/}
       - name: Set up Python ${{ env.python-version }}
-        uses: actions/setup-python@v1
+        uses: actions/setup-python@v2
         with:
           python-version: ${{ env.python-version }}
       - name: Get Python version
@@ -25,12 +25,12 @@ jobs:
         run: |
           echo ::set-output name=version::$(python -c "import sys; print('-'.join(str(v) for v in sys.version_info))")
       - name: Install Poetry
-        uses: snok/install-poetry@v1.1.1
+        uses: snok/install-poetry@v1
         with:
           virtualenvs-create: true
           virtualenvs-in-project: true
       - name: Cache Poetry virtualenv
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         id: cache
         with:
           path: .venv
@@ -39,7 +39,7 @@ jobs:
         run: poetry install
       - name: Create release ${{ steps.tag.outputs.tag }}
         id: create_release
-        uses: actions/create-release@v1
+        uses: elgohr/Github-Release-Action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:

@@ -6,22 +6,22 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.8, 3.9]
+        python-version: [3.8, 3.9,3.10]
     steps:
       - uses: actions/checkout@master
       - name: Setup Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v1
+        uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
       - name: Install Poetry
-        uses: snok/install-poetry@v1.1.1
+        uses: snok/install-poetry@v1
         with:
           virtualenvs-create: true
           virtualenvs-in-project: true
       - name: Setup node.js (for pyright)
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2
         with:
-          node-version: "14"
+          node-version: "16"
       - name: Flake8
         run: |
           poetry install
@@ -36,18 +36,18 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.8, 3.9]
+        python-version: [3.8, 3.9,3.10]
     env:
       PYTHON: ${{ matrix.python-version }}
       DAGPI_TOKEN: ${{ secrets.DAGPI_TOKEN }}
     steps:
       - uses: actions/checkout@master
       - name: Setup Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v1
+        uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
       - name: Install Poetry
-        uses: snok/install-poetry@v1.1.1
+        uses: snok/install-poetry@v1
         with:
           virtualenvs-create: true
           virtualenvs-in-project: true
@@ -55,7 +55,7 @@ jobs:
         id: python-version
         run: echo ::set-output name=version::$(python -c "import sys; print('-'.join(str(v) for v in sys.version_info))")
       - name: Cache Poetry virtualenv
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         id: cache
         with:
           path: .venv
@@ -67,4 +67,4 @@ jobs:
         run: poetry run pytest --cov-report=xml --cov=asyncdagpi tests/
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v1
+        uses: codecov/codecov-action@v2
