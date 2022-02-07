@@ -427,14 +427,6 @@ lint = ["flake8 (>=3.5.0)", "isort", "mypy (>=0.931)", "docutils-stubs", "types-
 test = ["pytest", "pytest-cov", "html5lib", "cython", "typed-ast"]
 
 [[package]]
-name = "sphinx-bootstrap-theme"
-version = "0.7.1"
-description = "Sphinx Bootstrap Theme."
-category = "dev"
-optional = false
-python-versions = "*"
-
-[[package]]
 name = "sphinx-press-theme"
 version = "0.8.0"
 description = "A Sphinx-doc theme based on Vuepress"
@@ -572,7 +564,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "49c8b94390f830d31040d6aaebe07ad4cd0e1f106ac4f7f2af1138b99408f995"
+content-hash = "a0b3ce701bab804b3261a9212f46a91ed02a143c3d1536b238b7c1e45959ec59"
 
 [metadata.files]
 aiohttp = [
@@ -1014,9 +1006,6 @@ snowballstemmer = [
 sphinx = [
     {file = "Sphinx-4.4.0-py3-none-any.whl", hash = "sha256:5da895959511473857b6d0200f56865ed62c31e8f82dd338063b84ec022701fe"},
     {file = "Sphinx-4.4.0.tar.gz", hash = "sha256:6caad9786055cb1fa22b4a365c1775816b876f91966481765d7d50e9f0dd35cc"},
-]
-sphinx-bootstrap-theme = [
-    {file = "sphinx-bootstrap-theme-0.7.1.tar.gz", hash = "sha256:571e43ccb76d4c6c06576aa24a826b6ebc7adac45a5b54985200128806279d08"},
 ]
 sphinx-press-theme = [
     {file = "sphinx_press_theme-0.8.0-py3-none-any.whl", hash = "sha256:ddf877d414a2c66e13396d726115aa3f0c94d1ac9133b4df028c261bf388ab25"},
