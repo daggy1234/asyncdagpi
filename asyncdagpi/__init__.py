@@ -20,7 +20,7 @@ __title__: str = "asyncdagpi"
 __author__: str = "Daggy1234"
 __license__: str = "MIT"
 __copyright__: str = "Copyright 2021 Daggy1234"
-__version__: str = '4.1.0'
+__version__: str = '4.1.2'
 
 
 class VersionInfo(NamedTuple):

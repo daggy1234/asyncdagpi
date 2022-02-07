@@ -39,7 +39,7 @@ jobs:
         run: poetry install
       - name: Create release ${{ steps.tag.outputs.tag }}
         id: create_release
-        uses: elgohr/Github-Release-Action@master
+        uses: ncipollo/release-action@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
