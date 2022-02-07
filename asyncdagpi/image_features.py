@@ -595,6 +595,51 @@ class ImageFeatures:
         return cls("/expand/", "blown out of proportions")
 
     @classmethod
+    def elmo(cls: Type[IF]) -> IF:
+        """
+        burning elmo gif
+        Needs:
+            - image
+        """
+        return cls("/elmo/", "burning elmo gif")
+
+    @classmethod
+    def tv(cls: Type[IF]) -> IF:
+        """
+        burning elmo gif
+        Needs:
+            - image
+        """
+        return cls("/elmo/", "burning elmo gif")
+
+    @classmethod
+    def glitch_static(cls: Type[IF]) -> IF:
+        """
+        simpler static glitch
+        Needs:
+            - image
+        """
+        return cls("/elmo/", "simpler static glitch")
+
+    @classmethod
+    def album(cls: Type[IF]) -> IF:
+        """
+        turn image into album cover
+        Needs:
+            - image
+        """
+        return cls("/album/", "turn image into album cover")
+
+    @classmethod
+    def rain(cls: Type[IF]) -> IF:
+        """
+        for rainy days
+        Needs:
+            - image
+        """
+        return cls("/rain/", "for rainy days")
+
+    @classmethod
     def from_string(cls: Type[IF], feature: str) -> Optional[IF]:
         """Get an image feature from a string
 
@@ -611,3 +656,4 @@ class ImageFeatures:
             return cls(called.value, called.description)
         except BaseException:
             return None
+

@@ -39,9 +39,32 @@ dagpi = Client("dagpi token")
 
 @bot.command()
 async def pixel(ctx, member: discord.Member):
-    url = str(member.avatar_url_as(static_format="png", size=1024))
+    url = str(member.display_avatar.with_format("png").with_size(1024))
     img = await dagpi.image_process(ImageFeatures.pixel(), url)
     file = discord.File(fp=img.image,filename=f"pixel.{img.format}")
+    await ctx.send(file=file)
+
+```
+
+### Pycord
+
+```python
+from discord.ext import commands
+import discord
+from asyncdagpi import Client, ImageFeatures
+
+bot = discord.Bot()
+dagpi = Client("dagpi token")
+
+@bot.slash_command(guild_ids=[...])
+async def pixel(
+    ctx, member: discord.Member = None
+):  # Passing a default value makes the argument optional
+    user = member or ctx.author
+    url = str(member.display_avatar.with_format("png").with_size(1024))
+    img = await dagpi.image_process(ImageFeatures.pixel(), url)
+    file = discord.File(fp=img.image,filename=f"pixel.{img.format}")
+
 
 ```
 
