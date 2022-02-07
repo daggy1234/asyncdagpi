@@ -4,11 +4,9 @@ IF = TypeVar('IF', bound='ImageFeatures')
 
 
 class ImageFeatures:
-
     """
     Base ImageFatures that asyncdagpi has
     """
-
     def __init__(self, value: str, description: str):
         """
         Initialise the dagpi Image feature
@@ -126,8 +124,7 @@ class ImageFeatures:
             - url
             - url2
         """
-        return cls("/slap/",
-                   "Have someone slap someone.")
+        return cls("/slap/", "Have someone slap someone.")
 
     @classmethod
     def why_are_you_gay(cls: Type[IF]) -> IF:
@@ -391,7 +388,8 @@ class ImageFeatures:
         """
         A cool multicolored glowing neon sign from an image.
         """
-        return cls("/neon/", "A cool multicolored glowing neon sign form an image.")
+        return cls("/neon/",
+                   "A cool multicolored glowing neon sign form an image.")
 
     @classmethod
     def petpet(cls: Type[IF]) -> IF:
@@ -656,4 +654,3 @@ class ImageFeatures:
             return cls(called.value, called.description)
         except BaseException:
             return None
-
