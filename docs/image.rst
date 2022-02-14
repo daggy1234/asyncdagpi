@@ -3,6 +3,9 @@
 Image API Reference
 ===================
 
+Images
+------
+
 ImageFeatures
 ~~~~~~~~~~~~~
 
