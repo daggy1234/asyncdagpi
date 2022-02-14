@@ -10,7 +10,7 @@ Asyncdagpi incorporates custom exceptions
   This is the base excpetion
 
 AsyncDagpiException
--------------------
+~~~~~~~~~~~~~~~~~~~
 
 The base asyncdagpi exceptions
 
@@ -18,7 +18,7 @@ Use this to catch errors from the wrapper
 
 
 SubExceptions
--------------
+~~~~~~~~~~~~~
 
 .. py:exception:: BadUrl
 
