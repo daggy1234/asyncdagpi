@@ -75,7 +75,7 @@ release = version
 #
 html_experimental_html5_writer = True
 html_theme = 'furo'
-html_sidebars = {'**': ['localtoc.html', 'searchbox.html', 'globaltoc.html']}
+# html_sidebars = {'**': ['localtoc.html', 'searchbox.html', 'globaltoc.html']}
 # html_theme = 'alabaster'
 
 pygments_style = "vs"
@@ -85,17 +85,17 @@ html_theme_options = {
     "light_logo": "dagpib.png",
     "dark_logo": "dagpi.png",
     'description': 'Powerful Asynchronous wrapper for https://dagpi.xyz',
-    'navbar_site_name': "asyncdagpi",
-    'navbar_links': [
-        ("Dagpi", "https://dagpi.xyz", True),
-        ("Github", "https://github.com/Daggy1234/dagpi", True),
+    # 'navbar_site_name': "asyncdagpi",
+    # 'navbar_links': [
+    #     ("Dagpi", "https://dagpi.xyz", True),
+    #     ("Github", "https://github.com/Daggy1234/dagpi", True),
 
-    ],
-    'external_links': [
-        ("Dagpi", "https://dagpi.xyz"),
-        ("Github", "https://github.com/Daggy1234/dagpi"),
+    # ],
+    # 'external_links': [
+    #     ("Dagpi", "https://dagpi.xyz"),
+    #     ("Github", "https://github.com/Daggy1234/dagpi"),
 
-    ],
+    # ],
 
 }
 html_static_path = ['_static']
