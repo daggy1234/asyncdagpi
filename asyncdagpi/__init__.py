@@ -14,13 +14,13 @@ from typing import NamedTuple
 from .image_features import ImageFeatures
 from .client import Client
 from .image import Image
-from .objects import WTP, Logo, PickupLine, BaseDagpiObject, Ratelimits
+from .objects import WTP, Logo, PickupLine, BaseDagpiObject, Ratelimits, Headline, Captcha, Typeracer
 
 __title__: str = "asyncdagpi"
 __author__: str = "Daggy1234"
 __license__: str = "MIT"
 __copyright__: str = "Copyright 2021 Daggy1234"
-__version__: str = '4.1.2'
+__version__: str = '4.1.3'
 
 
 class VersionInfo(NamedTuple):
