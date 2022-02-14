@@ -9,6 +9,9 @@ Documentation
 
   quickstart
   library
+  image
+  data
+  exceptions
 
 
 Indices and tables
@@ -17,4 +20,5 @@ Indices and tables
 To search the documentation
 
 * :ref:`genindex`
+* :ref:`modindex`
 * :ref:`search`

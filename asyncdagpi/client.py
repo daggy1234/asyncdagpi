@@ -16,21 +16,27 @@ url_regex: str = r"http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]| " \
 
 
 class Client:
+    """Client for interacting with asyncdagpi.
 
-    """
-    Initialisation
-    ~~~~~~~~~~~~~~
+    Attributes
+    -----------
 
+    token: :class:`str`
+        Your Dagpi Api token
+    
+    session: Optional[:class:`aiohttp.ClientSession`]
+        an aiohttp ClientSession for dagpi to use
 
-    :param token: Your Dagpi Api token
-    :param **kwargs: Extra arguments you may pass this can include
+    loop: Optional[:class:`asyncio.AbstractEventLoop`]
+        an asyncio event loop for the asyncdagpi to use
 
-        * loop: an asyncio event loop for the asyncdagpi to use
-        * session: an aiohttp ClientSession for dagpi to use
+    .. note::
+        This will initialise an AsyncDagpiClient that you can use for making requests.
+        It is recommended to re-use the Client.
 
-
-    This will initialise an AsyncDagpiClient that you can use for making
-    dagpi requests.
+    ..note::
+        The :class:`aiohttp.ClientSession` passed via constructor will have headers and authentication set.
+        Do not pass one you plan to re-use for other things, lest you leak your login data.
     """
 
     def __init__(
@@ -71,7 +77,10 @@ class Client:
         url: str,
         **kwargs: Any) \
             -> Image:
-        """
+        """|coro|
+
+        Parameters
+        -----------
         feature: :class:`ImageFeature`
             a dagpi ImageFeature class
 
@@ -82,8 +91,9 @@ class Client:
             based on the Docs for your Feature chose the right
             extra kwargs like `text` or `username`
 
-
-        :return: :class:`asyncdagpi.Image`
+        Returns
+        --------
+        :class:`asyncdagpi.Image`
             Asyncdagpi Image Object
         """
         if not isinstance(feature, ImageFeatures):
@@ -97,12 +107,16 @@ class Client:
 
     async def special_image_process(self, url: str) \
             -> Image:
-        """
-
+        """|coro|
+        
+        Parameters
+        -----------
         url: :class:`str`
             the Url for the Image Passed
-
-        :return: :class:`asyncdagpi.Image`
+        
+        Returns
+        --------
+        :class:`asyncdagpi.Image`
             Asyncdagpi Image Object
         """
         self.url_test(url)
@@ -118,91 +132,136 @@ class Client:
         return WTP(raw_data)
 
     async def logo(self) -> Logo:
-        """
+        """|coro|
         get a Logo data object
-        :returns: :class:`asyncdagpi.Logo`
+
+        Returns
+        --------
+        :class:`asyncdagpi.Logo`
+            logo object
         """
         raw_data = await self.http.data_request("logo")
         return Logo(raw_data)
 
     async def roast(self) -> str:
-        """
+        """|coro|
         Returns a string with a Roast
-        :returns: :class:`str`
+        
+        Returns
+        --------
+        :class:`str`
         """
         obj = await self.http.data_request("roast")
         return obj["roast"]
 
     async def yomama(self) -> str:
-        """
+        """|coro|
         Returns a YoMama Joke String
-        :returns: :class:`str`
+        
+        Returns
+        --------
+        :class:`str`
         """
         obj = await self.http.data_request("yomama")
         return obj["description"]
 
     async def joke(self) -> str:
-        """
+        """|coro|
         Gets a Funny Joke
-        :returns: :class:`str`
+        
+        Returns
+        --------
+        :class:`str`
         """
         obj = await self.http.data_request("joke")
         return obj["joke"]
 
     async def fact(self) -> str:
-        """
+        """|coro|
         Gets a Fun fact
-        :returns: :class:`str`
+        
+        Returns
+        --------
+        :class:`str`
         """
         obj = await self.http.data_request("fact")
         return obj["fact"]
 
     async def eight_ball(self) -> str:
-        """
+        """|coro|
         Gets an 8ball response
-        :returns: :class:`str`
+        
+        Returns
+        --------
+        :class:`str`
         """
         obj = await self.http.data_request("8ball")
         return obj["response"]
 
     async def pickup_line(self) -> PickupLine:
-        """
+        """|coro|
         Get a PickupLine
+
+        Returns
+        --------
+        :class:`asyncdagpi.objects.PickupLine`
         """
 
         return PickupLine(await self.http.data_request("pickupline"))
 
     async def headline(self) -> Headline:
-        """
-        Get a PickupLine
+        """|coro|
+        Get a Headline
+
+        Returns
+        --------
+        :class:`asyncdagpi.objects.Headline`
         """
 
         return Headline(await self.http.data_request("headline"))
 
     async def captcha(self) -> Captcha:
-        """
+        """|coro|
+        
         Get a captcha
+
+        Returns
+        --------
+        :class:`asyncdagpi.objects.Captcha`
         """
 
         return Captcha(await self.http.data_request("captcha"))
 
     async def typeracer(self) -> Typeracer:
-        """
+        """|coro|
         Get a sentence on an image
+
+        Returns
+        --------
+        :class:`asyncdagpi.objects.Typeracer`
         """
 
         return Typeracer(await self.http.data_request("typeracer"))
 
     async def waifu(self) -> Dict[str, Any]:
-        """
+        """|coro|
         Get a Random Anime Waifu.
         Does not return a model due to sheer complexity and impracticality.
+
+        Returns
+        --------
+        :class:`asyncdagpi.objects.PickupLine`
         """
         return await self.http.data_request("waifu")
 
     async def data_ping(self) -> float:
-        """
+        """|coro|
         Returns a float with the Data API's ping
+
+        Returns
+        --------
+        :class:`float`
+            ping time for data api
         """
         start = time.perf_counter()
         await self.http.data_request("wtp")
@@ -210,8 +269,13 @@ class Client:
         return (end - start)
 
     async def image_ping(self) -> float:
-        """
+        """|coro|
         Returns a float with the Image API's ping
+
+        Returns
+        --------
+        :class:`float`
+            ping time for image api
         """
         start = time.perf_counter()
         await self.http.data_request("/", image=True)
@@ -219,7 +283,7 @@ class Client:
         return (end - start)
 
     async def close(self) -> None:
-        """
+        """|coro|
         Shuts down the asyncdagpi Client
         """
         await self.http.close()
