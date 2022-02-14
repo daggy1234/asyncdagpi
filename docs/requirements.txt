@@ -1,1 +1,2 @@
-sphinx-press-theme
+furo
+sphinxcontrib-trio

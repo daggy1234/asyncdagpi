@@ -31,10 +31,22 @@ author = 'Daggy1234'
 # ones.
 extensions = ['sphinx.ext.autodoc', 'sphinx.ext.coverage',
               'sphinx.ext.napoleon', 'sphinx.ext.viewcode', 'sphinx.ext.extlinks',
-              'details', 'builder'
+              'details', 'builder', 'sphinx.ext.intersphinx', 'sphinxcontrib_trio'
               ]
 
+rst_prolog = """
+.. |coro| replace:: This function is a |coroutine_link|_.
+.. |maybecoro| replace:: This function *could be a* |coroutine_link|_.
+.. |coroutine_link| replace:: *coroutine*
+.. _coroutine_link: https://docs.python.org/3/library/asyncio-task.html#coroutine
+"""
+
 autodoc_member_order = 'bysource'
+
+ntersphinx_mapping = {
+  'py': ('https://docs.python.org/3', None),
+  'aio': ('https://docs.aiohttp.org/en/stable/', None),
+}
 
 extlinks = {
     'issue': ('https://github.com/Daggy1234/asyncdagpi/issues/%s', 'issue '),
@@ -62,8 +74,8 @@ release = version
 # a list of builtin themes.
 #
 html_experimental_html5_writer = True
-html_theme = 'press'
-html_sidebars = {'**': ['localtoc.html', 'searchbox.html', 'globaltoc.html']}
+html_theme = 'furo'
+# html_sidebars = {'**': ['localtoc.html', 'searchbox.html', 'globaltoc.html']}
 # html_theme = 'alabaster'
 
 html_logo = 'dagpib.png'
