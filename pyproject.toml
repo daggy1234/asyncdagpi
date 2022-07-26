@@ -9,7 +9,7 @@ authors = ["Daggy1234 <daggy@daggy.tech>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
-aiohttp = "^3.7.3"
+aiohttp = "^3.8.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^7.0"
