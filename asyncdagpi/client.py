@@ -23,7 +23,7 @@ class Client:
 
     token: :class:`str`
         Your Dagpi Api token
-    
+
     session: Optional[:class:`aiohttp.ClientSession`]
         an aiohttp ClientSession for dagpi to use
 
@@ -108,12 +108,12 @@ class Client:
     async def special_image_process(self, url: str) \
             -> Image:
         """|coro|
-        
+
         Parameters
         -----------
         url: :class:`str`
             the Url for the Image Passed
-        
+
         Returns
         --------
         :class:`asyncdagpi.Image`
@@ -146,7 +146,7 @@ class Client:
     async def roast(self) -> str:
         """|coro|
         Returns a string with a Roast
-        
+
         Returns
         --------
         :class:`str`
@@ -157,7 +157,7 @@ class Client:
     async def yomama(self) -> str:
         """|coro|
         Returns a YoMama Joke String
-        
+
         Returns
         --------
         :class:`str`
@@ -168,7 +168,7 @@ class Client:
     async def joke(self) -> str:
         """|coro|
         Gets a Funny Joke
-        
+
         Returns
         --------
         :class:`str`
@@ -179,7 +179,7 @@ class Client:
     async def fact(self) -> str:
         """|coro|
         Gets a Fun fact
-        
+
         Returns
         --------
         :class:`str`
@@ -190,7 +190,7 @@ class Client:
     async def eight_ball(self) -> str:
         """|coro|
         Gets an 8ball response
-        
+
         Returns
         --------
         :class:`str`
@@ -222,7 +222,7 @@ class Client:
 
     async def captcha(self) -> Captcha:
         """|coro|
-        
+
         Get a captcha
 
         Returns
