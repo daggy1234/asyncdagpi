@@ -15,6 +15,13 @@ def test_url_regex():
 
 
 @pytest.mark.asyncio
+async def test_no_token():
+    try:
+        c = Client()
+    except Exception as e:
+        assert isinstance(e, errors.Unauthorised)
+
+@pytest.mark.asyncio
 async def test_no_auth():
     c = Client("bad token")
     try:
@@ -103,8 +110,22 @@ async def test_data():
     headline = await c.headline()
     assert headline.headline
     logo = await c.logo()
-    await c.close()
     assert isinstance(str(logo), str)
+    roast = await c.roast()
+    assert isinstance(roast, str)
+    yomama = await c.roast()
+    assert isinstance(yomama, str)
+    await c.close()
+
+@pytest.mark.asyncio
+async def test_data_objects():
+    tok = os.getenv("DAGPI_TOKEN")
+    c = Client(tok)
+    cap = await c.captcha()
+    assert cap.answer
+    typ = await c.typeracer()
+    assert typ.image
+    await c.close()
 
 @pytest.mark.asyncio
 async def test_image_kwargs():
@@ -134,5 +155,7 @@ async def test_rls():
     image_ping = await c.joke()
     assert isinstance(c.ratelimits, Ratelimits)
     assert isinstance(c.ratelimits.limit, int)
+    assert isinstance(repr(c.ratelimits), str)
     assert isinstance(c.ratelimits.remaining, int)
     assert isinstance(c.ratelimits.reset, datetime)
+
