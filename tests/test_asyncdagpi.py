@@ -15,13 +15,6 @@ def test_url_regex():
 
 
 @pytest.mark.asyncio
-async def test_no_token():
-    try:
-        c = Client()
-    except Exception as e:
-        assert isinstance(e, errors.Unauthorised)
-
-@pytest.mark.asyncio
 async def test_no_auth():
     c = Client("bad token")
     try:
