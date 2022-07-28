@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.8, 3.9,3.10.5]
+        python-version: [3.8, 3.9,'3.10']
     steps:
       - uses: actions/checkout@master
       - name: Setup Python ${{ matrix.python-version }}
@@ -37,7 +37,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.8, 3.9,3.10.5]
+        python-version: [3.8, 3.9,'3.10']
     env:
       PYTHON: ${{ matrix.python-version }}
       DAGPI_TOKEN: ${{ secrets.DAGPI_TOKEN }}
