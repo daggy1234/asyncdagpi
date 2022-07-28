@@ -20,7 +20,7 @@ __title__: str = "asyncdagpi"
 __author__: str = "Daggy1234"
 __license__: str = "MIT"
 __copyright__: str = "Copyright 2021 Daggy1234"
-__version__: str = '4.1.4'
+__version__: str = '4.1.5'
 
 
 class VersionInfo(NamedTuple):
@@ -31,7 +31,7 @@ class VersionInfo(NamedTuple):
     serial: int
 
 
-version_info: VersionInfo = VersionInfo(major=4, minor=0, micro=0, releaselevel='alpha',
+version_info: VersionInfo = VersionInfo(major=4, minor=1, micro=5, releaselevel='alpha',
                                         serial=0)
 
 logging.getLogger(__name__).addHandler(logging.NullHandler())
