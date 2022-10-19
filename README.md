@@ -1,4 +1,4 @@
-# asyncdagpi
+# Asyncdagpi
 
 [![Build Status](https://travis-ci.com/Daggy1234/asyncdagpi.svg?branch=master)](https://travis-ci.com/Daggy1234/asyncdagpi) [![License](https://img.shields.io/github/license/daggy1234/asyncdagpi)](https://mit-license.org/) ![version](https://img.shields.io/pypi/v/asyncdagpi) [![python](https://img.shields.io/pypi/pyversions/asyncdagpi)](https://pypi.org/p/asyncdagpi) [![Documentation Status](https://readthedocs.org/projects/asyncdagpi/badge/?version=latest)](https://asyncdagpi.readthedocs.io/en/latest/?badge=latest) [![Codecov](https://img.shields.io/codecov/c/github/daggy1234/asyncdagpi?logo=codecov)](https://codecov.io/gh/daggy1234/asyncdagpi) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/ad36f1ea6211444792e84f32a14326dd)](https://www.codacy.com/gh/Daggy1234/asyncdagpi/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Daggy1234/asyncdagpi&amp;utm_campaign=Badge_Grade)
 
